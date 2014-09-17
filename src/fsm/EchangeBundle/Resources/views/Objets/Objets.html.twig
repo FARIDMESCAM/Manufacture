@@ -1,0 +1,75 @@
+{% block body %}
+<div class ="container">
+    <table class ="table table-striped table-condensed ">
+
+        <thead >
+            <tr >
+                <th>Nom Objet </th>
+                <th>Photo principale </th>
+                <th>Nom propriétaire </th>
+                <th>Photo propriétaire </th>
+                <th>Type annonce</th>
+                <th>Mail propriétaire</th>
+                 <th>Catégorie</th>
+        </thead>
+        <tbody >
+
+{% for objetphoto in objetphotos %}
+            {% if objetphoto != null%}
+            <tr>
+                <td><a href= "{{path ('fsm_objet_show',{'id':objetphoto.id}) }}">{{ objetphoto.nom }}</a>
+                    <br>
+                    {% if gestion =='YES'%}
+                    {%if objetphoto.user.id == app.user.id %}
+                    <a href="{{path('fsm_objet_update',{'id':objetphoto.id})}}" class="btn btn-success">Modifier</a><br><br>
+                    <a href="{{path('fsm_objet_supprimer',{'id':objetphoto.id})}}" > <img width="35"  src="{{asset('img/suppression.jpg')}}" /> </a>
+                    
+               {%endif%}
+                      {%endif%}
+                </td>
+                <td>
+                 {% if objetphoto.getPhotos is not null %}
+           {%for photo in objetphoto.getPhotos%}
+                    {% if photo.getPrincipal == TRUE %}
+                    <img width="130" class="img-circle" src="{{asset( photo.getWebPath)}}" /> 
+                     {% endif %} 
+          {% endfor %}
+                {% endif %}
+                </td>
+                <td>{{ objetphoto.user.username}}</td>
+                <td> {%for photo in objetphoto.user.getphotos%}
+
+                                                            {% if photo.getPrincipal == TRUE %}
+                    <img width="40" class="img-circle" src="{{asset( photo.getWebPath)}}" alt="{{photo.alt}}" /> 
+                                                            {% endif %} 
+
+                                                            {%endfor%}
+                    <br>
+
+                    <a href= "{{path ('fsm_profile_showPerso',{'id':objetphoto.user.id}) }}">Contacter</a>
+                </td>
+                <td>{{objetphoto.RetourType(objetphoto.sens)}}</td>
+                <td>{{ objetphoto.user.email}}</td>
+                  {% if objetphoto.getCategories is not null %}
+           {%for categorie in objetphoto.getCategories %}
+                 <td>{{ categorie.nom}}</td>
+ {% endfor %}                 
+{% endif %}
+                  
+            </tr>
+         {% endif %}
+   {% endfor %}
+
+
+
+
+    </table>
+</div> 
+
+
+<div class ="col-lg-1"></div>
+</div> 
+<div class ="row-100">.</div>
+</div> 
+
+{% endblock %}

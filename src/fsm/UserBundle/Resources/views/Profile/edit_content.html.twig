@@ -1,0 +1,57 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="row">
+    <div class="msgOK">
+{% for message in app.session.flashbag.get('info') %}
+        <p >{{ message }} </p>
+    </div>
+{% endfor %}
+    <div class="col-lg-4 col-lg-offset-4">
+        <div class ="well">
+            <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+{{ form_widget(form) }}  <br/>
+                    {% for userphoto in userphotos %}
+    {%for photo in userphoto.getPhotos%}
+            {% if userphoto.getPhotos is not null %}
+                <div class="row">
+                    <div class ="well">
+                        {#On ne donne pas la possibilité de mettre une photo principale si elle l'est déjà.#}
+                        {% if photo.principal < 1 %}
+                            <a class="navbar-brand" href="{{path('fsm_photo_principale',{'photo':photo.id})}}">Définir en tant que photo principale</a>
+                            {% endif %}
+                            <hr>
+                        <img width="130" class="img-circle" src="{{asset( photo.getWebPath)}}" alt="{{photo.alt}}" /> 
+                        <div class="col-lg-4 col-lg-offset-1">
+                            <a href="{{path('fsm_photo_supprimer',{'id':photo.id})}}" class="btn btn-danger">supprimer</a>
+                            
+                        </div>
+                     </div>
+                </div>
+        
+            {% endif %} 
+            
+            
+  {% endfor %}
+{%if userphoto.getPhotos.count == 0%}
+<p><em><strong>Vous n'avez pas associé de photo à votre profil.</strong></em></p>
+<p><em><strong>Ceci permettrait pourtant à vos voisins de vous reconnaitre</strong></em></p>
+{% endif %} 
+{#Un utilisateur ne peut avoir plus de 3 photos de profil#}
+{%if userphoto.getPhotos.count < 3 %}
+<div class="row">
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <a href="{{path('fsm_photo_ajout_U',{'id':userphoto.id})}}" class="btn btn-success">Ajouter Photo</a>
+                    </div>
+                </div>
+{% endif %}
+                <hr/>
+                {% endfor %}
+                <div class="col-lg-4 col-lg-offset-4">
+                    <input class="btn btn-success" type="submit" id="_submit" name="_submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+                </div>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+</div>
+</form>

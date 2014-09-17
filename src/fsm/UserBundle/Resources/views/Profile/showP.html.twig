@@ -1,0 +1,33 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+<div class="row"></row>
+    <div class="col-lg-4 col-lg-offset-4">
+        {% for userphoto in userphotos %}
+        <p><label for="username">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</label>:</p>
+        <div class="col-lg-2 col-lg-offset-1"><p> {{ userphoto.username }}</p>
+        </div>
+
+        <br>
+<hr>
+        <p> <label for="email">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</label>: </p>
+        <div class="col-lg-2 col-lg-offset-1"><p> {{ userphoto.email }}</p></div>
+  
+             <br>
+<hr>
+        <p> <label for="telephone">{{ 'telephone'|trans({}, 'FOSUserBundle') }}</label>: </p>
+        <div class="col-lg-2 col-lg-offset-1"><p> {{ userphoto.telephone }}</p></div>
+              <br>
+<hr>
+
+   {%for photo in userphoto.getPhotos%}
+{% if userphoto.getPhotos is not null %}
+                <img width="130" class="img-circle" src="{{asset( photo.getWebPath)}}" /> 
+ {% endif %}          
+{% endfor %}
+         
+
+  {% endfor %}
+                   </div>
+ </div>
+{% endblock %}
+ 

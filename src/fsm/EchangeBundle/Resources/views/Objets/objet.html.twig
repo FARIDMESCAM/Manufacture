@@ -1,0 +1,53 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+<div class ="container">
+    {% for objetphoto in objetphotos %}
+    <div class ="row-30">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class ="well">
+                <p class="text-center">
+                    <strong>{{objetphoto.nom}} </strong>
+                    </p><hr>
+   
+    <div class ="row-30">
+{# Cette page est accessible à des anonymes. On ne leur donne pas les mails des users inscrits       #}
+        {% if app.user %}
+        <a  href="{{path('fsm_user_envoimail',{'id':objetphoto.id})}}" />Envoyer un mail<img width="50" src="{{ asset('img/mail.jpg') }}" /> </a><br> <br> <br>
+    {% endif%}   
+    <strong> description : </strong> <br>
+        {{objetphoto.description}}<br>
+        <strong> type d'annonce </strong><br>
+        {{objetphoto.RetourType(objetphoto.sens)}}<br>
+        {% if objetphoto.RetourType(objetphoto.sens) < 1 %}
+        <strong>Prix demandé :  </strong> <br>
+        {{objetphoto.prix}}<br>
+        {%endif%}
+        <strong> Photos : </strong>
+         {%for photo in objetphoto.getPhotos%}
+        {% if objetphoto.getPhotos is not null %}
+         <div class="thumbnail">
+{%if (is_owner ==true)%}       
+{# {% if photo.principal < 1 %}
+                            <a class="navbar-brand" href="{{path('fsm_photo_principale',{'photo':photo.id})}}">Définir en tant que photo principale</a>
+                            {% endif %}#}
+                             {% endif %}
+                            <hr>
+                        <img src="{{asset( photo.getWebPath)}}" alt="{{photo.alt}}" /> 
+                      {%if (is_owner ==true)%}
+                       {# <div class="col-lg-4 col-lg-offset-1">
+                            <a href="{{path('fsm_photo_supprimer',{'id':photo.id})}}" class="btn btn-danger">supprimer</a>
+                        </div> #}
+                         {%endif%}
+         </div>    
+        {%endif%}
+        {%endfor %}
+                        <hr>
+                        
+                        
+    </div>
+            </div>
+    </div>
+     </div>
+</div>
+{% endfor %}
+{% endblock %}    

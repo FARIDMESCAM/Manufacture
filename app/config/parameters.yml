@@ -1,0 +1,36 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    
+#    database_host:  127.0.0.1
+#    database_port:
+#    database_name: lamanu
+#    database_user: root
+#    database_password: 
+#    mailer_auth_mode: login
+#    mailer_transport:  smtp
+#    mailer_port: 
+#    mailer_host: smtp.gmail.com
+#    mailer_user: faridmescam@gmail.com
+#    mailer_password: bprop789
+
+#   PROD 
+    database_host: mysql51-108.perso
+    database_port: null
+    database_name: gitelugomanufa
+    database_user: gitelugomanufa
+    database_password: bprop789    
+    mailer_auth_mode: login
+    mailer_transport: smtp
+    mailer_port: 587
+    mailer_host: mx1.ovh.net
+    mailer_user: postmaster@gite-lugos.fr
+    mailer_password: bprop789
+    
+    
+    
+    locale: fr
+    secret: ThisTokenIsNotSoSecretChangeIt44
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true

@@ -1,0 +1,22 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row"></row>
+    <div class="col-lg-4 col-lg-offset-4">
+        <p><label for="username">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</label>:</p>
+        <div class="col-lg-2 col-lg-offset-1"><p> {{ user.username }}</p>
+        </div>
+    </div>
+    <div class="col-lg-4 col-lg-offset-4">
+        <p> <label for="email">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</label>: </p>
+        <div class="col-lg-2 col-lg-offset-1"><p> {{ user.email }}</p></div>
+    </div>
+      <div class="col-lg-4 col-lg-offset-4">
+        <p> <label for="telephone">{{ 'telephone'|trans({}, 'FOSUserBundle') }}</label>: </p>
+        <div class="col-lg-2 col-lg-offset-1"><p> {{ user.telephone }}</p></div>
+      </div>
+{% for objetphoto in objetphotos %}
+   {# {%for photo in objetphotos.getPhotos%}
+                <img width="130" class="img-circle" src="{{asset( photo.getWebPath)}}" /> 
+          {% endfor %}#}
+
+  {% endfor %}

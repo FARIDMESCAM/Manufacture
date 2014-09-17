@@ -1,0 +1,26 @@
+parameters:
+#    fsmUser.example.class: fsm\UserBundle\Example
+
+services:
+#    fsmUser.example:
+#        class: %fsmuser.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+services:
+    fsm_user.registration.form.type:
+        class: fsm\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: fsm_user_registration }
+
+    fsm_user.change_password.form.type:
+        class: fsm\UserBundle\Form\Type\ChangePasswordFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: fsm_user_change_password }
+            
+    fsm_user.profile.form.type:
+        class: fsm\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: fsm_user_profile }

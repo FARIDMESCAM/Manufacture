@@ -1,0 +1,89 @@
+fsm_echange_accueil:
+    path : /accueil
+    defaults: { _controller: fsmEchangeBundle:Main:accueil }
+
+fsm_echange_index:
+    path : /
+    defaults: { _controller: fsmEchangeBundle:Main:accueil }
+    
+fsm_objet_ajout:
+    path : /ajouterObjet
+    defaults: { _controller: fsmEchangeBundle:Objet:ajouterObjet }
+    
+fsm_objet_supprimer:
+    path: /supprObjet/{id}
+    defaults: { _controller: fsmEchangeBundle:Objet:supprObjet } 
+    requirements:
+       id: \d+
+    
+fsm_objets_mes:
+    path: /mesObjets
+    defaults: { _controller: fsmEchangeBundle:Objet:ListMesObjet }
+    
+fsm_categorie_ajout:
+    path : /ajouterCategorie
+    defaults: { _controller: fsmEchangeBundle:Categorie:ajouterCategorie }
+    
+fsm_categorie_modif:
+    path : /modifCategorie/{id}
+    defaults: { _controller: fsmEchangeBundle:Categorie:modifCategorie }
+    requirements:
+        id: \d+
+    
+fsm_categorie_list:
+    path : /ListCategorie
+    defaults: { _controller: fsmEchangeBundle:Categorie:ListCategorie }
+    
+fsm_photo_ajout_O:
+    path : /ajouterPhotoO/{id}
+    defaults: { _controller: fsmEchangeBundle:Photo:ajouterPhotoO } 
+    requirements:
+       id: \d+
+
+fsm_photo_ajout_U:
+    path : /ajouterPhotoU/{id}
+    defaults: { _controller: fsmEchangeBundle:Photo:ajouterPhotoU } 
+    requirements:
+       id: \d+
+
+fsm_objet_list:
+    path: /Objets
+    defaults: { _controller: fsmEchangeBundle:Objet:ListObjets }
+    
+fsm_photo_supprimer:
+    path: /supprPhoto/{id}
+    defaults: { _controller: fsmEchangeBundle:Photo:supprPhoto } 
+    requirements:
+       id: \d+
+
+fsm_photo_principale:
+    path: /PhotoPr/{photo}
+    defaults: { _controller: fsmEchangeBundle:Photo:photoPrincipale } 
+    requirements:
+       photo: \d+
+    
+fsm_profile_showPerso:
+    path: /showPrP/{id}
+    defaults: { _controller: fsmUserBundle:Profile:showProfile } 
+    requirements:
+       id: \d+      
+fsm_objet_show:
+    path: /showObjet/{id}
+    defaults: { _controller: fsmEchangeBundle:Objet:showObjet }
+    requirements:
+       id: \d+
+fsm_objet_update:       
+    path: /updateObjet/{id}
+    defaults: { _controller: fsmEchangeBundle:Objet:updateObjet }
+    requirements:
+       id: \d+
+fsm_user_envoimail:
+    path: /envoimail/{id}
+    defaults: { _controller: fsmEchangeBundle:Objet:envoiMail }
+    requirements:
+       id: \d+
+fsm_objet_envoimail:
+    path: /objetmail/{id}
+    defaults: { _controller: fsmEchangeBundle:Objet:objetMail }
+    requirements:
+       id: \d+

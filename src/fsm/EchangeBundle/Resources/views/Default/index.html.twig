@@ -1,0 +1,84 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+ {% if is_granted ("IS_AUTHENTICATED_REMEMBERED") %}
+{# On affiche tous les messages flash dont le nom est 
+info  #}
+{% for message in app.session.flashbag.get('Creationinfo') %}
+<p >{{ message }} </p>
+{% endfor %}
+</p>
+
+{% else %}
+
+<div class ="container">
+    <div class ="row-100">.</div>
+    <div class ="row">
+      {#  <div class ="col-lg-1"> </div> #}
+        <div class ="col-lg-2">
+            <table class="table borderless">
+                <tbody> 
+                    
+                    <tr>
+                <p class=""text-center">  <em><strong>Les dernières annonces</strong></em></p>
+                    </tr>
+          {% for objetphoto in objetphotos %}
+                    <tr>
+                        <td>
+              {{ objetphoto.nom }}</td>
+                    {#  <td>
+                          {{objetphoto.RetourType(objetphoto.sens)}}
+                      </td>#}
+                        <td>{% if objetphoto.getPhotos is not null %}
+{%for photo in objetphoto.getphotos%}               
+{% if photo.getPrincipal() == 1 %}
+                           <a href= "{{path ('fsm_objet_show',{'id':objetphoto.id}) }}">
+                               <img width="45" class="img-circle" src="{{asset( photo.getWebPath)}}" alt="{{photo.alt}}" /> 
+                           </a>
+ {% endif %}
+
+              {% endfor %}
+              {% endif %}
+                        </td></tr>
+          {% endfor %}
+                    
+
+
+            </table>
+        </div>  
+        <div class ="col-lg-1"> </div> 
+        <div class ="col-lg-5">
+            <img   width="400" src="{{ asset('img/manufacture.jpg') }}" />
+        </div> 
+        <div class ="col-lg-1"></div>
+    {#    <div class ="col-lg-2"></div>#}
+{% block aside %}
+        <span class="badge">Un site d'échanges de biens et services</span>
+        <br>
+        <br>
+        <span class="badge">Un blog</span>
+        <br>
+        <br>
+        <span class="badge">les news du conseil syndical</span>
+        <br>
+        <br>
+        <h4>
+            Le tout entre voisins
+            </h>
+
+
+            <br>
+            </div>
+{% endblock %} 
+
+            <div class ="col-lg-1"></div>
+    </div> 
+    <div class ="row-100">.</div>
+</div> 
+<br>
+<br>
+<a href="{{path('fos_user_registration_register')}}">
+    <div class ="col-lg-6"> </div><span class="badge">
+        Inscription
+    </span></a>
+{% endif %} 
+{% endblock %}

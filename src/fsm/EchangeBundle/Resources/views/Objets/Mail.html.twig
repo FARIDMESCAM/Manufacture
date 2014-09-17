@@ -1,0 +1,26 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+<p>
+{# On affiche tous les messages flash dont le nom est 
+info  #}
+{% for message in app.session.flashbag.get('Objetinfo') %}
+<p >{{ message }} </p>
+{% endfor %}
+</p>
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4">
+<div class ="well">
+{#    <form method ="post" {{ form_enctype(form) }} action="{{ path ('fsm_objet_envoimail',{'id':objet}) }}"> #}
+   <form method ="post" {{ form_enctype(form) }} > 
+        {{ form_row(form.objet) }}
+     
+        {{ form_row(form.texte) }}<br>
+        
+        {{ form_row(form.envoyer) }}
+        {{form_end(form)}}
+{#       <input type ="submit" class ="btn btn-primary" />#}
+    </form>
+</div>
+    </div>
+        </div>
+{% endblock %}
