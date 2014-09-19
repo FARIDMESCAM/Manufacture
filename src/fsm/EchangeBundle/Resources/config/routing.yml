@@ -2,13 +2,18 @@ fsm_echange_accueil:
     path : /accueil
     defaults: { _controller: fsmEchangeBundle:Main:accueil }
 
-fsm_echange_index:
-    path : /
-    defaults: { _controller: fsmEchangeBundle:Main:accueil }
+#Routing grace à des annotations dans le controller    
+echange:
+    resource: "@fsmEchangeBundle/Controller"
+    type:     annotation
+
+#fsm_echange_index:
+#    path : /
+#    defaults: { _controller: fsmEchangeBundle:Main:accueil }
     
-fsm_objet_ajout:
-    path : /ajouterObjet
-    defaults: { _controller: fsmEchangeBundle:Objet:ajouterObjet }
+#fsm_objet_ajout:
+#    path : /ajouterObjet
+#    defaults: { _controller: fsmEchangeBundle:Objet:ajouterObjet }
     
 fsm_objet_supprimer:
     path: /supprObjet/{id}
@@ -87,3 +92,6 @@ fsm_objet_envoimail:
     defaults: { _controller: fsmEchangeBundle:Objet:objetMail }
     requirements:
        id: \d+
+fsm_taches:
+    path: /test
+    defaults: { _controller: fsmEchangeBundle:CronTask:test }

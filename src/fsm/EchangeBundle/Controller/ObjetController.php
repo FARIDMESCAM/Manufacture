@@ -13,15 +13,22 @@ use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use fsm\EchangeBundle\Form\RechercheType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+//use fsm\EchangeBundle\Command\EmailCommand;
 
 
 
 class ObjetController extends Controller {
 
     
-
+    /**
+     * @Route("/ajouterObjet", name="fsm_objet_ajout") 
+     */
     public function ajouterObjetAction() {
-         $this->Habilitation();
+        $autorisation = 'KO';
+        $autorisation = $this->Habilitation($autorisation);
+         if($autorisation=== 'OK')
+         {
         $user = $this->get('security.context')->getToken()->getUser();
         $Objet = new Objet($user);
         $form = $this->createForm(new ObjetType(), $Objet);
@@ -33,8 +40,10 @@ class ObjetController extends Controller {
         }
         return $this->render('fsmEchangeBundle:Objets:ajouter.html.twig', array('form' => $form->createView(),));
     }
+    else
+    {}
 
-        
+    }
 
 
     
@@ -171,20 +180,25 @@ class ObjetController extends Controller {
                             $Objet = $Objet['0']; 
                             
                             $data = $form->getData();
-//                             var_dump($data);
+
                              $texte= $data['texte'];
                              $objetmail= $data['objet'];
                              $destinataire = $Objet->getUser()->getEmail();
                        
                               $message = \Swift_Message::newInstance()
                                  ->setSubject($objetmail)
-                                 ->setFrom('send@example.com')
+                                 ->setFrom('faridsahlimescam@voila.fr')
                                  ->setTo($destinataire)
                                  ->setBody($this->renderView('fsmEchangeBundle:Objets:formatMail.html.twig', array('textemail' => $texte)));
-    
-                                $this->get('mailer')->send($message);
-                             
-                             
+                              
+
+                              $mailer = $this->get('mailer');
+                              $result = $mailer->send($message);
+//                             $spool = $mailer->getTransport()->getSpool();
+//                              $transport = $this->get('swiftmailer.transport.real');
+//                              $spool->flushQueue($transport);
+                              
+                              
                              return $this->redirect
                             ($this->generateUrl('fsm_objet_show', array('id' => $id)));
                          

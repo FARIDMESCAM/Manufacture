@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @BCCCronManagerBundle/Resources/config/assetic.yml }
 
 framework:
     #esi:             ~
@@ -41,6 +42,10 @@ assetic:
         #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+        less:
+            node:       %node%
+            node_paths: [%node_paths%]
+            apply_to: "\.less$"
 
 # Doctrine Configuration
 doctrine:
@@ -68,7 +73,12 @@ swiftmailer:
     host:     "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    spool:     { type: memory }
+    spool:    
+     type: file
+     path: "%kernel.root_dir%/spool"
+    
+    delivery_address: faridmescam@gmail.com
+
 fos_user :
     db_driver : orm 
     firewall_name : main
@@ -92,3 +102,6 @@ fos_user :
             from_email:
                 address:        resetting@lamanufacture.fr
                 sender_name:    Site La Manufacture-PANTIN
+                
+
+        

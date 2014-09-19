@@ -19,6 +19,7 @@
       <parameter key="fsmEchangeBundle">fsm\EchangeBundle\fsmEchangeBundle</parameter>
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="fsmUserBundle">fsm\UserBundle\fsmUserBundle</parameter>
+      <parameter key="BCCCronManagerBundle">BCC\CronManagerBundle\BCCCronManagerBundle</parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">appProdDebugProjectContainer</parameter>
@@ -39,6 +40,9 @@
     <parameter key="debug_toolbar">true</parameter>
     <parameter key="debug_redirects">false</parameter>
     <parameter key="use_assetic_controller">true</parameter>
+    <parameter key="node">null</parameter>
+    <parameter key="node_paths">null</parameter>
+    <parameter key="apply_to">null</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
     <parameter key="response_listener.class">Symfony\Component\HttpKernel\EventListener\ResponseListener</parameter>
@@ -376,13 +380,14 @@
     <parameter key="swiftmailer.mailer.default.transport.smtp.auth_mode">login</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.timeout">30</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.source_ip">null</parameter>
-    <parameter key="swiftmailer.spool.default.memory.path">C:/wamp/www/LaManu/app/cache/prod/swiftmailer/spool/default</parameter>
+    <parameter key="swiftmailer.spool.default.file.path">C:/wamp/www/LaManu/app/spool/default</parameter>
     <parameter key="swiftmailer.mailer.default.spool.enabled">true</parameter>
     <parameter key="swiftmailer.mailer.default.plugin.impersonate">null</parameter>
-    <parameter key="swiftmailer.mailer.default.single_address">null</parameter>
+    <parameter key="swiftmailer.mailer.default.single_address">faridmescam@gmail.com</parameter>
+    <parameter key="swiftmailer.mailer.default.delivery_whitelist" type="collection"/>
     <parameter key="swiftmailer.spool.enabled">true</parameter>
     <parameter key="swiftmailer.delivery.enabled">true</parameter>
-    <parameter key="swiftmailer.single_address">null</parameter>
+    <parameter key="swiftmailer.single_address">faridmescam@gmail.com</parameter>
     <parameter key="swiftmailer.mailers" type="collection">
       <parameter key="default">swiftmailer.mailer.default</parameter>
     </parameter>
@@ -401,7 +406,9 @@
     <parameter key="assetic.value_supplier.class">Symfony\Bundle\AsseticBundle\DefaultValueSupplier</parameter>
     <parameter key="assetic.node.paths" type="collection"/>
     <parameter key="assetic.cache_dir">C:/wamp/www/LaManu/app/cache/prod/assetic</parameter>
-    <parameter key="assetic.bundles" type="collection"/>
+    <parameter key="assetic.bundles" type="collection">
+      <parameter>BCCCronManagerBundle</parameter>
+    </parameter>
     <parameter key="assetic.twig_extension.class">Symfony\Bundle\AsseticBundle\Twig\AsseticExtension</parameter>
     <parameter key="assetic.twig_formula_loader.class">Assetic\Extension\Twig\TwigFormulaLoader</parameter>
     <parameter key="assetic.helper.dynamic.class">Symfony\Bundle\AsseticBundle\Templating\DynamicAsseticHelper</parameter>
@@ -418,6 +425,13 @@
     <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
     <parameter key="assetic.filter.cssrewrite.class">Assetic\Filter\CssRewriteFilter</parameter>
+    <parameter key="assetic.filter.less.class">Assetic\Filter\LessFilter</parameter>
+    <parameter key="assetic.filter.less.node">null</parameter>
+    <parameter key="assetic.filter.less.node_paths" type="collection">
+      <parameter>null</parameter>
+    </parameter>
+    <parameter key="assetic.filter.less.timeout">null</parameter>
+    <parameter key="assetic.filter.less.compress">null</parameter>
     <parameter key="assetic.twig_extension.functions" type="collection"/>
     <parameter key="doctrine.dbal.logger.chain.class">Doctrine\DBAL\Logging\LoggerChain</parameter>
     <parameter key="doctrine.dbal.logger.profiling.class">Doctrine\DBAL\Logging\DebugStack</parameter>
@@ -1839,6 +1853,36 @@
         <argument>fr</argument>
         <argument>messages</argument>
       </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>C:\wamp\www\LaManu\vendor\bcc\cron-manager-bundle\BCC\CronManagerBundle/Resources/translations\BCCCronManagerBundle.de.xliff</argument>
+        <argument>de</argument>
+        <argument>BCCCronManagerBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>C:\wamp\www\LaManu\vendor\bcc\cron-manager-bundle\BCC\CronManagerBundle/Resources/translations\BCCCronManagerBundle.es.xliff</argument>
+        <argument>es</argument>
+        <argument>BCCCronManagerBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>C:\wamp\www\LaManu\vendor\bcc\cron-manager-bundle\BCC\CronManagerBundle/Resources/translations\BCCCronManagerBundle.fr.xliff</argument>
+        <argument>fr</argument>
+        <argument>BCCCronManagerBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>C:\wamp\www\LaManu\vendor\bcc\cron-manager-bundle\BCC\CronManagerBundle/Resources/translations\BCCCronManagerBundle.pl.xliff</argument>
+        <argument>pl</argument>
+        <argument>BCCCronManagerBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>xliff</argument>
+        <argument>C:\wamp\www\LaManu\vendor\bcc\cron-manager-bundle\BCC\CronManagerBundle/Resources/translations\BCCCronManagerBundle.tr.xliff</argument>
+        <argument>tr</argument>
+        <argument>BCCCronManagerBundle</argument>
+      </call>
     </service>
     <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
       <tag name="translation.loader" alias="php"/>
@@ -2491,6 +2535,7 @@
         <argument type="collection">
           <argument>C:\wamp\www\LaManu\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/config/validation.xml</argument>
           <argument>C:\wamp\www\LaManu\vendor\friendsofsymfony\user-bundle\FOS\UserBundle\Resources\config\validation.xml</argument>
+          <argument>C:\wamp\www\LaManu\vendor\bcc\cron-manager-bundle\BCC\CronManagerBundle\Resources\config\validation.xml</argument>
         </argument>
       </call>
       <call method="enableAnnotationMapping">
@@ -2621,7 +2666,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5417eac79f613</argument>
+            <argument>541c2373877fc</argument>
           </service>
         </argument>
         <argument type="service">
@@ -2642,7 +2687,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5417eac79f613</argument>
+            <argument>541c2373877fc</argument>
           </service>
         </argument>
       </argument>
@@ -2794,7 +2839,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>5417eac79f613</argument>
+            <argument>541c2373877fc</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2975,7 +3020,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>5417eac79f613</argument>
+            <argument>541c2373877fc</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -3137,7 +3182,9 @@
             <argument type="service" id="templating.name_parser"/>
             <argument>false</argument>
             <argument type="collection"/>
-            <argument type="collection"/>
+            <argument type="collection">
+              <argument>BCCCronManagerBundle</argument>
+            </argument>
             <argument type="service">
               <service class="Symfony\Bundle\AsseticBundle\DefaultValueSupplier" public="false">
                 <argument type="service" id="service_container"/>
@@ -3150,6 +3197,15 @@
         <argument type="service">
           <service class="Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension" public="false">
             <tag name="twig.extension"/>
+          </service>
+        </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service">
+          <service class="BCC\CronManagerBundle\Twig\TwigExtension" public="false">
+            <tag name="twig.extension"/>
+            <argument>C:/wamp/www/LaManu/app/logs</argument>
+            <argument>C:/wamp/www/LaManu/app</argument>
           </service>
         </argument>
       </call>
@@ -3208,11 +3264,17 @@
       <argument type="service" id="service_container"/>
       <argument type="collection">
         <argument key="cssrewrite">assetic.filter.cssrewrite</argument>
+        <argument key="less">assetic.filter.less</argument>
       </argument>
     </service>
     <service id="assetic.asset_manager" class="Assetic\Factory\LazyAssetManager">
       <argument type="service" id="assetic.asset_factory"/>
       <argument type="collection">
+        <argument key="config" type="service">
+          <service class="Symfony\Bundle\AsseticBundle\Factory\Loader\ConfigurationLoader" public="false">
+            <tag name="assetic.formula_loader" alias="config"/>
+          </service>
+        </argument>
         <argument key="twig" type="service">
           <service class="Assetic\Factory\Loader\CachedFormulaLoader" public="false">
             <tag name="assetic.formula_loader" alias="twig"/>
@@ -3232,6 +3294,75 @@
           </service>
         </argument>
       </argument>
+      <call method="addResource">
+        <argument type="service">
+          <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\ConfigurationResource" public="false">
+            <tag name="assetic.formula_resource" loader="config"/>
+            <argument type="collection">
+              <argument key="jquery_js" type="collection">
+                <argument type="collection">
+                  <argument>C:/wamp/www/LaManu/app/../components/jquery/jquery.min.js</argument>
+                </argument>
+                <argument type="collection"/>
+                <argument type="collection"/>
+              </argument>
+              <argument key="bootstrap_js" type="collection">
+                <argument type="collection">
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/transition.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/alert.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/modal.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/dropdown.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/scrollspy.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/tab.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/tooltip.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/popover.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/button.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/collapse.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/carousel.js</argument>
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/affix.js</argument>
+                </argument>
+                <argument type="collection"/>
+                <argument type="collection"/>
+              </argument>
+              <argument key="bootstrap_less" type="collection">
+                <argument type="collection">
+                  <argument>C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/less/bootstrap.less</argument>
+                </argument>
+                <argument type="collection"/>
+                <argument type="collection"/>
+              </argument>
+            </argument>
+          </service>
+        </argument>
+        <argument>config</argument>
+      </call>
+      <call method="addResource">
+        <argument type="service">
+          <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource" public="false">
+            <tag name="assetic.templating.twig"/>
+            <tag name="assetic.formula_resource" loader="twig"/>
+            <argument type="collection">
+              <argument type="service">
+                <service class="%assetic.directory_resource.class%" public="false">
+                  <argument type="service" id="templating.loader"/>
+                  <argument>BCCCronManagerBundle</argument>
+                  <argument>C:/wamp/www/LaManu/app/Resources/BCCCronManagerBundle/views</argument>
+                  <argument>/\.[^.]+\.twig$/</argument>
+                </service>
+              </argument>
+              <argument type="service">
+                <service class="%assetic.directory_resource.class%" public="false">
+                  <argument type="service" id="templating.loader"/>
+                  <argument>BCCCronManagerBundle</argument>
+                  <argument>C:\wamp\www\LaManu\vendor\bcc\cron-manager-bundle\BCC\CronManagerBundle/Resources/views</argument>
+                  <argument>/\.[^.]+\.twig$/</argument>
+                </service>
+              </argument>
+            </argument>
+          </service>
+        </argument>
+        <argument>twig</argument>
+      </call>
       <call method="addResource">
         <argument type="service">
           <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource" public="false">
@@ -3254,9 +3385,31 @@
       </argument>
       <argument>C:/wamp/www/LaManu/app/../web</argument>
       <argument>true</argument>
+      <call method="addWorker">
+        <argument type="service">
+          <service class="Assetic\Factory\Worker\EnsureFilterWorker" public="false">
+            <tag name="assetic.factory_worker"/>
+            <argument>/\.less$/</argument>
+            <argument type="service" id="assetic.filter.less"/>
+          </service>
+        </argument>
+      </call>
     </service>
     <service id="assetic.filter.cssrewrite" class="Assetic\Filter\CssRewriteFilter">
       <tag name="assetic.filter" alias="cssrewrite"/>
+    </service>
+    <service id="assetic.filter.less" class="Assetic\Filter\LessFilter">
+      <tag name="assetic.filter" alias="less"/>
+      <argument>null</argument>
+      <argument type="collection">
+        <argument>null</argument>
+      </argument>
+      <call method="setTimeout">
+        <argument>null</argument>
+      </call>
+      <call method="setCompress">
+        <argument>null</argument>
+      </call>
     </service>
     <service id="doctrine.dbal.connection_factory" class="Doctrine\Bundle\DoctrineBundle\ConnectionFactory">
       <argument type="collection"/>
@@ -3815,6 +3968,10 @@
         <argument>fsmUser</argument>
       </call>
       <call method="addPath">
+        <argument>C:\wamp\www\LaManu\vendor\bcc\cron-manager-bundle\BCC\CronManagerBundle/Resources/views</argument>
+        <argument>BCCCronManager</argument>
+      </call>
+      <call method="addPath">
         <argument>C:/wamp/www/LaManu/app/Resources/views</argument>
       </call>
       <call method="addPath">
@@ -3834,10 +3991,15 @@
       <argument type="service" id="swiftmailer.mailer.default.transport.eventdispatcher"/>
       <argument type="service" id="swiftmailer.mailer.default.spool"/>
       <call method="registerPlugin">
+        <argument type="service" id="swiftmailer.plugin.redirecting"/>
+      </call>
+      <call method="registerPlugin">
         <argument type="service" id="swiftmailer.mailer.default.plugin.messagelogger"/>
       </call>
     </service>
-    <service id="swiftmailer.mailer.default.spool" class="Swift_MemorySpool"/>
+    <service id="swiftmailer.mailer.default.spool" class="Swift_FileSpool">
+      <argument>C:/wamp/www/LaManu/app/spool/default</argument>
+    </service>
     <service id="swiftmailer.mailer.default.transport.real" class="Swift_Transport_EsmtpTransport">
       <argument type="service">
         <service class="Swift_Transport_StreamBuffer" public="false">
@@ -3882,6 +4044,11 @@
       <call method="setSourceIp">
         <argument>null</argument>
       </call>
+    </service>
+    <service id="swiftmailer.plugin.redirecting" class="Swift_Plugins_RedirectingPlugin">
+      <tag name="swiftmailer.default.plugin"/>
+      <argument>faridmescam@gmail.com</argument>
+      <argument type="collection"/>
     </service>
     <service id="fos_user.mailer" class="FOS\UserBundle\Mailer\Mailer">
       <argument type="service" id="swiftmailer.mailer.default"/>

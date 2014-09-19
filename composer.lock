@@ -4,8 +4,98 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "310c08a966338326ecb3f70b2192b22b",
+    "hash": "7e4351e023a77123b8e2953578bc1be3",
     "packages": [
+        {
+            "name": "bcc/cron-manager-bundle",
+            "version": "v2.4.1",
+            "target-dir": "BCC/CronManagerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/michelsalib/BCCCronManagerBundle.git",
+                "reference": "4eda5bdcce7c594e9232d4535305884d5f0adeab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/michelsalib/BCCCronManagerBundle/zipball/4eda5bdcce7c594e9232d4535305884d5f0adeab",
+                "reference": "4eda5bdcce7c594e9232d4535305884d5f0adeab",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": "1.*",
+                "symfony/assetic-bundle": "~2",
+                "symfony/symfony": "~2",
+                "twbs/bootstrap": "~3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "BCC\\CronManagerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michel Salib",
+                    "email": "michelsalib@hotmail.com",
+                    "homepage": "http://www.michelsalib.com"
+                }
+            ],
+            "description": "A cron table manager bundle for Symfony2",
+            "homepage": "http://github.com/michelsalib/BCCCronManagerBundle",
+            "keywords": [
+                "cron management"
+            ],
+            "time": "2014-04-17 16:26:19"
+        },
+        {
+            "name": "components/jquery",
+            "version": "1.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jquery.git",
+                "reference": "950ba6f21f2b5fab0195a11728cc83c5b147c594"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jquery/zipball/950ba6f21f2b5fab0195a11728cc83c5b147c594",
+                "reference": "950ba6f21f2b5fab0195a11728cc83c5b147c594",
+                "shasum": ""
+            },
+            "require": {
+                "robloach/component-installer": "*"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "jquery.js"
+                    ],
+                    "files": [
+                        "jquery.min.js",
+                        "jquery-migrate.js",
+                        "jquery-migrate.min.js"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Resig",
+                    "email": "jeresig@gmail.com",
+                    "homepage": "http://ejohn.org/"
+                }
+            ],
+            "description": "jQuery JavaScript Library",
+            "homepage": "http://jquery.com",
+            "time": "2014-07-02 11:53:01"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.1.2",
@@ -977,6 +1067,50 @@
             "time": "2012-12-21 11:40:51"
         },
         {
+            "name": "robloach/component-installer",
+            "version": "0.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RobLoach/component-installer.git",
+                "reference": "1864f25db21fc173e02a359f646acd596c1b0460"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RobLoach/component-installer/zipball/1864f25db21fc173e02a359f646acd596c1b0460",
+                "reference": "1864f25db21fc173e02a359f646acd596c1b0460",
+                "shasum": ""
+            },
+            "require": {
+                "kriswallsmith/assetic": "1.*",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "composer/composer": "1.*"
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "ComponentInstaller\\Installer"
+            },
+            "autoload": {
+                "psr-0": {
+                    "ComponentInstaller": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Loach",
+                    "email": "robloach@gmail.com",
+                    "homepage": "http://robloach.net"
+                }
+            ],
+            "description": "Allows installation of Components via Composer.",
+            "time": "2013-08-31 23:46:48"
+        },
+        {
             "name": "sensio/distribution-bundle",
             "version": "v3.0.0",
             "target-dir": "Sensio/Bundle/DistributionBundle",
@@ -1491,6 +1625,57 @@
                 "framework"
             ],
             "time": "2014-05-31 18:45:50"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "c068162161154a4b85110ea1e7dd3d7897ce2b72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/c068162161154a4b85110ea1e7dd3d7897ce2b72",
+                "reference": "c068162161154a4b85110ea1e7dd3d7897ce2b72",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "http://getbootstrap.com",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "less",
+                "mobile-first",
+                "responsive",
+                "web"
+            ],
+            "time": "2014-06-26 16:36:48"
         },
         {
             "name": "twig/extensions",

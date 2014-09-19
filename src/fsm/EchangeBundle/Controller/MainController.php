@@ -10,9 +10,13 @@ use fsm\EchangeBundle\Form\CategorieType;
 use fsm\EchangeBundle\Form\FormHandler;
 use fsm\EchangeBundle\Entity\Image;
 use fsm\EchangeBundle\Form\ImageType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 class MainController extends Controller {
-
+/**
+     * @Route("/")
+     */
     public function accueilAction() {
         $objets = $this->getDoctrine()
                 ->getManager()

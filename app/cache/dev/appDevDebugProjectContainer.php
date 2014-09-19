@@ -44,6 +44,7 @@ class appDevDebugProjectContainer extends Container
             'assetic.cache' => 'getAssetic_CacheService',
             'assetic.controller' => 'getAssetic_ControllerService',
             'assetic.filter.cssrewrite' => 'getAssetic_Filter_CssrewriteService',
+            'assetic.filter.less' => 'getAssetic_Filter_LessService',
             'assetic.filter_manager' => 'getAssetic_FilterManagerService',
             'assetic.request_listener' => 'getAssetic_RequestListenerService',
             'assetic.value_supplier.default' => 'getAssetic_ValueSupplier_DefaultService',
@@ -215,6 +216,7 @@ class appDevDebugProjectContainer extends Container
             'swiftmailer.mailer.default.transport' => 'getSwiftmailer_Mailer_Default_TransportService',
             'swiftmailer.mailer.default.transport.eventdispatcher' => 'getSwiftmailer_Mailer_Default_Transport_EventdispatcherService',
             'swiftmailer.mailer.default.transport.real' => 'getSwiftmailer_Mailer_Default_Transport_RealService',
+            'swiftmailer.plugin.redirecting' => 'getSwiftmailer_Plugin_RedirectingService',
             'templating' => 'getTemplatingService',
             'templating.asset.package_factory' => 'getTemplating_Asset_PackageFactoryService',
             'templating.filename_parser' => 'getTemplating_FilenameParserService',
@@ -368,9 +370,13 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_AssetManagerService()
     {
-        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($this->get('assetic.asset_factory'), array('twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig')), new \Assetic\Cache\ConfigCache('C:/wamp/www/LaManu/app/cache/dev/assetic/config'), true)));
+        $a = $this->get('templating.loader');
 
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($this->get('templating.loader'), '', 'C:/wamp/www/LaManu/app/Resources/views', '/\\.[^.]+\\.twig$/'), 'twig');
+        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($this->get('assetic.asset_factory'), array('config' => new \Symfony\Bundle\AsseticBundle\Factory\Loader\ConfigurationLoader(), 'twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig')), new \Assetic\Cache\ConfigCache('C:/wamp/www/LaManu/app/cache/dev/assetic/config'), true)));
+
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\ConfigurationResource(array('jquery_js' => array(0 => array(0 => 'C:/wamp/www/LaManu/app/../components/jquery/jquery.min.js'), 1 => array(), 2 => array()), 'bootstrap_js' => array(0 => array(0 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/transition.js', 1 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/alert.js', 2 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/modal.js', 3 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/dropdown.js', 4 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/scrollspy.js', 5 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/tab.js', 6 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/tooltip.js', 7 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/popover.js', 8 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/button.js', 9 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/collapse.js', 10 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/carousel.js', 11 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/js/affix.js'), 1 => array(), 2 => array()), 'bootstrap_less' => array(0 => array(0 => 'C:/wamp/www/LaManu/app/../vendor/twbs/bootstrap/less/bootstrap.less'), 1 => array(), 2 => array()))), 'config');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'BCCCronManagerBundle', 'C:/wamp/www/LaManu/app/Resources/BCCCronManagerBundle/views', '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'BCCCronManagerBundle', 'C:\\wamp\\www\\LaManu\\vendor\\bcc\\cron-manager-bundle\\BCC\\CronManagerBundle/Resources/views', '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, '', 'C:/wamp/www/LaManu/app/Resources/views', '/\\.[^.]+\\.twig$/'), 'twig');
 
         return $instance;
     }
@@ -405,6 +411,24 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'assetic.filter.less' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Assetic\Filter\LessFilter A Assetic\Filter\LessFilter instance.
+     */
+    protected function getAssetic_Filter_LessService()
+    {
+        $this->services['assetic.filter.less'] = $instance = new \Assetic\Filter\LessFilter(NULL, array(0 => NULL));
+
+        $instance->setTimeout(NULL);
+        $instance->setCompress(NULL);
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'assetic.filter_manager' service.
      *
      * This service is shared.
@@ -414,7 +438,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_FilterManagerService()
     {
-        return $this->services['assetic.filter_manager'] = new \Symfony\Bundle\AsseticBundle\FilterManager($this, array('cssrewrite' => 'assetic.filter.cssrewrite'));
+        return $this->services['assetic.filter_manager'] = new \Symfony\Bundle\AsseticBundle\FilterManager($this, array('cssrewrite' => 'assetic.filter.cssrewrite', 'less' => 'assetic.filter.less'));
     }
 
     /**
@@ -2294,7 +2318,7 @@ class appDevDebugProjectContainer extends Container
         $k = new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($a, $g, $this->get('security.authentication.session_strategy'), $e, 'main', $j, new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($f, $e, array('login_path' => 'fos_user_security_login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'), $c), array('check_path' => 'fos_user_security_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $c, $d, NULL);
         $k->setRememberMeServices($h);
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $b), 'main', $c, $d), 2 => $i, 3 => $k, 4 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($a, $h, $g, $c, $d), 5 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '5417eac3dbf17', $c), 6 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $e, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $e, 'fos_user_security_login', false), NULL, NULL, $c));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $b), 'main', $c, $d), 2 => $i, 3 => $k, 4 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($a, $h, $g, $c, $d), 5 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '541c3e498cf58', $c), 6 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $e, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $e, 'fos_user_security_login', false), NULL, NULL, $c));
     }
 
     /**
@@ -2310,7 +2334,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('security.context');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.main_login'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_provider.username')), 'main_login', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '5417eac3dbf17', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'main_login', NULL, NULL, NULL, $b));
+        return $this->services['security.firewall.map.context.main_login'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_provider.username')), 'main_login', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '541c3e498cf58', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'main_login', NULL, NULL, NULL, $b));
     }
 
     /**
@@ -2623,11 +2647,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return Swift_MemorySpool A Swift_MemorySpool instance.
+     * @return Swift_FileSpool A Swift_FileSpool instance.
      */
     protected function getSwiftmailer_Mailer_Default_SpoolService()
     {
-        return $this->services['swiftmailer.mailer.default.spool'] = new \Swift_MemorySpool();
+        return $this->services['swiftmailer.mailer.default.spool'] = new \Swift_FileSpool('C:/wamp/www/LaManu/app/spool/default');
     }
 
     /**
@@ -2642,6 +2666,7 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['swiftmailer.mailer.default.transport'] = $instance = new \Swift_Transport_SpoolTransport($this->get('swiftmailer.mailer.default.transport.eventdispatcher'), $this->get('swiftmailer.mailer.default.spool'));
 
+        $instance->registerPlugin($this->get('swiftmailer.plugin.redirecting'));
         $instance->registerPlugin($this->get('swiftmailer.mailer.default.plugin.messagelogger'));
 
         return $instance;
@@ -2671,6 +2696,19 @@ class appDevDebugProjectContainer extends Container
         $instance->setSourceIp(NULL);
 
         return $instance;
+    }
+
+    /**
+     * Gets the 'swiftmailer.plugin.redirecting' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Swift_Plugins_RedirectingPlugin A Swift_Plugins_RedirectingPlugin instance.
+     */
+    protected function getSwiftmailer_Plugin_RedirectingService()
+    {
+        return $this->services['swiftmailer.plugin.redirecting'] = new \Swift_Plugins_RedirectingPlugin('faridmescam@gmail.com', array());
     }
 
     /**
@@ -3483,6 +3521,11 @@ class appDevDebugProjectContainer extends Container
         $instance->addResource('yml', 'C:\\wamp\\www\\LaManu\\vendor\\friendsofsymfony\\user-bundle\\FOS\\UserBundle/Resources/translations\\validators.vi.yml', 'vi', 'validators');
         $instance->addResource('yml', 'C:\\wamp\\www\\LaManu\\vendor\\friendsofsymfony\\user-bundle\\FOS\\UserBundle/Resources/translations\\validators.zh_CN.yml', 'zh_CN', 'validators');
         $instance->addResource('xlf', 'C:\\wamp\\www\\LaManu\\src\\fsm\\UserBundle/Resources/translations\\messages.fr.xlf', 'fr', 'messages');
+        $instance->addResource('xliff', 'C:\\wamp\\www\\LaManu\\vendor\\bcc\\cron-manager-bundle\\BCC\\CronManagerBundle/Resources/translations\\BCCCronManagerBundle.de.xliff', 'de', 'BCCCronManagerBundle');
+        $instance->addResource('xliff', 'C:\\wamp\\www\\LaManu\\vendor\\bcc\\cron-manager-bundle\\BCC\\CronManagerBundle/Resources/translations\\BCCCronManagerBundle.es.xliff', 'es', 'BCCCronManagerBundle');
+        $instance->addResource('xliff', 'C:\\wamp\\www\\LaManu\\vendor\\bcc\\cron-manager-bundle\\BCC\\CronManagerBundle/Resources/translations\\BCCCronManagerBundle.fr.xliff', 'fr', 'BCCCronManagerBundle');
+        $instance->addResource('xliff', 'C:\\wamp\\www\\LaManu\\vendor\\bcc\\cron-manager-bundle\\BCC\\CronManagerBundle/Resources/translations\\BCCCronManagerBundle.pl.xliff', 'pl', 'BCCCronManagerBundle');
+        $instance->addResource('xliff', 'C:\\wamp\\www\\LaManu\\vendor\\bcc\\cron-manager-bundle\\BCC\\CronManagerBundle/Resources/translations\\BCCCronManagerBundle.tr.xliff', 'tr', 'BCCCronManagerBundle');
 
         return $instance;
     }
@@ -3512,8 +3555,9 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpKernelExtension($this->get('fragment.handler')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'form_div_layout.html.twig')), $this->get('form.csrf_provider', ContainerInterface::NULL_ON_INVALID_REFERENCE))));
         $instance->addExtension(new \Twig_Extension_Debug());
-        $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(), $this->get('assetic.value_supplier.default', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
+        $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(0 => 'BCCCronManagerBundle'), $this->get('assetic.value_supplier.default', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
         $instance->addExtension(new \Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension());
+        $instance->addExtension(new \BCC\CronManagerBundle\Twig\TwigExtension('C:/wamp/www/LaManu/app/logs', 'C:/wamp/www/LaManu/app'));
         $instance->addExtension(new \Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension());
         $instance->addGlobal('app', $this->get('templating.globals'));
 
@@ -3566,6 +3610,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath('C:\\wamp\\www\\LaManu\\src\\fsm\\EchangeBundle/Resources/views', 'fsmEchange');
         $instance->addPath('C:\\wamp\\www\\LaManu\\vendor\\friendsofsymfony\\user-bundle\\FOS\\UserBundle/Resources/views', 'FOSUser');
         $instance->addPath('C:\\wamp\\www\\LaManu\\src\\fsm\\UserBundle/Resources/views', 'fsmUser');
+        $instance->addPath('C:\\wamp\\www\\LaManu\\vendor\\bcc\\cron-manager-bundle\\BCC\\CronManagerBundle/Resources/views', 'BCCCronManager');
         $instance->addPath('C:\\wamp\\www\\LaManu\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
         $instance->addPath('C:\\wamp\\www\\LaManu\\vendor\\sensio\\distribution-bundle\\Sensio\\Bundle\\DistributionBundle/Resources/views', 'SensioDistribution');
         $instance->addPath('C:/wamp/www/LaManu/app/Resources/views');
@@ -3628,7 +3673,7 @@ class appDevDebugProjectContainer extends Container
         $instance->setConstraintValidatorFactory(new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('validator.expression' => 'validator.expression', 'Symfony\\Component\\Validator\\Constraints\\EmailValidator' => 'validator.email', 'security.validator.user_password' => 'security.validator.user_password', 'doctrine.orm.validator.unique' => 'doctrine.orm.validator.unique')));
         $instance->setTranslator($this->get('translator.default'));
         $instance->setTranslationDomain('validators');
-        $instance->addXmlMappings(array(0 => 'C:\\wamp\\www\\LaManu\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml', 1 => 'C:\\wamp\\www\\LaManu\\vendor\\friendsofsymfony\\user-bundle\\FOS\\UserBundle\\Resources\\config\\validation.xml'));
+        $instance->addXmlMappings(array(0 => 'C:\\wamp\\www\\LaManu\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml', 1 => 'C:\\wamp\\www\\LaManu\\vendor\\friendsofsymfony\\user-bundle\\FOS\\UserBundle\\Resources\\config\\validation.xml', 2 => 'C:\\wamp\\www\\LaManu\\vendor\\bcc\\cron-manager-bundle\\BCC\\CronManagerBundle\\Resources\\config\\validation.xml'));
         $instance->enableAnnotationMapping($this->get('annotation_reader'));
         $instance->addMethodMapping('loadClassMetadata');
         $instance->addObjectInitializers(array(0 => $this->get('doctrine.orm.validator_initializer'), 1 => new \FOS\UserBundle\Validator\Initializer($this->get('fos_user.user_manager'))));
@@ -3731,6 +3776,7 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['assetic.asset_factory'] = $instance = new \Symfony\Bundle\AsseticBundle\Factory\AssetFactory($this->get('kernel'), $this, $this->getParameterBag(), 'C:/wamp/www/LaManu/app/../web', true);
 
+        $instance->addWorker(new \Assetic\Factory\Worker\EnsureFilterWorker('/\\.less$/', $this->get('assetic.filter.less')));
         $instance->addWorker(new \Symfony\Bundle\AsseticBundle\Factory\Worker\UseControllerWorker());
 
         return $instance;
@@ -3908,7 +3954,7 @@ class appDevDebugProjectContainer extends Container
     {
         $a = $this->get('security.user_checker');
 
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5417eac3dbf17'), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('fos_user.user_provider.username'), $a, 'main', $this->get('security.encoder_factory'), true), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'ThisTokenIsNotSoSecretChangeIt44', 'main'), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5417eac3dbf17')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('541c3e498cf58'), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('fos_user.user_provider.username'), $a, 'main', $this->get('security.encoder_factory'), true), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'ThisTokenIsNotSoSecretChangeIt44', 'main'), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('541c3e498cf58')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -4139,6 +4185,7 @@ class appDevDebugProjectContainer extends Container
                 'fsmEchangeBundle' => 'fsm\\EchangeBundle\\fsmEchangeBundle',
                 'FOSUserBundle' => 'FOS\\UserBundle\\FOSUserBundle',
                 'fsmUserBundle' => 'fsm\\UserBundle\\fsmUserBundle',
+                'BCCCronManagerBundle' => 'BCC\\CronManagerBundle\\BCCCronManagerBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
                 'SensioGeneratorBundle' => 'Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle',
@@ -4162,6 +4209,9 @@ class appDevDebugProjectContainer extends Container
             'debug_toolbar' => true,
             'debug_redirects' => false,
             'use_assetic_controller' => true,
+            'node' => NULL,
+            'node_paths' => NULL,
+            'apply_to' => NULL,
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',
@@ -4526,13 +4576,16 @@ class appDevDebugProjectContainer extends Container
             'swiftmailer.mailer.default.transport.smtp.auth_mode' => 'login',
             'swiftmailer.mailer.default.transport.smtp.timeout' => 30,
             'swiftmailer.mailer.default.transport.smtp.source_ip' => NULL,
-            'swiftmailer.spool.default.memory.path' => 'C:/wamp/www/LaManu/app/cache/dev/swiftmailer/spool/default',
+            'swiftmailer.spool.default.file.path' => 'C:/wamp/www/LaManu/app/spool/default',
             'swiftmailer.mailer.default.spool.enabled' => true,
             'swiftmailer.mailer.default.plugin.impersonate' => NULL,
-            'swiftmailer.mailer.default.single_address' => NULL,
+            'swiftmailer.mailer.default.single_address' => 'faridmescam@gmail.com',
+            'swiftmailer.mailer.default.delivery_whitelist' => array(
+
+            ),
             'swiftmailer.spool.enabled' => true,
             'swiftmailer.delivery.enabled' => true,
-            'swiftmailer.single_address' => NULL,
+            'swiftmailer.single_address' => 'faridmescam@gmail.com',
             'swiftmailer.mailers' => array(
                 'default' => 'swiftmailer.mailer.default',
             ),
@@ -4554,7 +4607,7 @@ class appDevDebugProjectContainer extends Container
             ),
             'assetic.cache_dir' => 'C:/wamp/www/LaManu/app/cache/dev/assetic',
             'assetic.bundles' => array(
-
+                0 => 'BCCCronManagerBundle',
             ),
             'assetic.twig_extension.class' => 'Symfony\\Bundle\\AsseticBundle\\Twig\\AsseticExtension',
             'assetic.twig_formula_loader.class' => 'Assetic\\Extension\\Twig\\TwigFormulaLoader',
@@ -4574,6 +4627,13 @@ class appDevDebugProjectContainer extends Container
             'assetic.ruby.bin' => '/usr/bin/ruby',
             'assetic.sass.bin' => '/usr/bin/sass',
             'assetic.filter.cssrewrite.class' => 'Assetic\\Filter\\CssRewriteFilter',
+            'assetic.filter.less.class' => 'Assetic\\Filter\\LessFilter',
+            'assetic.filter.less.node' => NULL,
+            'assetic.filter.less.node_paths' => array(
+                0 => NULL,
+            ),
+            'assetic.filter.less.timeout' => NULL,
+            'assetic.filter.less.compress' => NULL,
             'assetic.twig_extension.functions' => array(
 
             ),

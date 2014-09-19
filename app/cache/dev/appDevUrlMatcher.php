@@ -27,6 +27,125 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         $context = $this->context;
         $request = $this->request;
 
+        if (0 === strpos($pathinfo, '/assetic')) {
+            if (0 === strpos($pathinfo, '/assetic/jquery_js')) {
+                // _assetic_jquery_js
+                if ($pathinfo === '/assetic/jquery_js.js') {
+                    return array (  '_controller' => 'assetic.controller:render',  'name' => 'jquery_js',  'pos' => NULL,  '_format' => 'js',  '_route' => '_assetic_jquery_js',);
+                }
+
+                // _assetic_jquery_js_0
+                if ($pathinfo === '/assetic/jquery_js_jquery.min_1.js') {
+                    return array (  '_controller' => 'assetic.controller:render',  'name' => 'jquery_js',  'pos' => 0,  '_format' => 'js',  '_route' => '_assetic_jquery_js_0',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/assetic/bootstrap_')) {
+                if (0 === strpos($pathinfo, '/assetic/bootstrap_js')) {
+                    // _assetic_bootstrap_js
+                    if ($pathinfo === '/assetic/bootstrap_js.js') {
+                        return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => NULL,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js',);
+                    }
+
+                    if (0 === strpos($pathinfo, '/assetic/bootstrap_js_')) {
+                        // _assetic_bootstrap_js_0
+                        if ($pathinfo === '/assetic/bootstrap_js_transition_1.js') {
+                            return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 0,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_0',);
+                        }
+
+                        // _assetic_bootstrap_js_1
+                        if ($pathinfo === '/assetic/bootstrap_js_alert_2.js') {
+                            return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 1,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_1',);
+                        }
+
+                        // _assetic_bootstrap_js_2
+                        if ($pathinfo === '/assetic/bootstrap_js_modal_3.js') {
+                            return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 2,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_2',);
+                        }
+
+                        // _assetic_bootstrap_js_3
+                        if ($pathinfo === '/assetic/bootstrap_js_dropdown_4.js') {
+                            return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 3,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_3',);
+                        }
+
+                        // _assetic_bootstrap_js_4
+                        if ($pathinfo === '/assetic/bootstrap_js_scrollspy_5.js') {
+                            return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 4,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_4',);
+                        }
+
+                        if (0 === strpos($pathinfo, '/assetic/bootstrap_js_t')) {
+                            // _assetic_bootstrap_js_5
+                            if ($pathinfo === '/assetic/bootstrap_js_tab_6.js') {
+                                return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 5,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_5',);
+                            }
+
+                            // _assetic_bootstrap_js_6
+                            if ($pathinfo === '/assetic/bootstrap_js_tooltip_7.js') {
+                                return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 6,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_6',);
+                            }
+
+                        }
+
+                        // _assetic_bootstrap_js_7
+                        if ($pathinfo === '/assetic/bootstrap_js_popover_8.js') {
+                            return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 7,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_7',);
+                        }
+
+                        // _assetic_bootstrap_js_8
+                        if ($pathinfo === '/assetic/bootstrap_js_button_9.js') {
+                            return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 8,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_8',);
+                        }
+
+                        if (0 === strpos($pathinfo, '/assetic/bootstrap_js_c')) {
+                            // _assetic_bootstrap_js_9
+                            if ($pathinfo === '/assetic/bootstrap_js_collapse_10.js') {
+                                return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 9,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_9',);
+                            }
+
+                            // _assetic_bootstrap_js_10
+                            if ($pathinfo === '/assetic/bootstrap_js_carousel_11.js') {
+                                return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 10,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_10',);
+                            }
+
+                        }
+
+                        // _assetic_bootstrap_js_11
+                        if ($pathinfo === '/assetic/bootstrap_js_affix_12.js') {
+                            return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_js',  'pos' => 11,  '_format' => 'js',  '_route' => '_assetic_bootstrap_js_11',);
+                        }
+
+                    }
+
+                }
+
+                if (0 === strpos($pathinfo, '/assetic/bootstrap_less')) {
+                    // _assetic_bootstrap_less
+                    if ($pathinfo === '/assetic/bootstrap_less.less') {
+                        return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_less',  'pos' => NULL,  '_format' => 'less',  '_route' => '_assetic_bootstrap_less',);
+                    }
+
+                    // _assetic_bootstrap_less_0
+                    if ($pathinfo === '/assetic/bootstrap_less_bootstrap_1.less') {
+                        return array (  '_controller' => 'assetic.controller:render',  'name' => 'bootstrap_less',  'pos' => 0,  '_format' => 'less',  '_route' => '_assetic_bootstrap_less_0',);
+                    }
+
+                }
+
+            }
+
+        }
+
+        // _assetic_9baa251
+        if ($pathinfo === '/css/9baa251.css') {
+            return array (  '_controller' => 'assetic.controller:render',  'name' => '9baa251',  'pos' => NULL,  '_format' => 'css',  '_route' => '_assetic_9baa251',);
+        }
+
+        // _assetic_f25b053
+        if ($pathinfo === '/js/f25b053.js') {
+            return array (  '_controller' => 'assetic.controller:render',  'name' => 'f25b053',  'pos' => NULL,  '_format' => 'js',  '_route' => '_assetic_f25b053',);
+        }
+
         if (0 === strpos($pathinfo, '/_')) {
             // _wdt
             if (0 === strpos($pathinfo, '/_wdt') && preg_match('#^/_wdt/(?P<token>[^/]++)$#s', $pathinfo, $matches)) {
@@ -140,13 +259,18 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\MainController::accueilAction',  '_route' => 'fsm_echange_accueil',);
         }
 
-        // fsm_echange_index
+        // fsm_echangebundle_crontasks_test
+        if ($pathinfo === '/crontasks/test') {
+            return array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\CronTasksController::testAction',  '_route' => 'fsm_echangebundle_crontasks_test',);
+        }
+
+        // fsm_echange_main_accueil
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'fsm_echange_index');
+                return $this->redirect($pathinfo.'/', 'fsm_echange_main_accueil');
             }
 
-            return array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\MainController::accueilAction',  '_route' => 'fsm_echange_index',);
+            return array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\MainController::accueilAction',  '_route' => 'fsm_echange_main_accueil',);
         }
 
         // fsm_objet_ajout
@@ -233,6 +357,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // fsm_objet_envoimail
         if (0 === strpos($pathinfo, '/objetmail') && preg_match('#^/objetmail/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'fsm_objet_envoimail')), array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\ObjetController::objetMailAction',));
+        }
+
+        // fsm_taches
+        if ($pathinfo === '/test') {
+            return array (  '_controller' => 'fsmEchangeBundle:CronTask:test',  '_route' => 'fsm_taches',);
         }
 
         if (0 === strpos($pathinfo, '/log')) {
@@ -396,6 +525,54 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'fsm\\UserBundle\\Controller\\ChangePasswordController::changePasswordAction',  '_route' => 'fos_user_change_password',);
         }
         not_fos_user_change_password:
+
+        if (0 === strpos($pathinfo, '/cron-manager')) {
+            // BCCCronManagerBundle_index
+            if (rtrim($pathinfo, '/') === '/cron-manager') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'BCCCronManagerBundle_index');
+                }
+
+                return array (  '_controller' => 'BCC\\CronManagerBundle\\Controller\\DefaultController::indexAction',  '_route' => 'BCCCronManagerBundle_index',);
+            }
+
+            // BCCCronManagerBundle_edit
+            if (preg_match('#^/cron\\-manager/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'BCCCronManagerBundle_edit')), array (  '_controller' => 'BCC\\CronManagerBundle\\Controller\\DefaultController::editAction',));
+            }
+
+            // BCCCronManagerBundle_add
+            if ($pathinfo === '/cron-manager/add') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_BCCCronManagerBundle_add;
+                }
+
+                return array (  '_controller' => 'BCC\\CronManagerBundle\\Controller\\DefaultController::addAction',  '_route' => 'BCCCronManagerBundle_add',);
+            }
+            not_BCCCronManagerBundle_add:
+
+            // BCCCronManagerBundle_wakeup
+            if (preg_match('#^/cron\\-manager/(?P<id>[^/]++)/wakeup$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'BCCCronManagerBundle_wakeup')), array (  '_controller' => 'BCC\\CronManagerBundle\\Controller\\DefaultController::wakeupAction',));
+            }
+
+            // BCCCronManagerBundle_suspend
+            if (preg_match('#^/cron\\-manager/(?P<id>[^/]++)/suspend$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'BCCCronManagerBundle_suspend')), array (  '_controller' => 'BCC\\CronManagerBundle\\Controller\\DefaultController::suspendAction',));
+            }
+
+            // BCCCronManagerBundle_remove
+            if (preg_match('#^/cron\\-manager/(?P<id>[^/]++)/remove$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'BCCCronManagerBundle_remove')), array (  '_controller' => 'BCC\\CronManagerBundle\\Controller\\DefaultController::removeAction',));
+            }
+
+            // BCCCronManagerBundle_file
+            if (preg_match('#^/cron\\-manager/(?P<id>[^/]++)/file/(?P<type>log|error)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'BCCCronManagerBundle_file')), array (  '_controller' => 'BCC\\CronManagerBundle\\Controller\\DefaultController::fileAction',));
+            }
+
+        }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
