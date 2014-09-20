@@ -27,11 +27,6 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $context = $this->context;
         $request = $this->request;
 
-        // fsm_echange_accueil
-        if ($pathinfo === '/accueil') {
-            return array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\MainController::accueilAction',  '_route' => 'fsm_echange_accueil',);
-        }
-
         // fsm_echangebundle_crontasks_test
         if ($pathinfo === '/crontasks/test') {
             return array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\CronTasksController::testAction',  '_route' => 'fsm_echangebundle_crontasks_test',);
@@ -49,6 +44,16 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         // fsm_objet_ajout
         if ($pathinfo === '/ajouterObjet') {
             return array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\ObjetController::ajouterObjetAction',  '_route' => 'fsm_objet_ajout',);
+        }
+
+        // fsm_objet_update
+        if (0 === strpos($pathinfo, '/updateObjet') && preg_match('#^/updateObjet(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'fsm_objet_update')), array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\ObjetController::updateObjetAction',));
+        }
+
+        // fsm_echange_accueil
+        if ($pathinfo === '/accueil') {
+            return array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\MainController::accueilAction',  '_route' => 'fsm_echange_accueil',);
         }
 
         // fsm_objet_supprimer
@@ -115,11 +120,6 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'fsm_objet_show')), array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\ObjetController::showObjetAction',));
             }
 
-        }
-
-        // fsm_objet_update
-        if (0 === strpos($pathinfo, '/updateObjet') && preg_match('#^/updateObjet/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'fsm_objet_update')), array (  '_controller' => 'fsm\\EchangeBundle\\Controller\\ObjetController::updateObjetAction',));
         }
 
         // fsm_user_envoimail

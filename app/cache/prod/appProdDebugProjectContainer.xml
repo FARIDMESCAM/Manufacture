@@ -380,7 +380,7 @@
     <parameter key="swiftmailer.mailer.default.transport.smtp.auth_mode">login</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.timeout">30</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.source_ip">null</parameter>
-    <parameter key="swiftmailer.spool.default.file.path">C:/wamp/www/LaManu/app/spool/default</parameter>
+    <parameter key="swiftmailer.spool.default.memory.path">C:/wamp/www/LaManu/app/cache/prod/swiftmailer/spool/default</parameter>
     <parameter key="swiftmailer.mailer.default.spool.enabled">true</parameter>
     <parameter key="swiftmailer.mailer.default.plugin.impersonate">null</parameter>
     <parameter key="swiftmailer.mailer.default.single_address">faridmescam@gmail.com</parameter>
@@ -2666,7 +2666,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>541c2373877fc</argument>
+            <argument>541c47e557fc2</argument>
           </service>
         </argument>
         <argument type="service">
@@ -2687,7 +2687,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>541c2373877fc</argument>
+            <argument>541c47e557fc2</argument>
           </service>
         </argument>
       </argument>
@@ -2839,7 +2839,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>541c2373877fc</argument>
+            <argument>541c47e557fc2</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -3020,7 +3020,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>541c2373877fc</argument>
+            <argument>541c47e557fc2</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -3997,9 +3997,7 @@
         <argument type="service" id="swiftmailer.mailer.default.plugin.messagelogger"/>
       </call>
     </service>
-    <service id="swiftmailer.mailer.default.spool" class="Swift_FileSpool">
-      <argument>C:/wamp/www/LaManu/app/spool/default</argument>
-    </service>
+    <service id="swiftmailer.mailer.default.spool" class="Swift_MemorySpool"/>
     <service id="swiftmailer.mailer.default.transport.real" class="Swift_Transport_EsmtpTransport">
       <argument type="service">
         <service class="Swift_Transport_StreamBuffer" public="false">

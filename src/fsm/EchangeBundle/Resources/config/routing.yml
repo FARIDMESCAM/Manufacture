@@ -3,9 +3,9 @@ fsm_echange_accueil:
     defaults: { _controller: fsmEchangeBundle:Main:accueil }
 
 #Routing grace à des annotations dans le controller    
-echange:
-    resource: "@fsmEchangeBundle/Controller"
-    type:     annotation
+#echange:
+#    resource: "@fsmEchangeBundle/Controller"
+#    type:     annotation
 
 #fsm_echange_index:
 #    path : /
@@ -77,11 +77,11 @@ fsm_objet_show:
     defaults: { _controller: fsmEchangeBundle:Objet:showObjet }
     requirements:
        id: \d+
-fsm_objet_update:       
-    path: /updateObjet/{id}
-    defaults: { _controller: fsmEchangeBundle:Objet:updateObjet }
-    requirements:
-       id: \d+
+#fsm_objet_update:       
+#    path: /updateObjet/{id}
+#    defaults: { _controller: fsmEchangeBundle:Objet:updateObjet }
+#    requirements:
+#       id: \d+
 fsm_user_envoimail:
     path: /envoimail/{id}
     defaults: { _controller: fsmEchangeBundle:Objet:envoiMail }

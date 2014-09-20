@@ -74,8 +74,9 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:    
-     type: file
-     path: "%kernel.root_dir%/spool"
+      {  type : memory }
+#     type: file
+#     path: "%kernel.root_dir%/spool"
     
     delivery_address: faridmescam@gmail.com
 

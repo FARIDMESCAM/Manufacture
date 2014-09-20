@@ -10,15 +10,38 @@
 <div class="row">
 <div class="col-lg-4 col-lg-offset-4">
 <div class ="well">
-  <form method ="post" {{ form_enctype(form) }}> 
+  <form id="form_recherche" action="{{ path('fsm_objet_list') }}" method ="post" {{ form_enctype(form) }}> 
        {{ form_widget(form) }}
         <input type ="submit" class ="btn btn-primary" />
     </form>
 </div>
 </div>
 </div>    
-<p>{%include "fsmEchangeBundle:Objets:Recherche.html.twig"%}</p>
+
 <br>
-  
+  <div id="resultats_recherche"> 
 <p>{%include "fsmEchangeBundle:Objets:Objets.html.twig"%}</p>
+  </div>
+<script>
+$(".loading").hide();
+$("#form_recherche").submit(function(){ 
+    $(".loading").show();
+    var namerecherche = $("#objetrecherche_name").val();
+     {#var catrecherche = $("#objetrecherche_categories").val();#}
+    var DATA = 'name=' + namerecherche;
+    $.ajax({
+        type: "POST",
+        url: "{{ path('fsm_objet_list')}}",
+        data: DATA,
+        cache: false,
+        success: function(data){
+           $('#resultats_recherche').html(data);
+           $(".loading").hide();
+        }
+    });    
+    return false;
+});
+</script>
+
+
 {% endblock %}
