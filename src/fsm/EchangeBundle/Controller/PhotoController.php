@@ -129,8 +129,14 @@ class PhotoController extends Controller {
         }
     }
 
-    public function photoPrincipaleAction(photo $photo) {
-        
+    public function photoPrincipaleAction( $photo) {
+       
+         $request = $this->container->get('request');
+//            var_dump($request);
+            $em = $this->getDoctrine()->getManager();
+        $photo = $em->getRepository("fsmEchangeBundle:Photo")->find($photo);
+//        var_dump($photo);
+//        throw new HttpNotFoundException("Page not found");
         // On récupère l'utilisateur connecté car c'est le proprio des photos
         $user = $this->get('security.context')->getToken()->getUser();
         if ($photo->getUser()) {
@@ -147,10 +153,13 @@ class PhotoController extends Controller {
         } else {
             //var_dump($photo);
             $Objet = $photo->getObjet()->getId();
+           
             // si var_dump de $Objet = $photo->getObjet(), renvoie objet type proxies ???
             //var_dump($Objet);
             //throw $this -> createNotFoundException ('Page inexistante');
+             
             $photos = $em->getRepository("fsmEchangeBundle:Photo")->findByObjet($Objet);
+           
         }
 
         // On les définit toutes comme non principale
@@ -164,10 +173,22 @@ class PhotoController extends Controller {
         $em->flush();
         if ( $Type === 'User'){
 
-        return $this->redirect($this->generateUrl('fos_user_profile_edit'));}
-        else {return $this->redirect
+        return $this->redirect($this->generateUrl('fos_user_profile_edit'));} // Fin si type user
+        else {
+           
+            if ($request->isXmlHttpRequest()) {
+               $liste_objet = $this->getDoctrine()->getManager()
+                        ->getRepository('fsmEchangeBundle:Objet')->getObjetPhotosByObjet($Objet); 
+//             var_dump($liste_objet);
+        return $this->render('fsmEchangeBundle:Photos:listephotos.html.twig',array('objetphotos' => $liste_objet));
+    
+                
+            } // fin si XHR
+            else
+            {
+            return $this->redirect
                             ($this->generateUrl('fsm_photo_ajout_O', array('id' => $photoU->getObjet()->getId())));
-        }
+        }}
     }
 
     private function isPrincipale(user $user) {

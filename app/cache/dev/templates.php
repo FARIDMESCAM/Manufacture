@@ -90,6 +90,8 @@
   'fsmEchangeBundle:Objets:objetsList.html.twig' => 'C:\\wamp\\www\\LaManu\\src\\fsm\\EchangeBundle/Resources/views/Objets/objetsList.html.twig',
   'fsmEchangeBundle:Objets:objetsPerso.html.twig' => 'C:\\wamp\\www\\LaManu\\src\\fsm\\EchangeBundle/Resources/views/Objets/objetsPerso.html.twig',
   'fsmEchangeBundle:Photos:ajouter.html.twig' => 'C:\\wamp\\www\\LaManu\\src\\fsm\\EchangeBundle/Resources/views/Photos/ajouter.html.twig',
+  'fsmEchangeBundle:Photos:creation.html.twig' => 'C:\\wamp\\www\\LaManu\\src\\fsm\\EchangeBundle/Resources/views/Photos/creation.html.twig',
+  'fsmEchangeBundle:Photos:listephotos.html.twig' => 'C:\\wamp\\www\\LaManu\\src\\fsm\\EchangeBundle/Resources/views/Photos/listephotos.html.twig',
   'FOSUserBundle:ChangePassword:changePassword.html.twig' => 'C:\\wamp\\www\\LaManu\\src\\fsm\\UserBundle/Resources/views/ChangePassword/changePassword.html.twig',
   'FOSUserBundle:ChangePassword:changePassword_content.html.twig' => 'C:\\wamp\\www\\LaManu\\src\\fsm\\UserBundle/Resources/views/ChangePassword/changePassword_content.html.twig',
   'FOSUserBundle:Group:edit.html.twig' => 'C:\\wamp\\www\\LaManu\\vendor\\friendsofsymfony\\user-bundle\\FOS\\UserBundle/Resources/views/Group/edit.html.twig',

@@ -9,103 +9,40 @@ info  #}
 </p>
 {#En mode création, on affiche le formulaire de saisie de photos ainsi que si moins de 3 photos.#}
 {%if objetphotos == null %}
-<div class="row">
-    <div class="col-lg-6 col-lg-offset-3">
-        <div class ="well">
-            <form method ="post" {{ form_enctype(form) }}> 
-       {{ form_widget(form) }}
-                <br>
-                <div class="col-lg-2"></div>
-                <input type ="submit" class ="btn btn-primary" />
-                <div class="col-lg-2"></div>
-
-        </div>
-
-    </div>
-</div>
-
+<p>{%include "fsmEchangeBundle:Photos:creation.html.twig"%}</p>
 {%else%}
 {#Si moins de 3 photos, affichage d'ajout de photos.#}
    {% for objetphoto in objetphotos %}
     {%if  objetphoto.getPhotos.count <3 %}
-<div class="row">
-    <div class="col-lg-6 col-lg-offset-3">
-        <div class ="well">
-            <form method ="post" {{ form_enctype(form) }}> 
-       {{ form_widget(form) }}
-                <br>
-                <div class="col-lg-2"></div>
-                <input type ="submit" class ="btn btn-primary" />
-                <div class="col-lg-2"></div>
-                <a href="{{path ('fsm_objets_mes') }}">Pas de photo</a>
-                <hr>
-                <p class="text-center">Vous pouvez mettre jusqu'à 3 photos.</p>
-        </div>
-
-    </div>
-
-</div>
+<p>{%include "fsmEchangeBundle:Photos:creation.html.twig"%}</p>
 
 {%endif%}
    {% endfor%}
 {# Affichage des photos.  #}
-<div id="resultats_recherche"> 
-    <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
-            <div id = "photos" class ="well">
-
-                <table class="table borderless">
-{% for objetphoto in objetphotos %}
-
- {% if objetphoto.getPhotos is not null %}
-
-           {%for photo in objetphoto.getPhotos%}  <tr>
-
-                        <td>
-
-                            <img width="150" class="img-circle" src="{{asset( photo.getWebPath)}}" /></td>
-                        <td>
-                            <a  id = "suppr" href="{{path('fsm_photo_supprimer',{'id':photo.id})}}"   class="btn btn-danger">supprimer</a>
-                        </td>
-                        <td>
-                  {% if photo.principal < 1 %}
-{#                        <a id="PhotoDefaut"  idphoto= {{photo.id}} class="navbar-brand" href="{{path('fsm_photo_principale',{'photo':photo.id})}}">Définir en tant que photo principale</a>#}
-                            <a id="PhotoDefaut"  onclick = 'test({{photo.id}})' idphoto= {{photo.id}} class="navbar-brand" href="#">Définir en tant que photo principale</a>
-                            {% endif %}
-                        </td>
-          {% endfor %}
-                {% endif %}
-
-                    </tr>
- {%endfor%}
-                </table>
-            </div>
-        </div>
-    </div>
+<div id="affichage_photos"> 
+    <p>{%include "fsmEchangeBundle:Photos:listephotos.html.twig"%}</p>
 </div>
+
 {%endif%}
 <script>
-
-    function test(id1) {
-        alert(id1);
-        var idt = id1;
-        var DATA =  id1;
+    $(".loading").hide();
+    function photoP(id1) {
+        $(".loading").show();
         $.ajax({
             type: "POST",
-           {#Routing.generate('fsm_photo_principale',{'id':id1});#}
-           Routing.generate('fsm_photo_principale',{id1});
+            url: Routing.generate('fsm_photo_principale', {photo: id1}),
             cache: false,
-            success: function(data) {
-                $('#resultats_recherche').html(data);
+            success: function() {
+                $('#affichage_photos').html();
                 $(".loading").hide();
             }
         });
         return false;
     }
-
-
-
 </script>
+
+
+
 
 {% endblock %}
 

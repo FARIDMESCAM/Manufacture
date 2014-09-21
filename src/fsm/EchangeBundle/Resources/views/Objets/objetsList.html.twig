@@ -23,20 +23,19 @@
 <p>{%include "fsmEchangeBundle:Objets:Objets.html.twig"%}</p>
   </div>
 <script>
-$(".loading").hide();
+{#$(".loading").hide();#}
 $("#form_recherche").submit(function(){ 
-    $(".loading").show();
+{#    $(".loading").show();#}
     var namerecherche = $("#objetrecherche_name").val();
-{#     var catrecherche = $("#objetrecherche_categories").val();#}
     var DATA = 'name=' + namerecherche;
     $.ajax({
         type: "POST",
-        url: "{{ path('fsm_objet_list')}}",
+        url:Routing.generate('fsm_objet_list'),
         data: DATA,
         cache: false,
         success: function(data){
-           $('#resultats_recherche').html(data);
-           $(".loading").hide();
+           $('#resultats_recherche').html();
+{#           $(".loading").hide();#}
         }
     });    
     return false;

@@ -54,6 +54,8 @@ fsm_photo_ajout_U:
 fsm_objet_list:
     path: /Objets
     defaults: { _controller: fsmEchangeBundle:Objet:ListObjets }
+    options:
+        expose: true
     
 fsm_photo_supprimer:
     path: /supprPhoto/{id}
