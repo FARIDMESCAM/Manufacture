@@ -19,6 +19,7 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "dev-master",
+        "friendsofsymfony/jsrouting-bundle": "1.5.3",
         "bcc/cron-manager-bundle": "v2.4.1"
         
     },

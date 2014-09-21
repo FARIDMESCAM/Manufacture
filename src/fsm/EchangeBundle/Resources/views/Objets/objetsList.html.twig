@@ -27,7 +27,7 @@ $(".loading").hide();
 $("#form_recherche").submit(function(){ 
     $(".loading").show();
     var namerecherche = $("#objetrecherche_name").val();
-     {#var catrecherche = $("#objetrecherche_categories").val();#}
+{#     var catrecherche = $("#objetrecherche_categories").val();#}
     var DATA = 'name=' + namerecherche;
     $.ajax({
         type: "POST",

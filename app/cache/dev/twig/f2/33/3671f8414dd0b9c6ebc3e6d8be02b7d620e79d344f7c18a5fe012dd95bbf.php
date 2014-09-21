@@ -32,10 +32,18 @@ class __TwigTemplate_f2333671f8414dd0b9c6ebc3e6d8be02b7d620e79d344f7c18a5fe012dd
         <meta name=\"description\" content=\"Se prêter aux uns et aux autres\">
         <meta name=\"author\" content=\"Farid MESCAM\">
         <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js\" type=\"text/javascript\"></script> 
-";
+        <script src=\"";
         // line 10
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/fosjsrouting/js/router.js"), "html", null, true);
+        echo "\"></script>
+        <script src=\"";
+        // line 11
+        echo $this->env->getExtension('routing')->getPath("fos_js_routing_js", array("callback" => "fos.Router.setData"));
+        echo "\"></script>
+";
+        // line 12
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 15
+        // line 18
         echo "    </head>
     <body>
         <div class=\"navbar-wrapper\">
@@ -45,21 +53,21 @@ class __TwigTemplate_f2333671f8414dd0b9c6ebc3e6d8be02b7d620e79d344f7c18a5fe012dd
                         <div class =\"row\">
                             <div class =\"col-lg-4\">  
                                        ";
-        // line 23
+        // line 26
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
-            // line 24
+            // line 27
             echo "                                <a  class=\"navbar-brand\" href =\"";
             echo $this->env->getExtension('routing')->getPath("fos_user_security_logout");
             echo "\">Déconnexion </a>
                                         ";
         } else {
-            // line 26
+            // line 29
             echo "                                <a class=\"navbar-brand\" href =\"";
             echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
             echo "\">Connexion </a>
                                         ";
         }
-        // line 27
+        // line 30
         echo "  </div> 
                             <div class =\"col-lg-3\">
                                 <div class=\"navbar-header\">
@@ -69,157 +77,157 @@ class __TwigTemplate_f2333671f8414dd0b9c6ebc3e6d8be02b7d620e79d344f7c18a5fe012dd
                             </div>
                             <div class =\"col-lg-4\">
                             </div>
-                             </div>
-                             
+                        </div>
+
                                          ";
-        // line 38
+        // line 41
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
-            // line 39
+            // line 42
             echo "                        ";
             if (($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user"), "gethabilite", array(), "method") == true)) {
-                // line 40
-                echo "                                       <ul id=\"menu-demo2\">
-\t<li><a href=\"#\">Mon compte</a>
-\t\t<ul>
-\t\t\t
-                        <li><a href=\"";
-                // line 44
+                // line 43
+                echo "                        <ul id=\"menu-demo2\">
+                            <li><a href=\"#\">Mon compte</a>
+                                <ul>
+
+                                    <li><a href=\"";
+                // line 47
                 echo $this->env->getExtension('routing')->getPath("fos_user_profile_show");
                 echo "\">Consulter</a></li>
-\t\t\t<li><a href=\"";
-                // line 45
+                                    <li><a href=\"";
+                // line 48
                 echo $this->env->getExtension('routing')->getPath("fos_user_change_password");
                 echo "\">Changer de mot de passe</a></li>
-\t\t\t<li><a href=\"";
-                // line 46
+                                    <li><a href=\"";
+                // line 49
                 echo $this->env->getExtension('routing')->getPath("fos_user_profile_edit");
                 echo "\">Modifier</a></li>
-                        <li><a href=\"";
-                // line 47
+                                    <li><a href=\"";
+                // line 50
                 echo $this->env->getExtension('routing')->getPath("fos_user_resetting_request");
                 echo "\">Ré-initialiser le mot de passe</a></li>
-                </ul>
-\t</li>
-\t<li><a href=\"#\">Mes Objets</a>
-\t\t<ul>
-\t\t\t<li><a href=\"";
-                // line 52
+                                </ul>
+                            </li>
+                            <li><a href=\"#\">Mes Objets</a>
+                                <ul>
+                                    <li><a href=\"";
+                // line 55
                 echo $this->env->getExtension('routing')->getPath("fsm_objets_mes");
                 echo "\">Consulter</a></li>
-\t\t\t<li><a href=\"";
-                // line 53
+                                    <li><a href=\"";
+                // line 56
                 echo $this->env->getExtension('routing')->getPath("fsm_objet_ajout");
                 echo "\">Ajouter des objets</a></li>
-                </ul>
-\t</li>
-\t<li><a href=\"#\"> </a>
-\t\t<ul>
-\t\t\t<li><a href=\"#\"> </a></li>
-\t\t\t<li><a href=\"#\"> </a></li>
-\t\t\t<li><a href=\"#\"> </a></li>
-\t\t\t<li><a href=\"#\"> </a></li>
-\t\t</ul>
-\t</li>
-\t<li><a href=\"#\">Menu général</a>
-\t\t<ul>
-\t\t\t<li><a href=\"";
-                // line 66
+                                </ul>
+                            </li>
+                            <li><a href=\"#\"> </a>
+                                <ul>
+                                    <li><a href=\"#\"> </a></li>
+                                    <li><a href=\"#\"> </a></li>
+                                    <li><a href=\"#\"> </a></li>
+                                    <li><a href=\"#\"> </a></li>
+                                </ul>
+                            </li>
+                            <li><a href=\"#\">Menu général</a>
+                                <ul>
+                                    <li><a href=\"";
+                // line 69
                 echo $this->env->getExtension('routing')->getPath("fsm_objet_list");
                 echo "\">Toutes les annonces</a></li>
 
-\t\t</ul>
-\t</li>
-</ul>
+                                </ul>
+                            </li>
+                        </ul>
                                         ";
             } else {
-                // line 72
+                // line 75
                 echo "                                        ";
             }
-            // line 73
+            // line 76
             echo "                          ";
         }
-        // line 74
-        echo "                                                    
-                                                  
-                                                    </div>
-                                                    </div>
-                                                    </div>
-                                                    </div>
+        // line 77
+        echo "
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
 
-                                                    </div>
+    </div>
   ";
-        // line 85
+        // line 88
         $this->displayBlock('body', $context, $blocks);
-        // line 86
+        // line 89
         echo " 
 
-                                                    <footer>
-                                                        <div class =\"row\">
-                                                        <hr>
-                                                     
+    <footer>
+        <div class =\"row\">
+            <hr>
+
                                                                 ";
-        // line 92
+        // line 95
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
-            // line 93
-            echo "                                                         <div class =\"col-lg-2\">
+            // line 96
+            echo "            <div class =\"col-lg-2\">
                                                                  ";
-            // line 94
+            // line 97
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user"), "getPhotos"));
             foreach ($context['_seq'] as $context["_key"] => $context["photo"]) {
-                // line 95
+                // line 98
                 echo "                                                            ";
                 if ((!(null === $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user"), "getPhotos")))) {
-                    // line 96
+                    // line 99
                     echo "                                                            ";
                     if (($this->getAttribute((isset($context["photo"]) ? $context["photo"] : $this->getContext($context, "photo")), "getPrincipal", array(), "method") == 1)) {
-                        // line 97
-                        echo "                                                             <img width=\"40\" class=\"img-circle\" src=\"";
+                        // line 100
+                        echo "                <img width=\"40\" class=\"img-circle\" src=\"";
                         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl($this->getAttribute((isset($context["photo"]) ? $context["photo"] : $this->getContext($context, "photo")), "getWebPath")), "html", null, true);
                         echo "\" alt=\"";
                         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["photo"]) ? $context["photo"] : $this->getContext($context, "photo")), "alt"), "html", null, true);
                         echo "\" /> 
                                                             ";
                     }
-                    // line 98
+                    // line 101
                     echo " 
                                                              ";
                 }
-                // line 99
+                // line 102
                 echo " 
                                                             ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['photo'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 101
-            echo "                                                             </div> 
-                                                                <div class =\"col-lg-2\"><p class=\"text-center\">
-                                                                Connecté en tant que ";
-            // line 103
+            // line 104
+            echo "            </div> 
+            <div class =\"col-lg-2\"><p class=\"text-center\">
+                    Connecté en tant que ";
+            // line 106
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user"), "username"), "html", null, true);
             echo "</p>
-                                                        </div>
-                                                        
-                                                           
+            </div>
+
+
                                     ";
         }
-        // line 107
+        // line 110
         echo "    
-                                                        <div class =\"col-lg-4\"></div> 
-                                                        <div class =\"col-lg-4\"><p class=\"text-center\"></p></div>
-                                                    </div>
-                                                    </footer>
+            <div class =\"col-lg-4\"></div> 
+            <div class =\"col-lg-4\"><p class=\"text-center\"></p></div>
+        </div>
+    </footer>
 
 ";
-        // line 113
+        // line 116
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 120
-        echo "                                                    </body>
-                                                    </html>
+        // line 123
+        echo "</body>
+</html>
 
 ";
     }
@@ -230,38 +238,39 @@ class __TwigTemplate_f2333671f8414dd0b9c6ebc3e6d8be02b7d620e79d344f7c18a5fe012dd
         echo " ";
     }
 
-    // line 10
+    // line 12
     public function block_stylesheets($context, array $blocks = array())
     {
-        // line 11
+        // line 13
         echo "        <link href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/bootstrap.css"), "html", null, true);
         echo "\" rel=\"stylesheet\">
         <link href=\"";
-        // line 12
+        // line 14
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/bootstrap-theme.css"), "html", null, true);
         echo "\" rel=\"stylesheet\">
         <link href=\"";
-        // line 13
+        // line 15
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/bootstrap-perso.css"), "html", null, true);
         echo "\" rel=\"stylesheet\">
+
 ";
     }
 
-    // line 85
+    // line 88
     public function block_body($context, array $blocks = array())
     {
-        // line 86
+        // line 89
         echo "  ";
     }
 
-    // line 113
+    // line 116
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 115
-        echo "                                                    <script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js\" ></script>
-                                                    <script type =\"text/javascript\" src=\"";
-        // line 116
+        // line 118
+        echo "    <script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js\" ></script>
+    <script type =\"text/javascript\" src=\"";
+        // line 119
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/bootstrap.js"), "html", null, true);
         echo "\" ></script>
 
@@ -281,6 +290,6 @@ class __TwigTemplate_f2333671f8414dd0b9c6ebc3e6d8be02b7d620e79d344f7c18a5fe012dd
 
     public function getDebugInfo()
     {
-        return array (  265 => 116,  262 => 115,  259 => 113,  255 => 86,  252 => 85,  246 => 13,  242 => 12,  237 => 11,  234 => 10,  228 => 5,  221 => 120,  219 => 113,  211 => 107,  203 => 103,  199 => 101,  192 => 99,  188 => 98,  180 => 97,  177 => 96,  174 => 95,  170 => 94,  167 => 93,  165 => 92,  157 => 86,  155 => 85,  142 => 74,  139 => 73,  136 => 72,  127 => 66,  111 => 53,  107 => 52,  99 => 47,  95 => 46,  91 => 45,  87 => 44,  81 => 40,  78 => 39,  76 => 38,  63 => 27,  57 => 26,  51 => 24,  39 => 15,  37 => 10,  29 => 5,  23 => 1,  74 => 33,  61 => 23,  49 => 23,  43 => 13,  31 => 3,  28 => 2,);
+        return array (  274 => 119,  271 => 118,  268 => 116,  264 => 89,  261 => 88,  254 => 15,  250 => 14,  245 => 13,  242 => 12,  236 => 5,  229 => 123,  227 => 116,  219 => 110,  211 => 106,  207 => 104,  200 => 102,  196 => 101,  188 => 100,  185 => 99,  182 => 98,  178 => 97,  175 => 96,  173 => 95,  165 => 89,  163 => 88,  150 => 77,  147 => 76,  144 => 75,  135 => 69,  119 => 56,  115 => 55,  107 => 50,  103 => 49,  99 => 48,  95 => 47,  89 => 43,  86 => 42,  84 => 41,  71 => 30,  65 => 29,  59 => 27,  45 => 12,  41 => 11,  37 => 10,  29 => 5,  23 => 1,  57 => 26,  53 => 13,  47 => 18,  38 => 7,  34 => 6,  31 => 3,  28 => 2,);
     }
 }

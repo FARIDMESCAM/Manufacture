@@ -66,6 +66,8 @@ fsm_photo_principale:
     defaults: { _controller: fsmEchangeBundle:Photo:photoPrincipale } 
     requirements:
        photo: \d+
+    options:
+        expose: true
     
 fsm_profile_showPerso:
     path: /showPrP/{id}

@@ -49,10 +49,10 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
         // line 11
         if (((isset($context["objetphotos"]) ? $context["objetphotos"] : $this->getContext($context, "objetphotos")) == null)) {
             // line 12
-            echo " <div class=\"row\">
-<div class=\"col-lg-6 col-lg-offset-3\">
-<div class =\"well\">
-   <form method =\"post\" ";
+            echo "<div class=\"row\">
+    <div class=\"col-lg-6 col-lg-offset-3\">
+        <div class =\"well\">
+            <form method =\"post\" ";
             // line 15
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'enctype');
             echo "> 
@@ -60,15 +60,15 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
             // line 16
             echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'widget');
             echo "
-       <br>
-        <div class=\"col-lg-2\"></div>
-       <input type =\"submit\" class =\"btn btn-primary\" />
-       <div class=\"col-lg-2\"></div>
-      
-       </div>
-   
-      </div>
+                <br>
+                <div class=\"col-lg-2\"></div>
+                <input type =\"submit\" class =\"btn btn-primary\" />
+                <div class=\"col-lg-2\"></div>
+
+        </div>
+
     </div>
+</div>
 
 ";
         } else {
@@ -82,9 +82,9 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
                 if (($this->getAttribute($this->getAttribute((isset($context["objetphoto"]) ? $context["objetphoto"] : $this->getContext($context, "objetphoto")), "getPhotos"), "count") < 3)) {
                     // line 31
                     echo "<div class=\"row\">
-<div class=\"col-lg-6 col-lg-offset-3\">
-<div class =\"well\">
-   <form method =\"post\" ";
+    <div class=\"col-lg-6 col-lg-offset-3\">
+        <div class =\"well\">
+            <form method =\"post\" ";
                     // line 34
                     echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'enctype');
                     echo "> 
@@ -92,21 +92,21 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
                     // line 35
                     echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'widget');
                     echo "
-       <br>
-        <div class=\"col-lg-2\"></div>
-       <input type =\"submit\" class =\"btn btn-primary\" />
-       <div class=\"col-lg-2\"></div>
-       <a href=\"";
+                <br>
+                <div class=\"col-lg-2\"></div>
+                <input type =\"submit\" class =\"btn btn-primary\" />
+                <div class=\"col-lg-2\"></div>
+                <a href=\"";
                     // line 40
                     echo $this->env->getExtension('routing')->getPath("fsm_objets_mes");
                     echo "\">Pas de photo</a>
-<hr>
-         <p class=\"text-center\">Vous pouvez mettre jusqu'à 3 photos.</p>
-       </div>
-     
-      </div>
-   
- </div>
+                <hr>
+                <p class=\"text-center\">Vous pouvez mettre jusqu'à 3 photos.</p>
+        </div>
+
+    </div>
+
+</div>
 
 ";
                 }
@@ -117,80 +117,106 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['objetphoto'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
             // line 52
-            echo "<div class=\"row\">
-<div class=\"col-lg-6 col-lg-offset-3\">
-<div class =\"well\">
-    
-    <table class=\"table borderless\">
+            echo "<div id=\"resultats_recherche\"> 
+    <div class=\"row\">
+        <div class=\"col-lg-6 col-lg-offset-3\">
+            <div id = \"photos\" class =\"well\">
+
+                <table class=\"table borderless\">
 ";
-            // line 57
+            // line 58
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["objetphotos"]) ? $context["objetphotos"] : $this->getContext($context, "objetphotos")));
             foreach ($context['_seq'] as $context["_key"] => $context["objetphoto"]) {
-                // line 58
-                echo "    
- ";
                 // line 59
+                echo "
+ ";
+                // line 60
                 if ((!(null === $this->getAttribute((isset($context["objetphoto"]) ? $context["objetphoto"] : $this->getContext($context, "objetphoto")), "getPhotos")))) {
-                    // line 60
-                    echo "       
-           ";
                     // line 61
+                    echo "
+           ";
+                    // line 62
                     $context['_parent'] = (array) $context;
                     $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["objetphoto"]) ? $context["objetphoto"] : $this->getContext($context, "objetphoto")), "getPhotos"));
                     foreach ($context['_seq'] as $context["_key"] => $context["photo"]) {
                         echo "  <tr>
-        <div class=\"col-lg-4\">
-            <td>
-                
-            <img width=\"150\" class=\"img-circle\" src=\"";
-                        // line 65
+
+                        <td>
+
+                            <img width=\"150\" class=\"img-circle\" src=\"";
+                        // line 66
                         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl($this->getAttribute((isset($context["photo"]) ? $context["photo"] : $this->getContext($context, "photo")), "getWebPath")), "html", null, true);
                         echo "\" /></td>
-            <td>
-             <a href=\"";
-                        // line 67
+                        <td>
+                            <a  id = \"suppr\" href=\"";
+                        // line 68
                         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("fsm_photo_supprimer", array("id" => $this->getAttribute((isset($context["photo"]) ? $context["photo"] : $this->getContext($context, "photo")), "id"))), "html", null, true);
-                        echo "\" class=\"btn btn-danger\">supprimer</a>
-             </td>
-             <td>
+                        echo "\"   class=\"btn btn-danger\">supprimer</a>
+                        </td>
+                        <td>
                   ";
-                        // line 70
+                        // line 71
                         if (($this->getAttribute((isset($context["photo"]) ? $context["photo"] : $this->getContext($context, "photo")), "principal") < 1)) {
-                            // line 71
-                            echo "                            <a class=\"navbar-brand\" href=\"";
-                            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("fsm_photo_principale", array("photo" => $this->getAttribute((isset($context["photo"]) ? $context["photo"] : $this->getContext($context, "photo")), "id"))), "html", null, true);
-                            echo "\">Définir en tant que photo principale</a>
+                            // line 73
+                            echo "                            <a id=\"PhotoDefaut\"  onclick = 'test(";
+                            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["photo"]) ? $context["photo"] : $this->getContext($context, "photo")), "id"), "html", null, true);
+                            echo ")' idphoto= ";
+                            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["photo"]) ? $context["photo"] : $this->getContext($context, "photo")), "id"), "html", null, true);
+                            echo " class=\"navbar-brand\" href=\"#\">Définir en tant que photo principale</a>
                             ";
                         }
-                        // line 73
-                        echo "             </td>
+                        // line 75
+                        echo "                        </td>
           ";
                     }
                     $_parent = $context['_parent'];
                     unset($context['_seq'], $context['_iterated'], $context['_key'], $context['photo'], $context['_parent'], $context['loop']);
                     $context = array_intersect_key($context, $_parent) + $_parent;
-                    // line 75
+                    // line 77
                     echo "                ";
                 }
-                // line 76
-                echo "    </tr>
+                // line 78
+                echo "
+                    </tr>
  ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['objetphoto'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 77
-            echo "  
-        </table>
-                    </div>
-</div>
-</div>
+            // line 81
+            echo "                </table>
+            </div>
+        </div>
+    </div>
 </div>
 ";
         }
-        // line 84
-        echo "</form>
+        // line 87
+        echo "<script>
+
+    function test(id1) {
+        alert(id1);
+        var idt = id1;
+        var DATA =  id1;
+        \$.ajax({
+            type: \"POST\",
+           ";
+        // line 96
+        echo "           Routing.generate('fsm_photo_principale',{id1});
+            cache: false,
+            success: function(data) {
+                \$('#resultats_recherche').html(data);
+                \$(\".loading\").hide();
+            }
+        });
+        return false;
+    }
+
+
+
+</script>
+
 ";
     }
 
@@ -206,6 +232,6 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
 
     public function getDebugInfo()
     {
-        return array (  184 => 77,  174 => 75,  153 => 67,  134 => 59,  84 => 31,  185 => 61,  180 => 58,  167 => 73,  160 => 53,  152 => 51,  127 => 57,  81 => 30,  70 => 25,  65 => 24,  118 => 40,  58 => 15,  20 => 1,  161 => 71,  148 => 65,  114 => 50,  104 => 38,  76 => 29,  53 => 20,  261 => 114,  251 => 84,  245 => 12,  236 => 10,  233 => 9,  218 => 112,  210 => 106,  202 => 102,  198 => 100,  191 => 62,  126 => 65,  110 => 52,  90 => 44,  77 => 22,  23 => 1,  34 => 6,  480 => 162,  474 => 161,  469 => 158,  461 => 155,  457 => 153,  453 => 151,  444 => 149,  440 => 148,  437 => 147,  435 => 146,  430 => 144,  427 => 143,  423 => 142,  413 => 134,  409 => 132,  407 => 131,  402 => 130,  398 => 129,  393 => 126,  387 => 122,  384 => 121,  381 => 120,  379 => 119,  374 => 116,  368 => 112,  365 => 111,  362 => 110,  360 => 109,  355 => 106,  341 => 105,  337 => 103,  322 => 101,  314 => 99,  312 => 98,  309 => 97,  305 => 95,  298 => 91,  294 => 90,  285 => 89,  283 => 88,  278 => 86,  268 => 85,  264 => 115,  258 => 112,  252 => 80,  247 => 78,  241 => 11,  229 => 73,  220 => 119,  214 => 69,  177 => 76,  169 => 93,  140 => 55,  132 => 51,  128 => 49,  107 => 36,  61 => 16,  273 => 96,  269 => 94,  254 => 85,  243 => 88,  240 => 86,  238 => 85,  235 => 74,  230 => 82,  227 => 5,  224 => 71,  221 => 77,  219 => 76,  217 => 75,  208 => 68,  204 => 72,  179 => 96,  159 => 70,  143 => 47,  135 => 44,  119 => 42,  102 => 33,  71 => 20,  67 => 15,  63 => 22,  59 => 17,  38 => 7,  94 => 45,  89 => 34,  85 => 31,  75 => 21,  68 => 19,  56 => 25,  87 => 32,  21 => 2,  26 => 2,  93 => 35,  88 => 26,  78 => 28,  46 => 9,  27 => 4,  44 => 9,  31 => 3,  28 => 2,  201 => 92,  196 => 90,  183 => 82,  171 => 61,  166 => 92,  163 => 62,  158 => 67,  156 => 52,  151 => 63,  142 => 59,  138 => 71,  136 => 60,  121 => 41,  117 => 44,  105 => 34,  91 => 34,  62 => 23,  49 => 13,  24 => 4,  25 => 3,  19 => 1,  79 => 18,  72 => 20,  69 => 25,  47 => 9,  40 => 8,  37 => 6,  22 => 2,  246 => 90,  157 => 56,  145 => 46,  139 => 61,  131 => 58,  123 => 47,  120 => 52,  115 => 43,  111 => 38,  108 => 37,  101 => 40,  98 => 29,  96 => 35,  83 => 32,  74 => 33,  66 => 18,  55 => 12,  52 => 12,  50 => 11,  43 => 13,  41 => 8,  35 => 5,  32 => 3,  29 => 3,  209 => 82,  203 => 78,  199 => 67,  193 => 84,  189 => 71,  187 => 97,  182 => 66,  176 => 56,  173 => 94,  168 => 72,  164 => 55,  162 => 54,  154 => 84,  149 => 51,  147 => 49,  144 => 49,  141 => 73,  133 => 55,  130 => 50,  125 => 42,  122 => 41,  116 => 37,  112 => 42,  109 => 34,  106 => 51,  103 => 32,  99 => 31,  95 => 34,  92 => 33,  86 => 43,  82 => 22,  80 => 23,  73 => 19,  64 => 17,  60 => 22,  57 => 15,  54 => 15,  51 => 14,  48 => 9,  45 => 12,  42 => 7,  39 => 7,  36 => 9,  33 => 4,  30 => 7,);
+        return array (  206 => 96,  196 => 87,  188 => 81,  180 => 78,  177 => 77,  170 => 75,  162 => 73,  160 => 71,  154 => 68,  149 => 66,  140 => 62,  137 => 61,  135 => 60,  132 => 59,  128 => 58,  120 => 52,  114 => 50,  101 => 40,  93 => 35,  89 => 34,  84 => 31,  81 => 30,  76 => 29,  61 => 16,  57 => 15,  52 => 12,  50 => 11,  47 => 9,  38 => 7,  34 => 6,  31 => 3,  28 => 2,);
     }
 }

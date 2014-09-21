@@ -13,6 +13,9 @@ parameters:
     mailer_host: smtp.gmail.com
     mailer_user: faridmescam@gmail.com
     mailer_password: bprop789
+    node:
+    node_paths:
+            
 
 #   PROD 
 #    database_host: mysql51-108.perso
@@ -31,7 +34,3 @@ parameters:
     debug_toolbar: true
     debug_redirects: false
     use_assetic_controller: true
-#    Ajoutés pour le bundle des CRON
-    node:
-    node_paths:
-    apply_to:

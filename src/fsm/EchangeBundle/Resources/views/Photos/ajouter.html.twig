@@ -9,78 +9,103 @@ info  #}
 </p>
 {#En mode création, on affiche le formulaire de saisie de photos ainsi que si moins de 3 photos.#}
 {%if objetphotos == null %}
- <div class="row">
-<div class="col-lg-6 col-lg-offset-3">
-<div class ="well">
-   <form method ="post" {{ form_enctype(form) }}> 
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class ="well">
+            <form method ="post" {{ form_enctype(form) }}> 
        {{ form_widget(form) }}
-       <br>
-        <div class="col-lg-2"></div>
-       <input type ="submit" class ="btn btn-primary" />
-       <div class="col-lg-2"></div>
-      
-       </div>
-   
-      </div>
+                <br>
+                <div class="col-lg-2"></div>
+                <input type ="submit" class ="btn btn-primary" />
+                <div class="col-lg-2"></div>
+
+        </div>
+
     </div>
+</div>
 
 {%else%}
 {#Si moins de 3 photos, affichage d'ajout de photos.#}
    {% for objetphoto in objetphotos %}
     {%if  objetphoto.getPhotos.count <3 %}
 <div class="row">
-<div class="col-lg-6 col-lg-offset-3">
-<div class ="well">
-   <form method ="post" {{ form_enctype(form) }}> 
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class ="well">
+            <form method ="post" {{ form_enctype(form) }}> 
        {{ form_widget(form) }}
-       <br>
-        <div class="col-lg-2"></div>
-       <input type ="submit" class ="btn btn-primary" />
-       <div class="col-lg-2"></div>
-       <a href="{{path ('fsm_objets_mes') }}">Pas de photo</a>
-<hr>
-         <p class="text-center">Vous pouvez mettre jusqu'à 3 photos.</p>
-       </div>
-     
-      </div>
-   
- </div>
+                <br>
+                <div class="col-lg-2"></div>
+                <input type ="submit" class ="btn btn-primary" />
+                <div class="col-lg-2"></div>
+                <a href="{{path ('fsm_objets_mes') }}">Pas de photo</a>
+                <hr>
+                <p class="text-center">Vous pouvez mettre jusqu'à 3 photos.</p>
+        </div>
+
+    </div>
+
+</div>
 
 {%endif%}
    {% endfor%}
 {# Affichage des photos.  #}
-<div class="row">
-<div class="col-lg-6 col-lg-offset-3">
-<div class ="well">
-    
-    <table class="table borderless">
+<div id="resultats_recherche"> 
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div id = "photos" class ="well">
+
+                <table class="table borderless">
 {% for objetphoto in objetphotos %}
-    
+
  {% if objetphoto.getPhotos is not null %}
-       
+
            {%for photo in objetphoto.getPhotos%}  <tr>
-        <div class="col-lg-4">
-            <td>
-                
-            <img width="150" class="img-circle" src="{{asset( photo.getWebPath)}}" /></td>
-            <td>
-             <a href="{{path('fsm_photo_supprimer',{'id':photo.id})}}" class="btn btn-danger">supprimer</a>
-             </td>
-             <td>
+
+                        <td>
+
+                            <img width="150" class="img-circle" src="{{asset( photo.getWebPath)}}" /></td>
+                        <td>
+                            <a  id = "suppr" href="{{path('fsm_photo_supprimer',{'id':photo.id})}}"   class="btn btn-danger">supprimer</a>
+                        </td>
+                        <td>
                   {% if photo.principal < 1 %}
-                            <a class="navbar-brand" href="{{path('fsm_photo_principale',{'photo':photo.id})}}">Définir en tant que photo principale</a>
+{#                        <a id="PhotoDefaut"  idphoto= {{photo.id}} class="navbar-brand" href="{{path('fsm_photo_principale',{'photo':photo.id})}}">Définir en tant que photo principale</a>#}
+                            <a id="PhotoDefaut"  onclick = 'test({{photo.id}})' idphoto= {{photo.id}} class="navbar-brand" href="#">Définir en tant que photo principale</a>
                             {% endif %}
-             </td>
+                        </td>
           {% endfor %}
                 {% endif %}
-    </tr>
- {%endfor%}  
-        </table>
-                    </div>
-</div>
-</div>
+
+                    </tr>
+ {%endfor%}
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 {%endif%}
-</form>
+<script>
+
+    function test(id1) {
+        alert(id1);
+        var idt = id1;
+        var DATA =  id1;
+        $.ajax({
+            type: "POST",
+           {#Routing.generate('fsm_photo_principale',{'id':id1});#}
+           Routing.generate('fsm_photo_principale',{id1});
+            cache: false,
+            success: function(data) {
+                $('#resultats_recherche').html(data);
+                $(".loading").hide();
+            }
+        });
+        return false;
+    }
+
+
+
+</script>
+
 {% endblock %}
 

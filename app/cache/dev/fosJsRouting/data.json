@@ -1,0 +1,1 @@
+{"fsm_photo_principale":{"tokens":[["variable","\/","\\d+","photo"],["text","\/PhotoPr"]],"defaults":[],"requirements":{"photo":"\\d+"},"hosttokens":[]}}

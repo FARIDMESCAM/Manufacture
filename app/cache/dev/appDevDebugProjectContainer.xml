@@ -20,6 +20,7 @@
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="fsmUserBundle">fsm\UserBundle\fsmUserBundle</parameter>
       <parameter key="BCCCronManagerBundle">BCC\CronManagerBundle\BCCCronManagerBundle</parameter>
+      <parameter key="FOSJsRoutingBundle">FOS\JsRoutingBundle\FOSJsRoutingBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
@@ -38,14 +39,13 @@
     <parameter key="mailer_host">smtp.gmail.com</parameter>
     <parameter key="mailer_user">faridmescam@gmail.com</parameter>
     <parameter key="mailer_password">bprop789</parameter>
+    <parameter key="node">null</parameter>
+    <parameter key="node_paths">null</parameter>
     <parameter key="locale">fr</parameter>
     <parameter key="secret">ThisTokenIsNotSoSecretChangeIt44</parameter>
     <parameter key="debug_toolbar">true</parameter>
     <parameter key="debug_redirects">false</parameter>
     <parameter key="use_assetic_controller">true</parameter>
-    <parameter key="node">null</parameter>
-    <parameter key="node_paths">null</parameter>
-    <parameter key="apply_to">null</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
     <parameter key="response_listener.class">Symfony\Component\HttpKernel\EventListener\ResponseListener</parameter>
@@ -567,6 +567,11 @@
     <parameter key="fos_user.resetting.form.validation_groups" type="collection">
       <parameter>ResetPassword</parameter>
       <parameter>Default</parameter>
+    </parameter>
+    <parameter key="fos_js_routing.extractor.class">FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor</parameter>
+    <parameter key="fos_js_routing.controller.class">FOS\JsRoutingBundle\Controller\Controller</parameter>
+    <parameter key="fos_js_routing.cache_control" type="collection">
+      <parameter key="enabled">false</parameter>
     </parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
@@ -2917,7 +2922,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>541d19716c095</argument>
+            <argument>541eb268c8922</argument>
           </service>
         </argument>
         <argument type="service">
@@ -2938,7 +2943,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>541d19716c095</argument>
+            <argument>541eb268c8922</argument>
           </service>
         </argument>
       </argument>
@@ -3090,7 +3095,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>541d19716c095</argument>
+            <argument>541eb268c8922</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -3271,7 +3276,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>541d19716c095</argument>
+            <argument>541eb268c8922</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -4035,6 +4040,49 @@
     <service id="fsm_user.profile.form.type" class="fsm\UserBundle\Form\Type\ProfileFormType">
       <tag name="form.type" alias="fsm_user_profile"/>
       <argument>fsm\UserBundle\Entity\User</argument>
+    </service>
+    <service id="fos_js_routing.extractor" class="FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor">
+      <argument type="service" id="router"/>
+      <argument type="collection"/>
+      <argument>C:/wamp/www/LaManu/app/cache/dev</argument>
+      <argument type="collection">
+        <argument key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</argument>
+        <argument key="SecurityBundle">Symfony\Bundle\SecurityBundle\SecurityBundle</argument>
+        <argument key="TwigBundle">Symfony\Bundle\TwigBundle\TwigBundle</argument>
+        <argument key="MonologBundle">Symfony\Bundle\MonologBundle\MonologBundle</argument>
+        <argument key="SwiftmailerBundle">Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle</argument>
+        <argument key="AsseticBundle">Symfony\Bundle\AsseticBundle\AsseticBundle</argument>
+        <argument key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</argument>
+        <argument key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</argument>
+        <argument key="fsmEchangeBundle">fsm\EchangeBundle\fsmEchangeBundle</argument>
+        <argument key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</argument>
+        <argument key="fsmUserBundle">fsm\UserBundle\fsmUserBundle</argument>
+        <argument key="BCCCronManagerBundle">BCC\CronManagerBundle\BCCCronManagerBundle</argument>
+        <argument key="FOSJsRoutingBundle">FOS\JsRoutingBundle\FOSJsRoutingBundle</argument>
+        <argument key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</argument>
+        <argument key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</argument>
+        <argument key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</argument>
+      </argument>
+    </service>
+    <service id="fos_js_routing.controller" class="FOS\JsRoutingBundle\Controller\Controller">
+      <argument type="service" id="fos_js_routing.serializer"/>
+      <argument type="service" id="fos_js_routing.extractor"/>
+      <argument type="collection">
+        <argument key="enabled">false</argument>
+      </argument>
+      <argument>true</argument>
+    </service>
+    <service id="fos_js_routing.serializer" class="Symfony\Component\Serializer\Serializer">
+      <argument type="collection">
+        <argument type="service">
+          <service class="Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer" public="false"/>
+        </argument>
+      </argument>
+      <argument type="collection">
+        <argument key="json" type="service">
+          <service class="Symfony\Component\Serializer\Encoder\JsonEncoder" public="false"/>
+        </argument>
+      </argument>
     </service>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController">
       <argument type="service" id="router" on-invalid="null"/>
