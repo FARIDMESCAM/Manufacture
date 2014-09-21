@@ -108,16 +108,19 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
         }
         // line 27
         echo "<script>
-    \$(\".loading\").hide();
-    function photoP(id1) {
-        \$(\".loading\").show();
-        \$.ajax({
+";
+        // line 29
+        echo "    function photoP(id1) {
+";
+        // line 31
+        echo "        \$.ajax({
             type: \"POST\",
             url: Routing.generate('fsm_photo_principale', {photo: id1}),
             cache: false,
-            success: function() {
-                \$('#affichage_photos').html();
-                \$(\".loading\").hide();
+            success: function(html) {
+                 \$('#affichage_photos').empty();
+                 \$('#affichage_photos').append(html);
+
             }
         });
         return false;
@@ -142,6 +145,6 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
 
     public function getDebugInfo()
     {
-        return array (  110 => 27,  103 => 23,  100 => 22,  86 => 20,  79 => 17,  76 => 16,  58 => 15,  52 => 12,  50 => 11,  47 => 9,  38 => 7,  34 => 6,  31 => 3,  28 => 2,);
+        return array (  116 => 31,  113 => 29,  110 => 27,  103 => 23,  100 => 22,  86 => 20,  79 => 17,  76 => 16,  58 => 15,  52 => 12,  50 => 11,  47 => 9,  38 => 7,  34 => 6,  31 => 3,  28 => 2,);
     }
 }

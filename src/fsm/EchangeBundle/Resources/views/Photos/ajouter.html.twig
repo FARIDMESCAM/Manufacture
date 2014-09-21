@@ -25,16 +25,15 @@ info  #}
 
 {%endif%}
 <script>
-    $(".loading").hide();
     function photoP(id1) {
-        $(".loading").show();
         $.ajax({
             type: "POST",
             url: Routing.generate('fsm_photo_principale', {photo: id1}),
             cache: false,
-            success: function() {
-                $('#affichage_photos').html();
-                $(".loading").hide();
+            success: function(html) {
+                 $('#affichage_photos').empty();
+                 $('#affichage_photos').append(html);
+
             }
         });
         return false;
