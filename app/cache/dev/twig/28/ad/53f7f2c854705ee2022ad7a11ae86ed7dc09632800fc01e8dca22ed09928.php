@@ -79,10 +79,9 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
                     echo "<p>";
                     $this->env->loadTemplate("fsmEchangeBundle:Photos:creation.html.twig")->display($context);
                     echo "</p>
-
 ";
                 }
-                // line 20
+                // line 19
                 echo "   ";
                 ++$context['loop']['index0'];
                 ++$context['loop']['index'];
@@ -96,40 +95,31 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['objetphoto'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 22
+            // line 21
             echo "<div id=\"affichage_photos\"> 
     <p>";
-            // line 23
+            // line 22
             $this->env->loadTemplate("fsmEchangeBundle:Photos:listephotos.html.twig")->display($context);
             echo "</p>
 </div>
-
 ";
         }
-        // line 27
+        // line 25
         echo "<script>
-";
-        // line 29
-        echo "    function photoP(id1) {
-";
-        // line 31
-        echo "        \$.ajax({
+    function photoP(id1) {
+        \$.ajax({
             type: \"POST\",
             url: Routing.generate('fsm_photo_principale', {photo: id1}),
             cache: false,
             success: function(html) {
-                 \$('#affichage_photos').empty();
-                 \$('#affichage_photos').append(html);
+                \$('#affichage_photos').empty();
+                \$('#affichage_photos').append(html);
 
             }
         });
         return false;
     }
 </script>
-
-
-
-
 ";
     }
 
@@ -145,6 +135,6 @@ class __TwigTemplate_28ad53f7f2c854705ee2022ad7a11ae86ed7dc09632800fc01e8dca22ed
 
     public function getDebugInfo()
     {
-        return array (  116 => 31,  113 => 29,  110 => 27,  103 => 23,  100 => 22,  86 => 20,  79 => 17,  76 => 16,  58 => 15,  52 => 12,  50 => 11,  47 => 9,  38 => 7,  34 => 6,  31 => 3,  28 => 2,);
+        return array (  108 => 25,  102 => 22,  99 => 21,  85 => 19,  79 => 17,  76 => 16,  58 => 15,  52 => 12,  50 => 11,  47 => 9,  38 => 7,  34 => 6,  31 => 3,  28 => 2,);
     }
 }

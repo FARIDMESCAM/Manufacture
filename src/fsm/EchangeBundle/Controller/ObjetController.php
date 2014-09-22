@@ -88,6 +88,7 @@ class ObjetController extends Controller {
     }
 
     public function ListObjetsAction() {
+     
         $autorisation = 'KO';
         $autorisation = $this->Habilitation($autorisation);
         $em = $this->getDoctrine()->getManager();
@@ -97,12 +98,18 @@ class ObjetController extends Controller {
             $form = $this->container->get('form.factory')->create(new RechercheForm());
             $request = $this->container->get('request');
             if ($request->isXmlHttpRequest()) {
-//                var_dump($request);
                  $name = $request->request->get('name');
-//                 $cat = $request->request->get('categories');
-                 $cat = $em->getRepository('fsmEchangeBundle:Categorie')->findAll();
+                 $catrech = $request->request->get('categorie');
+                 if ($catrech == null) 
+                 { $cat = $em->getRepository('fsmEchangeBundle:Categorie')->findAll();
+                   }
+                 else
+                 { 
+                    $cat = $em->getRepository('fsmEchangeBundle:Categorie')->find($catrech);   
+                    $cat = array($cat);
+                 }
+                
                 $criteres = array(('%'.$name.'%'), $cat);
-//                var_dump($criteres);
                 $liste_objet = $em->getRepository('fsmEchangeBundle:Objet')->search($criteres);
 
 
@@ -114,93 +121,19 @@ class ObjetController extends Controller {
                
                 
                 
-            } else {
+            } // Fin si XHR
+            else {
                 return $this->container->get('templating')->renderResponse('fsmEchangeBundle:Objets:objetsList.html.twig', array(
                             'objetphotos' => $liste_objet, 'gestion' => $gestion,
                             'form' => $form->createView()
                 ));
-            }// Fin if de XHR
+            }// Fin si pas XHR
         } // Fin If autorisation = OK 
         else {
             return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
         }
     }
 
-    public function ListObjets1Action() {
-        $autorisation = 'KO';
-        $autorisation = $this->Habilitation($autorisation);
-        $em = $this->getDoctrine()->getManager();
-        if ($autorisation === 'OK') {
-            $request = $this->container->get('request');
-//         $t = $request>isXmlHttpRequest();
-//         var_dump($t);
-//             if($request->isXmlHttpRequest())
-            if ($autorisation = 'KO') {
-                
-            } else {
-
-
-                $em = $this->getDoctrine()->getManager();
-                $gestion = 'NO';
-
-
-                $defaultData = array();
-//             $form = $this->createForm(new Recherche(), $Objet);
-                $form = $this->container->get('form.factory')->create(new Recherche());
-//           $form = $this->createFormBuilder($defaultData)
-//               ->add('name', 'text',array( 'required'  => false,'label'=>'Votre Recherche','attr' => array('class' => 'form-control')))
-//                ->add('categories', 'entity', array(
-//                    'required'  => false,
-//                    //'expanded' => true,
-////                    'empty_value' => 'Choisissez une option',
-//                    'label' => 'Categorie de votre objet',
-//                    'class' => 'fsm\EchangeBundle\Entity\Categorie',
-//                    'multiple' => false,
-//                    'property' => 'getNom',
-//                    'attr' => array('class' => 'form-control')))                  
-////                    ->add('rechercher', 'submit')
-//               ->getForm();
-
-
-                $form->handleRequest($this->get('request'));
-                if ($form->isValid()) {
-                    $data = $form->getData();
-                    $test = '%' . $data['name'] . '%';
-                    $cat = $data['categories'];
-//                 var_dump($cat);
-                    // On a permis dans la liste la saisie de valeur null -> si null, on prend toutes les valeurs.
-
-                    if ($cat === null) {
-                        $cat = $em->getRepository('fsmEchangeBundle:Categorie')->findAll();
-                    }
-                    // Si pas nul, on transforme l'objet en tableau
-                    else {
-                        $cat = array($cat);
-                    }
-                    $criteres = array(('%' . $data['name'] . '%'), $cat);
-//               var_dump($cat);
-                    $liste_objet = $em->getRepository('fsmEchangeBundle:Objet')->search($criteres);
-
-
-
-                    $em = $this->getDoctrine()->getManager();
-                    $formHandler = new FormHandler($form, $this->get('request'), $em);
-
-                    return $this->render('fsmEchangeBundle:Objets:objetsList.html.twig', array('form' => $form->createView(), 'objetphotos' => $liste_objet, 'gestion' => $gestion));
-                }
-            }
-
-
-            $liste_objet = $em->getRepository('fsmEchangeBundle:Objet')->test();
-
-
-//        $formHandler = new FormHandler($form, $this->get('request'), $em);
-
-            return $this->render('fsmEchangeBundle:Objets:objetsList.html.twig', array('form' => $form->createView(), 'objetphotos' => $liste_objet, 'gestion' => $gestion));
-        } else {
-            return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
-        }
-    }
 
     public function showObjetAction($id) {
         // renvoie un tableau

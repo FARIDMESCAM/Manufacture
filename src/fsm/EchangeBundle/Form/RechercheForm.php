@@ -11,15 +11,15 @@ class RechercheForm extends AbstractType {
         $builder
         ->add('name', 'text', array( 'required' => false, 'label' => 'Votre Recherche',
         'attr' => array('class' => 'form-control')))
-//        ->add('categories', 'entity', array(
-//        'required' => false,
-//        //'expanded' => true,
-//        'empty_value' => 'Choisissez une option',
-//        'label' => 'Categorie de votre objet',
-//        'class' => 'fsm\EchangeBundle\Entity\Categorie',
-//        'multiple' => false,
-//        'property' => 'getNom',
-//        'attr' => array('class' => 'form-control')))
+        ->add('categories', 'entity', array(
+        'required' => false,
+        //'expanded' => true,
+        'empty_value' => 'Choisissez une option',
+        'label' => 'Categorie de votre objet',
+        'class' => 'fsm\EchangeBundle\Entity\Categorie',
+        'multiple' => false,
+        'property' => 'getNom',
+        'attr' => array('class' => 'form-control')))
         ;
     }
 
