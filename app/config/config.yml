@@ -78,7 +78,7 @@ swiftmailer:
 #     type: file
 #     path: "%kernel.root_dir%/spool"
     
-    delivery_address: faridmescam@gmail.com
+    delivery_address: 
 
 fos_user :
     db_driver : orm 
@@ -105,4 +105,4 @@ fos_user :
                 sender_name:    Site La Manufacture-PANTIN
                 
 
-        
+gregwar_image: ~  

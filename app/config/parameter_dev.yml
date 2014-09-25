@@ -1,0 +1,20 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host:  127.0.0.1
+    database_port:
+    database_name: lamanu
+    database_user: root
+    database_password: 
+    mailer_auth_mode: login
+    mailer_transport: smtp
+    mailer_port: 587
+    mailer_host: smtp.gite-lugos.fr
+    mailer_user: administration@gite-lugos.fr
+    mailer_password: bprop789
+    node:
+    node_paths:
+    locale: fr
+    secret: ThisTokenIsNotSoSecretChangeIt44
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true

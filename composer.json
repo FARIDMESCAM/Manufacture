@@ -4,7 +4,7 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-0": {"": "src/", "SymfonyStandard": "app/"}
     },
     "require": {
         "php": ">=5.3.3",
@@ -20,8 +20,11 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
-        "bcc/cron-manager-bundle": "v2.4.1"
-        
+        "bcc/cron-manager-bundle": "v2.4.1",
+        "gregwar/image-bundle": "dev-master",
+        "winzou/console-bundle": "dev-master",
+         "avro/blog-bundle": "*"
+
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -54,7 +57,8 @@
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "keep-outdated": true
         },
         "branch-alias": {
             "dev-master": "2.5-dev"

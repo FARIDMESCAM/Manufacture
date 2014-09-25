@@ -4,6 +4,7 @@ namespace fsm\UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -29,7 +30,9 @@ class User extends BaseUser {
     /**
      * @var string
      * @ORM\Column(name="telephone",type ="string", length=10)
+     * @Assert\Regex("^0[1-68]([-. ]?[0-9]{2}){4}^",message="Votre téléphone n'est pas conforme")
      */
+    
     protected $telephone;
    
     /**

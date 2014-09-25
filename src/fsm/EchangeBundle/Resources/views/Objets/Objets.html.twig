@@ -31,7 +31,7 @@
                  {% if objetphoto.getPhotos is not null %}
            {%for photo in objetphoto.getPhotos%}
                     {% if photo.getPrincipal == TRUE %}
-                    <img width="130" class="img-circle" src="{{asset( photo.getWebPath)}}" /> 
+                    <img width="130" class="img-thumbnail" src="{{image( photo.getWebPath).resize(100,100)}}" /> 
                      {% endif %} 
           {% endfor %}
                 {% endif %}

@@ -19,13 +19,15 @@ class AppKernel extends Kernel {
             new FOS\UserBundle\FOSUserBundle(),
             new fsm\UserBundle\fsmUserBundle(),
             new BCC\CronManagerBundle\BCCCronManagerBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle()
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Gregwar\ImageBundle\GregwarImageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles [] = new CoreSphere\ConsoleBundle\CoreSphereConsoleBundle();
         }
 
         return $bundles;

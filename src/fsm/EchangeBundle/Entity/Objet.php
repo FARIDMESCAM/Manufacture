@@ -35,9 +35,9 @@ class Objet {
      * @var string
      * @ORM\Column(name="nom", type="string", length=255)
      * @Assert\Length(
-     *      min = "2",
+     *      min = "3",
      *      max = "50",
-     *      minMessage = "Votre nom doit faire au moins 2 caractères",
+     *      minMessage = "Votre nom doit faire au moins 3 caractères",
      *      maxMessage = "Votre nom ne peut pas être plus long que 50 caractères")
      */
     private $nom;

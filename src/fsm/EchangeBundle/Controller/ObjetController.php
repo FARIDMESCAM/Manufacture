@@ -88,7 +88,7 @@ class ObjetController extends Controller {
     }
 
     public function ListObjetsAction() {
-     
+
         $autorisation = 'KO';
         $autorisation = $this->Habilitation($autorisation);
         $em = $this->getDoctrine()->getManager();
@@ -98,29 +98,24 @@ class ObjetController extends Controller {
             $form = $this->container->get('form.factory')->create(new RechercheForm());
             $request = $this->container->get('request');
             if ($request->isXmlHttpRequest()) {
-                 $name = $request->request->get('name');
-                 $catrech = $request->request->get('categorie');
-                 if ($catrech == null) 
-                 { $cat = $em->getRepository('fsmEchangeBundle:Categorie')->findAll();
-                   }
-                 else
-                 { 
-                    $cat = $em->getRepository('fsmEchangeBundle:Categorie')->find($catrech);   
+                $name = $request->request->get('name');
+                $catrech = $request->request->get('categorie');
+                if ($catrech == null) {
+                    $cat = $em->getRepository('fsmEchangeBundle:Categorie')->findAll();
+                } else {
+                    $cat = $em->getRepository('fsmEchangeBundle:Categorie')->find($catrech);
                     $cat = array($cat);
-                 }
-                
-                $criteres = array(('%'.$name.'%'), $cat);
+                }
+
+                $criteres = array(('%' . $name . '%'), $cat);
                 $liste_objet = $em->getRepository('fsmEchangeBundle:Objet')->search($criteres);
 
 
 
-                    $em = $this->getDoctrine()->getManager();
-                    $formHandler = new FormHandler($form, $this->get('request'), $em);
+                $em = $this->getDoctrine()->getManager();
+                $formHandler = new FormHandler($form, $this->get('request'), $em);
 // Nous sommes en Ajax. On ne renvoie que la partie objets à lister
-                    return $this->render('fsmEchangeBundle:Objets:Objets.html.twig', array( 'objetphotos' => $liste_objet, 'gestion' => $gestion));
-               
-                
-                
+                return $this->render('fsmEchangeBundle:Objets:Objets.html.twig', array('objetphotos' => $liste_objet, 'gestion' => $gestion));
             } // Fin si XHR
             else {
                 return $this->container->get('templating')->renderResponse('fsmEchangeBundle:Objets:objetsList.html.twig', array(
@@ -133,7 +128,6 @@ class ObjetController extends Controller {
             return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
         }
     }
-
 
     public function showObjetAction($id) {
         // renvoie un tableau
@@ -185,6 +179,54 @@ class ObjetController extends Controller {
 
             $mailer = $this->get('mailer');
             $result = $mailer->send($message);
+
+            $email_expediteur = $this->get('security.context')->getToken()->getUser()->getEmail();
+            $email_nom = $this->get('security.context')->getToken()->getUser()-> getUsername();
+
+            $message_texte = 'Bonjour,' . "\n\n" . 'Voici un message au format texte';
+            $message_html = '<html> 
+     <head> 
+     <title>Titre</title> 
+     </head> 
+     <body>Test de message</body> 
+     </html>';
+
+            //----------------------------------------------- 
+            //GENERE LA FRONTIERE DU MAIL ENTRE TEXTE ET HTML 
+            //----------------------------------------------- 
+
+            $frontiere = '-----=' . md5(uniqid(mt_rand()));
+
+            //----------------------------------------------- 
+            //HEADERS DU MAIL 
+            //----------------------------------------------- 
+
+            $headers = 'From: "Nom" <' . $email_expediteur . '>' . "\n";
+            $headers .= 'Return-Path: <' . $email_expediteur . '>' . "\n";
+            $headers .= 'MIME-Version: 1.0' . "\n";
+            $headers .= 'Content-Type: multipart/alternative; boundary="' . $frontiere . '"';
+
+            //----------------------------------------------- 
+            //MESSAGE TEXTE 
+            //----------------------------------------------- 
+            $message =$email_nom.' est interesse par l\'objet mentionne ci-dessus. Voici son message.  '.$texte;
+//            $message = $texte;
+            $sujet = "Votre objet " . $Objet->getNom() . " du site La Manufacture" . "-" . $data['objet'];
+            ini_set("SMTP", "smtp.sfr.fr");
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+            $headers .= "From: " . $email_expediteur . "\r\n";
+
+
+
+
+            if (mail($destinataire, $sujet, $message, $headers)) {
+                $EnvoiMail = 'OK';
+            } else {
+                $EnvoiMail = 'KO';
+            }
+
+
 //                             $spool = $mailer->getTransport()->getSpool();
 //                              $transport = $this->get('swiftmailer.transport.real');
 //                              $spool->flushQueue($transport);

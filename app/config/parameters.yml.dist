@@ -17,3 +17,12 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+    
+    database_driver: pdo_mysql
+    locale: fr
+    secret: ThisTokenIsNotSoSecretChangeIt44
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true
+    node:
+    node_paths:
