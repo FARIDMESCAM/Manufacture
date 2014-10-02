@@ -106,3 +106,10 @@ fos_user :
                 
 
 gregwar_image: ~  
+
+sensio_framework_extra:
+    router:   { annotations: true }
+    request:  { converters: true, auto_convert: true }
+    view:     { annotations: true }
+    cache:    { annotations: true }
+    security: { annotations: true }

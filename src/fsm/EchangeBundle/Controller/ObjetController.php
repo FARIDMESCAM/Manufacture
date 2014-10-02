@@ -15,6 +15,7 @@ use fsm\EchangeBundle\Form\RechercheType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 //use fsm\EchangeBundle\Command\EmailCommand;
 

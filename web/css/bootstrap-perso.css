@@ -100,6 +100,7 @@ background:#333A40;
 }
 #menu-demo2 li:nth-child(3) li{
 /*background:#9F391A;*/
+background:#2A2333;
 }
 #menu-demo2 li:last-child li{
 background:#677F35;
@@ -137,5 +138,5 @@ text-transform:inherit;
 color:#000;
 }
 #menu-demo2 li:nth-child(3) li{
-width:50px;
+/*width:50px;*/
 }

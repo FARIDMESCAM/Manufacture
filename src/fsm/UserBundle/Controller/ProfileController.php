@@ -16,38 +16,35 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
+//use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use fsm\EchangeBundle\Form\PhotoType;
-use fsm\EchangeBundle\Entity\Photo;
-/**
- * Controller managing the user profile
- *
- * @author Christophe Coevoet <stof@notk.org>
- */
-class ProfileController extends Controller
-{
+//use fsm\EchangeBundle\Form\PhotoType;
+//use fsm\EchangeBundle\Entity\Photo;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+class ProfileController extends Controller {
+
     /**
      * Show the user
      */
-    public function showAction()
-    {
+    public function showAction() {
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-            $em = $this->getDoctrine()->getManager();
-            $utilisateur=$em->getRepository('fsmUserBundle:User')->find($user);
-       
-               $em = $this->getDoctrine()->getManager();
-                $liste_user_photos = $em->getRepository('fsmUserBundle:User')->getUserPhotoP($user);
-                
-               
-        return $this->render('fsmUserBundle:Profile:showP.html.twig',
-                array('userphotos'=>$liste_user_photos));
+        $em = $this->getDoctrine()->getManager();
+        $utilisateur = $em->getRepository('fsmUserBundle:User')->find($user);
+
+        $em = $this->getDoctrine()->getManager();
+        $liste_user_photos = $em->getRepository('fsmUserBundle:User')->getUserPhotoP($user);
+
+
+        return $this->render('fsmUserBundle:Profile:showP.html.twig', array('userphotos' => $liste_user_photos));
 //               
         //return $this->container->get('templating')->renderResponse('fsmUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
     }
@@ -55,8 +52,7 @@ class ProfileController extends Controller
     /**
      * Edit the user
      */
-    public function editAction(Request $request)
-    {
+    public function editAction(Request $request) {
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
@@ -77,10 +73,10 @@ class ProfileController extends Controller
 
         $form = $formFactory->createForm();
         $form->setData($user);
-        
-                $em = $this->getDoctrine()->getManager();
-                $liste_user_photos = $em->getRepository('fsmUserBundle:User')->getUserPhotoP($user);
-  
+
+        $em = $this->getDoctrine()->getManager();
+        $liste_user_photos = $em->getRepository('fsmUserBundle:User')->getUserPhotoP($user);
+
 
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
@@ -104,24 +100,40 @@ class ProfileController extends Controller
                 return $response;
             }
         }
-        
+
         return $this->container->get('templating')->renderResponse(
-            'FOSUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
-            array('form' => $form->createView(),'userphotos'=>$liste_user_photos));
+                        'FOSUserBundle:Profile:edit.html.' . $this->container->getParameter('fos_user.template.engine'), array('form' => $form->createView(), 'userphotos' => $liste_user_photos));
     }
-    
-    public function showProfileAction($id)
-    {
+
+    public function showProfileAction($id) {
         $em = $this->getDoctrine()->getManager();
-            $utilisateur=$em->getRepository('fsmUserBundle:User')->find($id);
-       
-               $em = $this->getDoctrine()->getManager();
-                $liste_user_photos = $em->getRepository('fsmUserBundle:User')->getUserPhotoP($id);
-                
-               
-        return $this->render('fsmUserBundle:Profile:showP.html.twig',
-                array('userphotos'=>$liste_user_photos));
+        $utilisateur = $em->getRepository('fsmUserBundle:User')->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $liste_user_photos = $em->getRepository('fsmUserBundle:User')->getUserPhotoP($id);
+
+
+        return $this->render('fsmUserBundle:Profile:showP.html.twig', array('userphotos' => $liste_user_photos));
+    }
+
+    /**
+     * @Route("/listUser", name="fsm_user_list") 
+     * @Template("fsmUserBundle:Default:list.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function listUserAction() {
+        $em = $this->getDoctrine()->getManager();
+        $utilisateurs = $em->getRepository('fsmUserBundle:User')->getlistUserPhoto();
+
+//        var_dump($utilisateurs);
+        return array('users' => $utilisateurs);
+    }
+
+    /**
+     * @Route("/Groupmodif", name="fsm_group_user_update") 
+     */
+    public function modifGroupAction() {
         
     }
-    
+
 }

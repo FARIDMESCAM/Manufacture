@@ -5,9 +5,12 @@ namespace fsm\EchangeBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use fsm\EchangeBundle\Entity\Categorie;
 use fsm\EchangeBundle\Form\CategorieType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CategorieController extends Controller {
-
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function ajouterCategorieAction() {
         $Cat = new Categorie();
         $form = $this->createForm(new CategorieType, $Cat);

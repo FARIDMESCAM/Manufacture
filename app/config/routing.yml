@@ -2,7 +2,10 @@ echange:
     resource: "@fsmEchangeBundle/Controller"
     type:     annotation
 
-
+fsm_user:
+    resource: "@fsmUserBundle/Controller"
+    type:     annotation
+    
 fsmuser:
     resource: "@fsmUserBundle/Resources/config/routing.yml"
     prefix:   /

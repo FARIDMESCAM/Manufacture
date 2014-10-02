@@ -56,14 +56,15 @@
                                     <li><a href="{{path ('fsm_objet_ajout') }}">Ajouter des objets</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#"> </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="#"> Administration </a>
                                 <ul>
-                                    <li><a href="#"> </a></li>
-                                    <li><a href="#"> </a></li>
-                                    <li><a href="#"> </a></li>
-                                    <li><a href="#"> </a></li>
+                                    <li><a href="{{path ('fsm_categorie_ajout') }}">Ajout catégorie</a></li>
+                                    <li><a href="{{path ('fsm_user_list') }}">Gestion des utilisateurs</a></li>
+                                  
                                 </ul>
                             </li>
+                            {% endif %}
                             <li><a href="#">Menu général</a>
                                 <ul>
                                     <li><a href="{{path ('fsm_objet_list') }}">Toutes les annonces</a></li>

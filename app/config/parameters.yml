@@ -1,4 +1,21 @@
 # This file is auto-generated during the composer install
-#imports:
-#    - { resource: parameterspersos.yml }
-
+parameters:
+    database_driver: pdo_mysql
+    node: null
+    node_paths: null
+    database_host: mysql51-108.perso
+    database_port: null
+    database_name: gitelugomanufa
+    database_user: gitelugomanufa
+    database_password: bprop789
+    mailer_transport: smtp
+    mailer_auth_mode: login
+    mailer_host: smtp.gite-lugos.fr
+    mailer_port: 587
+    mailer_user: administration@gite-lugos.fr
+    mailer_password: bprop789
+    locale: fr
+    secret: ThisTokenIsNotSoSecretChangeIt44
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true
