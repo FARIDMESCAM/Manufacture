@@ -24,7 +24,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class ObjetController extends Controller {
 
     /**
-     * @Route("/ajouterObjet", name="fsm_objet_ajout") 
+     * @Route("/ajouterObjet", name="fsm_objet_ajout")
+     * @Security("has_role('ROLE_USER')") 
      */
     public function ajouterObjetAction() {
         $autorisation = 'KO';
@@ -87,8 +88,10 @@ class ObjetController extends Controller {
             return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
         }
     }
-
-    public function ListObjetsAction() {
+    /**
+ * @Security("has_role('ROLE_USER')")
+       */
+         public function ListObjetsAction() {
 
         $autorisation = 'KO';
         $autorisation = $this->Habilitation($autorisation);
@@ -249,17 +252,13 @@ class ObjetController extends Controller {
     }
 
     public function Habilitation($autorisation) {
-
+        $autorisation = 'KO';
         $user = $this->get('security.context')->getToken()->getUser();
-        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException();
-        } else {
             if (true === $user->getHabilite()) {
                 $autorisation = 'OK';
             }
-        }
-
-
+            else
+            { throw new AccessDeniedException();}
         return $autorisation;
     }
 

@@ -22,9 +22,11 @@ class FormHandler {
     }
 
     public function process() {
+       var_dump($this->request->getMethod());
         if ($this->request->getMethod() == "POST") {
             $this->form->bind($this->request);
             if ($this->form->isValid()) {
+                
                 $this->onSuccess($this->form->getData());
                 return true;
             }

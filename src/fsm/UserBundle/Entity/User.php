@@ -86,6 +86,20 @@ class User extends BaseUser {
         $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
         $this->habilite = false;
     }
+    
+    
+//    public function getRoles() {
+////        var_dump(parent::getRoles());
+//        $roles = array();
+//        $tabs = parent::getRoles();
+//        $roles[0]= 'utilisateur';
+//         foreach ($tabs as $tab)
+//         {  if ($tab == 'ROLE_ADMIN')
+//             {$roles[1]= 'Administrateur';}
+//
+//         }
+//        return array_unique($roles);
+//    }
 
     /**
      * Add photos

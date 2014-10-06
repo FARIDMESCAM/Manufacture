@@ -1,14 +1,35 @@
 {% extends "fsmEchangeBundle::layout.html.twig" %}
 {% block body %}
 <div class ="row-30">.</div>
-      <div class ="row">
-          <div class ="col-lg-4"> </div> 
-          <div class ="col-lg-2">      
+<div class ="row">
+    <div class ="col-lg-4"> </div> 
+    <div class ="col-lg-2">      
 {% for categorie in categories %}
-<p><strong>{{categorie.nom}}</strong>
- <a href="{{path('fsm_categorie_modif',{'id':categorie.id})}}">modif</a></p>
+        <p><strong>{{categorie.nom}}</strong>
 
+            <a id="cat"  onclick ='modifcat({{categorie.id}})' href="#">Modif</a>
+        </p>
 {%endfor%}
- </div>
-           </div>
+    </div>
+    <div id="gestioncat" class ="col-lg-2"> 
+        <p>{%include "fsmEchangeBundle:Categorie:Modif.html.twig"%}</p>
+    </div>
+</div>
+<script>
+    function modifcat(id1) {
+        $.ajax({
+            type: "POST",
+             data: $(this).serialize(),
+              dataType: "html",
+            url: Routing.generate('fsm_categorie_modif', {id: id1}),
+            cache: false,
+            success: function(html) {
+                $('#gestioncat').empty();
+                $('#gestioncat').append(html);
+
+            }
+        });
+        return false;
+    }
+</script>
 {%endblock%}

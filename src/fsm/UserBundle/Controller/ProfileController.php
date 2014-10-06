@@ -130,9 +130,9 @@ class ProfileController extends Controller {
     }
 
     /**
-     * @Route("/Groupmodif", name="fsm_group_user_update") 
+     * @Route("/user_admin/{id}", name="fsm_user_admin") 
      */
-    public function modifGroupAction() {
+    public function rendreAdminAction($id) {
         
     }
 

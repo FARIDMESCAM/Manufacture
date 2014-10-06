@@ -1,0 +1,22 @@
+{% block body %}
+{#On n'affiche le formulaire que s'il existe#}
+{#Lors du 1er apel à la liste catégorie, on ne visionne qu'une liste. Pas de formulaire#}
+{% if form != null%}
+<p>
+{# On affiche tous les messages flash dont le nom est info  #}
+{% for  message in app.session.flashbag.get('Objetinfo') %}
+<p >{{ message }} </p>
+{% endfor %}
+</p>
+<div class ="well">
+   <form method ="post" {{ form_enctype(form) }}> 
+       {{ form_widget(form) }}
+       {{ form_rest(form) }}
+     
+<input type ="submit" class ="btn btn-primary" />
+</form>
+</div>
+{% endif%}
+
+{% endblock %}
+

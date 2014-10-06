@@ -9,20 +9,20 @@
                 <th>Photo principale </th>
                 <th>Mail </th>
                 <th> Roles </th>
-               
-               
-          
-                
+
+
+
+
         </thead>
         <tbody >
 {% for user in users %}
             {% if user != null%}
             <tr>
-                
+
                 <td>
-                      <a href="{{path('fsm_group_user_update')}}" >
+                    <a href="{{path('fos_user_profile_show')}}" >
 {{ user.username }}</a>
-</td>qq
+                </td>
                 <td>
                       {% if user.getPhotos is not null %}
            {%for photo in user.getPhotos%}
@@ -32,21 +32,27 @@
           {% endfor %}
                 {% endif %}
                 </td>
-                 <td>{{ user.email }}</td>
-                 <td>
+                <td>{{ user.email }}</td>
+                <td>
                    {% if user.getRoles is not null %} 
                    {%for roles in user.getRoles%}
-                     {{ roles }}
-                     <br/>
-                  
+                     {{  roles }}
+                                           {% if user.getRoles|length <2 %}
+                    </br>
+                      <a id="PhotoDefaut"  onclick = 'photoP({{photo.id}})' idphoto= {{photo.id}} class="navbar-brand" href="#">Définir en tant que photo principale</a>
+                      
+            <a href="{{path('fsm_user_admin',{'id':user.id})}}" >Rendre administrateur</a><br><br>
+                                          {% endif %}
+                    <br/>
+
                     {% endfor %}
                     {% endif %}
                 </td>
-                  
+
                 {% endif %}  
-                
+
             </tr>
-        
+
    {% endfor %}
 
 
@@ -60,6 +66,24 @@
 </div> 
 <div class ="row-100">.</div>
 </div> 
+
+<script>
+    function photoP(id1) {
+        $.ajax({
+            type: "POST",
+            url: Routing.generate('fsm_photo_principale', {photo: id1}),
+            cache: false,
+            success: function(html) {
+                $('#affichage_photos').empty();
+                $('#affichage_photos').append(html);
+
+            }
+        });
+        return false;
+    }
+</script>
+
+
 
 {% endblock %}
 

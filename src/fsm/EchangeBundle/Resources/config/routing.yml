@@ -25,19 +25,21 @@ fsm_objets_mes:
     path: /mesObjets
     defaults: { _controller: fsmEchangeBundle:Objet:ListMesObjet }
     
-fsm_categorie_ajout:
-    path : /ajouterCategorie
-    defaults: { _controller: fsmEchangeBundle:Categorie:ajouterCategorie }
+#fsm_categorie_ajout:
+#    path : /ajouterCategorie
+#    defaults: { _controller: fsmEchangeBundle:Categorie:ajouterCategorie }
     
 fsm_categorie_modif:
     path : /modifCategorie/{id}
     defaults: { _controller: fsmEchangeBundle:Categorie:modifCategorie }
     requirements:
         id: \d+
+    options:
+        expose: true
     
-fsm_categorie_list:
-    path : /ListCategorie
-    defaults: { _controller: fsmEchangeBundle:Categorie:ListCategorie }
+#fsm_categorie_list:
+#    path : /ListCategorie
+#    defaults: { _controller: fsmEchangeBundle:Categorie:ListCategorie }
     
 fsm_photo_ajout_O:
     path : /ajouterPhotoO/{id}
