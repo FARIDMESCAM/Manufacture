@@ -86,6 +86,9 @@
 
 
     </div>
+{% for  message in app.session.flashbag.get('Information') %}
+<p >{{ message }} </p>
+{% endfor %}
   {% block body %}
   {% endblock %} 
 

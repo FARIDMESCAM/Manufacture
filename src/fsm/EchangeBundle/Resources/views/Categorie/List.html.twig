@@ -3,7 +3,7 @@
 <div class ="row-30">.</div>
 <div class ="row">
     <div class ="col-lg-4"> </div> 
-    <div class ="col-lg-2">      
+    <div id = "test" class ="col-lg-2">      
 {% for categorie in categories %}
         <p><strong>{{categorie.nom}}</strong>
 
@@ -18,9 +18,6 @@
 <script>
     function modifcat(id1) {
         $.ajax({
-            type: "POST",
-             data: $(this).serialize(),
-              dataType: "html",
             url: Routing.generate('fsm_categorie_modif', {id: id1}),
             cache: false,
             success: function(html) {

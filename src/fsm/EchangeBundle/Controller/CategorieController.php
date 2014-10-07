@@ -42,30 +42,50 @@ class CategorieController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function modifCategorieAction($id) {
-//        $csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
-//
-//        return array('csrf_token' => $csrfToken);
         $request = $this->container->get('request');
-         $Cat = $this->getDoctrine()->getManager()
+//        var_dump($request->isXmlHttpRequest());
+//         var_dump($request->getMethod());
+         if ($request->isXmlHttpRequest())
+         {  }
+        $Cat = $this->getDoctrine()->getManager()
                 ->getRepository("fsmEchangeBundle:Categorie")
                 ->find($id);
+//        var_dump($Cat);
+        
         $form = $this->createForm(new CategorieType, $Cat);
-        $em = $this->getDoctrine()->getManager();
-        $commit = TRUE;
-        $formHandler = new FormHandler($form, $this->get('request'), $em,$commit);
-        if ($formHandler->process()) {
-                var_dump($request);
-              
-//                $em = $this->getDoctrine()->getManager();
-//                $em->flush();
+
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST') {
+          
+            $form->bind($request);
+            $em = $this->getDoctrine()->getManager();
+                $em->persist($Cat);
+                $em->flush();
+                $nom = $Cat->getNom();
+                $this->get('session')->getFlashBag()->add('Information', 'La catégorie ' . $nom . ' a bien été modifie');
+
+                  return $this->redirect($this->generateUrl('fsm_categorie_list'));
+           
+            
+        }
+
+//        $em = $this->getDoctrine()->getManager();
+//        $commit = TRUE;
+//        $formHandler = new FormHandler($form, $this->get('request'), $em,$commit);
+//        if ($formHandler->process()) {
+////                var_dump($request);
+////                         return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
+//              
+////                $em = $this->getDoctrine()->getManager();
+////                $em->flush();
 //                $nom = $Cat->getNom();
 //                $this->get('session')->getFlashBag()->add('Creationinfo', 'La catégorie ' . $nom . ' a bien été modifie');
-                return $this->redirect($this->generateUrl('fsm_categorie_list'));
-           
-      
-       }
-//       var_dump($csrfToken);
-        return $this->render('fsmEchangeBundle:Categorie:Modif.html.twig', array('form' => $form->createView()));
+//                return $this->redirect($this->generateUrl('fsm_categorie_list'));
+//           
+//      
+//       }
+//
+        return $this->render('fsmEchangeBundle:Categorie:Modif.html.twig', array('form' => $form->createView(),'id'=>$Cat->getid()));
     }
 
     /**
@@ -74,17 +94,14 @@ class CategorieController extends Controller {
      * @Template("fsmEchangeBundle:Categorie:List.html.twig")
      */
     public function ListCategorieAction() {
-        
-//         return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
-       
-          
+        $request = $this->container->get('request');
         $em = $this->getDoctrine()->getManager();
         $liste_categories = $em->getRepository('fsmEchangeBundle:Categorie')->findAll();
-        
-          
-       
+
+
+
         // Lors de l'affichage des catégories, on ne fait que les visionner.
-        return array('categories' => $liste_categories,'form'=>null);
+        return array('categories' => $liste_categories, 'form' => null);
     }
 
 }

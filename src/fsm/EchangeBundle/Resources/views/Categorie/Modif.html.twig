@@ -7,11 +7,22 @@
 {% for  message in app.session.flashbag.get('Objetinfo') %}
 <p >{{ message }} </p>
 {% endfor %}
+{%for FlashMessage in app.session.flashbag.get('error')%}
+<div class="alert alert-error">
+    <p>{{FlashMessage}}</p>
+</div>
+{%endfor%}
 </p>
 <div class ="well">
-   <form method ="post" {{ form_enctype(form) }}> 
-       {{ form_widget(form) }}
-       {{ form_rest(form) }}
+    
+   <form method ="post" {{ form_enctype(form) }}
+         action = "{{ path('fsm_categorie_modif',{'id':id  }) }}" > 
+         
+         {{ form_row(form.nom) }}
+         
+     
+         
+       
      
 <input type ="submit" class ="btn btn-primary" />
 </form>
