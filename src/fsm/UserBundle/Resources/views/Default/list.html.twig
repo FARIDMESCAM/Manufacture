@@ -29,23 +29,28 @@
                     {% if photo.getPrincipal == TRUE %}
                     <img width="130" class="img-thumbnail" src="{{image( photo.getWebPath).resize(100,100)}}" /> 
                      {% endif %} 
-          {% endfor %}
-                {% endif %}
+         
+                
                 </td>
                 <td>{{ user.email }}</td>
                 <td>
                    {% if user.getRoles is not null %} 
                    {%for roles in user.getRoles%}
                      {{  roles }}
-                                           {% if user.getRoles|length <2 %}
-                    </br>
-                      <a id="PhotoDefaut"  onclick = 'photoP({{photo.id}})' idphoto= {{photo.id}} class="navbar-brand" href="#">Définir en tant que photo principale</a>
-                      
-            <a href="{{path('fsm_user_admin',{'id':user.id})}}" >Rendre administrateur</a><br><br>
-                                          {% endif %}
-                    <br/>
+                        </br>                   
 
                     {% endfor %}
+                    {% if user.getRoles|length <2 %}
+                    </br>
+            <a href="{{path('fsm_user_admin',{'id':user.id})}}" >Rendre administrateur</a><br><br>
+                                          {% endif %}
+                                                       {% if user.getRoles|length >1 %}
+                    </br>
+            <a href="{{path('fsm_user_suppr_admin',{'id':user.id})}}" >Enlever le rôle administrateur</a><br><br>
+                                          {% endif %}
+                    <br/>
+                    {% endif %}
+                     {% endfor %}
                     {% endif %}
                 </td>
 

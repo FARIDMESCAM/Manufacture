@@ -117,7 +117,7 @@ class ProfileController extends Controller {
     }
 
     /**
-     * @Route("/listUser", name="fsm_user_list") 
+     * @Route("/listUser", name="fsm_user_Profile_list") 
      * @Template("fsmUserBundle:Default:list.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
      */
@@ -131,9 +131,34 @@ class ProfileController extends Controller {
 
     /**
      * @Route("/user_admin/{id}", name="fsm_user_admin") 
+     * @Template("fsmUserBundle:Default:list.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function rendreAdminAction($id) {
+         $em = $this->getDoctrine()->getManager();
+        $utilisateur = $em->getRepository('fsmUserBundle:User')->find($id);
+        $utilisateur->addRole('ROLE_ADMIN');
+//        $em = $this->getDoctrine()->getManager();
+        $utilisateurs = $em->getRepository('fsmUserBundle:User')->getlistUserPhoto();
+
+        return array('users' => $utilisateurs);
         
     }
+/**
+     * @Route("/user_suppr_admin/{id}", name="fsm_user_suppr_admin") 
+     * @Template("fsmUserBundle:Default:list.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function enleverAdminAction($id) {
+         $em = $this->getDoctrine()->getManager();
+        $utilisateur = $em->getRepository('fsmUserBundle:User')->find($id);
+        $utilisateur->removeRole('ROLE_ADMIN');
+//        $em = $this->getDoctrine()->getManager();
+        $utilisateurs = $em->getRepository('fsmUserBundle:User')->getlistUserPhoto();
 
+        return array('users' => $utilisateurs);
+        
+    }
+    
+    
 }
