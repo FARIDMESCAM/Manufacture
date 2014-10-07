@@ -62,7 +62,7 @@ class CategorieController extends Controller {
                 $em->persist($Cat);
                 $em->flush();
                 $nom = $Cat->getNom();
-                $this->get('session')->getFlashBag()->add('Information', 'La catégorie ' . $nom . ' a bien été modifie');
+                $this->get('session')->getFlashBag()->add('Information', 'La catégorie ' . $nom . ' a bien été modifiée');
 
         return $this->redirect($this->generateUrl('fsm_categorie_list'));}}
         

@@ -111,7 +111,7 @@ background:#677F35;
 background:#65537A;
 }
 #menu-demo2 li:nth-child(2):hover, #menu-demo2 li:nth-child(2) li:hover{
-background:#729EBF;
+/*background:#729EBF;*/
 }
 /*#menu-demo2 li:nth-child(3):hover, #menu-demo2 li:nth-child(3) li:hover{
 background:#F6AD1A;

@@ -40,9 +40,16 @@
                         </br>                   
 
                     {% endfor %}
+                        {% if user.getHabilite == FALSE%}
+                         <a href="{{path('fsm_user_add_habilite',{'id':user.id})}}" >Habiliter cet utilisateur</a><br><br>
+           
+                        {% else %}
+                         <a href="{{path('fsm_user_suppr_habilite',{'id':user.id})}}" >Déshabiliter cet utilisateur</a><br><br>
+           
+                        {% endif %} 
                     {% if user.getRoles|length <2 %}
                     </br>
-            <a href="{{path('fsm_user_admin',{'id':user.id})}}" >Rendre administrateur</a><br><br>
+            <a href="{{path('fsm_user_add_admin',{'id':user.id})}}" >Ajouter le rôle d'administrateur</a><br><br>
                                           {% endif %}
                                                        {% if user.getRoles|length >1 %}
                     </br>

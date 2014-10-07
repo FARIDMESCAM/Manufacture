@@ -88,10 +88,11 @@ class ObjetController extends Controller {
             return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
         }
     }
+
     /**
- * @Security("has_role('ROLE_USER')")
-       */
-         public function ListObjetsAction() {
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function ListObjetsAction() {
 
         $autorisation = 'KO';
         $autorisation = $this->Habilitation($autorisation);
@@ -185,7 +186,7 @@ class ObjetController extends Controller {
             $result = $mailer->send($message);
 
             $email_expediteur = $this->get('security.context')->getToken()->getUser()->getEmail();
-            $email_nom = $this->get('security.context')->getToken()->getUser()-> getUsername();
+            $email_nom = $this->get('security.context')->getToken()->getUser()->getUsername();
 
             $message_texte = 'Bonjour,' . "\n\n" . 'Voici un message au format texte';
             $message_html = '<html> 
@@ -213,7 +214,7 @@ class ObjetController extends Controller {
             //----------------------------------------------- 
             //MESSAGE TEXTE 
             //----------------------------------------------- 
-            $message =$email_nom.' est interesse par l\'objet mentionne ci-dessus. Voici son message.  '.$texte;
+            $message = $email_nom . ' est interesse par l\'objet mentionne ci-dessus. Voici son message.  ' . $texte;
 //            $message = $texte;
             $sujet = "Votre objet " . $Objet->getNom() . " du site La Manufacture" . "-" . $data['objet'];
             ini_set("SMTP", "smtp.sfr.fr");
@@ -254,11 +255,12 @@ class ObjetController extends Controller {
     public function Habilitation($autorisation) {
         $autorisation = 'KO';
         $user = $this->get('security.context')->getToken()->getUser();
-            if (true === $user->getHabilite()) {
-                $autorisation = 'OK';
-            }
-            else
-            { throw new AccessDeniedException();}
+        if (true === $user->getHabilite()) {
+            $autorisation = 'OK';
+        } else {
+             return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
+//            throw new AccessDeniedException();
+        }
         return $autorisation;
     }
 
