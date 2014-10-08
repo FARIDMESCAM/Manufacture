@@ -18,6 +18,7 @@ class PhotoController extends Controller {
                 ->getRepository("fsmEchangeBundle:Objet")
                 ->find($id);
         $user = $this->get('security.context')->getToken()->getUser();
+        // vérification que l'utilisateur connecté est bien le proprio de l'objet
         if ($user == $objet->getUser()) {
             $is_owner = true;
         } else {
@@ -46,21 +47,20 @@ class PhotoController extends Controller {
             return $this->render('fsmEchangeBundle:Photos:ajouter.html.twig',
                     array('form' => $form->createView(),'objetphotos' => $liste_objet));
         }
+        else
+        {
+            
+        }
     }
 
     public function ajouterPhotoUAction($id) {
-
-
-
-//        $user = new User();
-        $user = $this->getDoctrine()->getManager()
-                ->getRepository("fsmUserBundle:User")
-                ->find($id);
+    $user = $this->get('security.context')->getToken()->getUser();
 
         $photo = new Photo($user);
-        $photo->setUser($user);
-        $liste_photo = $this->getDoctrine()->getManager()
-                        ->getRepository('fsmEchangeBundle:Photo')->getPhotoByUser($user);
+       $photo->setUser($user);
+       $liste_photo = $this->getDoctrine()->getManager()
+                        ->getRepository('fsmUserBundle:user')->getUserPhotoP($id);
+//        var_dump($liste_photo);
       //Attribution automatique de la valeur principale ou non d'une photo
         $test = $this->isPrincipale($user);
         $photo->setPrincipal($test);
@@ -135,8 +135,6 @@ class PhotoController extends Controller {
 //            var_dump($request);
             $em = $this->getDoctrine()->getManager();
         $photo = $em->getRepository("fsmEchangeBundle:Photo")->find($photo);
-//        var_dump($photo);
-//        throw new HttpNotFoundException("Page not found");
         // On récupère l'utilisateur connecté car c'est le proprio des photos
         $user = $this->get('security.context')->getToken()->getUser();
         if ($photo->getUser()) {
@@ -151,7 +149,7 @@ class PhotoController extends Controller {
             $photos = $em->getRepository("fsmEchangeBundle:Photo")->findByUser($user);
             
         } else {
-            //var_dump($photo);
+
             $Objet = $photo->getObjet()->getId();
            
             // si var_dump de $Objet = $photo->getObjet(), renvoie objet type proxies ???

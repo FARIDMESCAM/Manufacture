@@ -258,6 +258,26 @@ class ObjetController extends Controller {
         if (true === $user->getHabilite()) {
             $autorisation = 'OK';
         } else {
+            
+                         
+                    $objetmail = 'user à habilite';
+                    $destinataire = 'faridsahlimescam@voila.fr';
+                    $texte = 'les globs attaquent la plage';
+                     $message = \Swift_Message::newInstance()
+                    ->setSubject($objetmail)
+                    ->setFrom('faridsahlimescam@voila.fr')
+                    ->setTo($destinataire)
+                        
+                    ->setBody($this->renderView('fsmUserBundle:Default:mailuser.html.twig', array('textemail' => $texte)));
+           ;
+            $mailer = $this->get('mailer');
+            $type = $message->getHeaders()->get('Content-Type');
+            $type->setValue('text/html');
+            $type->setParameter('charset', 'utf-8');
+            
+            
+            $result = $mailer->send($message);
+             var_dump($result);
              return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
 //            throw new AccessDeniedException();
         }

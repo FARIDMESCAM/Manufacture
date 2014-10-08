@@ -181,7 +181,7 @@ $em = $this->getDoctrine()->getManager();
 $utilisateur = $em->getRepository('fsmUserBundle:User')->find($id);
 $utilisateur->setHabilite(TRUE);
 $utilisateurs = $em->getRepository('fsmUserBundle:User')->getlistUserPhoto();
-
+ $em->flush();
 return array('users' => $utilisateurs);
 }
 
