@@ -1,0 +1,21 @@
+        <div class="container">
+            <div class ="row">
+                <div class ="col-lg-4">  </div>
+                <div id="info_ok" style="background: springgreen" >
+{% for  message in app.session.flashbag.get('Information') %}
+                    <p >{{ message }} </p>
+{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class ="row">
+                <div class ="col-lg-4">  </div>
+                <div id="info_ok" style="background: #FF0000" >
+{% for  message in app.session.flashbag.get('Erreurinfo') %}
+                    <p >{{ message }} </p>
+{% endfor %}
+                </div>
+            </div>
+        </div>     
+

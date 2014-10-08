@@ -14,7 +14,7 @@ class RechercheForm extends AbstractType {
         ->add('categories', 'entity', array(
         'required' => false,
         //'expanded' => true,
-        'empty_value' => 'Choisissez une option',
+        'empty_value' => 'Toute catégorie',
         'label' => 'Categorie de votre objet',
         'class' => 'fsm\EchangeBundle\Entity\Categorie',
         'multiple' => false,

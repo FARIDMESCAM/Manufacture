@@ -1,0 +1,25 @@
+
+        <footer>
+            <div class ="row">
+                <hr>
+
+                                                                {% if is_granted ("IS_AUTHENTICATED_REMEMBERED") %}
+                <div class ="col-lg-2">
+                                                                 {%for photo in app.user.getPhotos%}
+                                                            {% if app.user.getPhotos is not null %}
+                                                            {% if photo.getPrincipal() == 1 %}
+                    <img width="40" class="img-circle" src="{{asset( photo.getWebPath)}}" alt="{{photo.alt}}" /> 
+                                                            {% endif %} 
+                                                             {% endif %} 
+                                                            {%endfor%}
+                </div> 
+                <div class ="col-lg-2"><p class="text-center">
+                        Connecté en tant que {{ app.user.username }}</p>
+                </div>
+
+
+                                    {% endif %}    
+                <div class ="col-lg-4"></div> 
+                <div class ="col-lg-4"><p class="text-center"></p></div>
+            </div>
+        </footer>

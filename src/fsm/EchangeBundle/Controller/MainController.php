@@ -25,6 +25,9 @@ class MainController extends Controller {
         return $this->render('fsmEchangeBundle:Default:index.html.twig', array('objetphotos' => $objets));
     }
     
-   
+    public function menuAction() {
+        
+        return $this->render('fsmEchangeBundle:Default:menu.html.twig');
+    }
 
 }

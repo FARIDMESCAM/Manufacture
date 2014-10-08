@@ -1,0 +1,67 @@
+ <div class="navbar-wrapper">
+            <div class="container">
+                <div class="navbar navbar-custom navbar-static-top" role="navigation">
+                    <div class="container">
+                        <div class ="row">
+                            <div class ="col-lg-4">  
+                                       {% if is_granted ("IS_AUTHENTICATED_REMEMBERED") %}
+                                <a  class="navbar-brand" href ="{{path ('fos_user_security_logout') }}">Déconnexion </a>
+                                        {% else %}
+                                <a class="navbar-brand" href ="{{ path ('fos_user_security_login') }}">Connexion </a>
+                                        {% endif %}  </div> 
+                            <div class ="col-lg-3">
+                                <div class="navbar-header">
+
+                                    <a class="navbar-brand" href="#">LA MANUFACTURE PANTIN</a>
+                                </div>
+                            </div>
+                            <div class ="col-lg-4">
+                            </div>
+                        </div>
+
+                                         {% if is_granted ("IS_AUTHENTICATED_REMEMBERED") %}
+                        {%if app.user.gethabilite() == true%}
+                        <ul id="menu-demo2">
+                            <li><a href="#">Mon compte</a>
+                                <ul>
+
+                                    <li><a href="{{path ('fos_user_profile_show') }}">Consulter</a></li>
+                                    <li><a href="{{path ('fos_user_change_password') }}">Changer de mot de passe</a></li>
+                                    <li><a href="{{path ('fos_user_profile_edit') }}">Modifier</a></li>
+                                    <li><a href="{{path ('fos_user_resetting_request') }}">Ré-initialiser le mot de passe</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Mes Objets</a>
+                                <ul>
+                                    <li><a href="{{path ('fsm_objets_mes') }}">Consulter</a></li>
+                                    <li><a href="{{path ('fsm_objet_ajout') }}">Ajouter des objets</a></li>
+                                </ul>
+                            </li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="#"> Administration </a>
+                                <ul>
+                                    <li><a href="{{path ('fsm_categorie_list') }}">Gestion des catégories</a></li>
+                                    <li><a href="{{path ('fsm_user_Profile_list') }}">Gestion des utilisateurs</a></li>
+                                  
+                                </ul>
+                            </li>
+                            {% endif %}
+                            <li><a href="#">Menu général</a>
+                                <ul>
+                                    <li><a href="{{path ('fsm_objet_list') }}">Toutes les annonces</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                                        {% else %}
+                                        {% endif %}
+                          {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
