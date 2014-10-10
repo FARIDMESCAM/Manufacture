@@ -134,7 +134,8 @@ $em = $this->getDoctrine()->getManager();
 $utilisateur = $em->getRepository('fsmUserBundle:User')->find($id);
 $utilisateur->addRole('ROLE_ADMIN');
 $utilisateurs = $em->getRepository('fsmUserBundle:User')->getlistUserPhoto();
-
+ $em->flush();
+$this->get('session')->getFlashBag()->add('Information', 'Le rôle d\'administrateur vient d\'être ajouté à '.$utilisateur->getUsername());
 return array('users' => $utilisateurs);
 }
 
@@ -162,11 +163,14 @@ $this->get('session')->getFlashBag()->add('Erreurinfo', 'Il est nécessaire d\'a
 $OuiNon = 'NON';
 }
 if ($OuiNon == 'OUI') {
-{$utilisateur = $em->getRepository('fsmUserBundle:User')->find($id);
-$utilisateur->removeRole('ROLE_ADMIN');}
+   
+    $utilisateur = $em->getRepository('fsmUserBundle:User')->find($id);
+$utilisateur->removeRole('ROLE_ADMIN');
+    $this->get('session')->getFlashBag()->add('Information', 'Le rôle d\'administrateur vient d\'être retiré à '.$utilisateur->getUsername());
+
 }
 $utilisateurs = $em->getRepository('fsmUserBundle:User')->getlistUserPhoto();
-
+ $em->flush();
 return array('users' => $utilisateurs);
 
 }
@@ -180,8 +184,10 @@ public function AddHabiliteAction($id) {
 $em = $this->getDoctrine()->getManager();
 $utilisateur = $em->getRepository('fsmUserBundle:User')->find($id);
 $utilisateur->setHabilite(TRUE);
+$this->get('session')->getFlashBag()->add('Information', $utilisateur->getUsername().' vient d\'être habilité');
+
 $utilisateurs = $em->getRepository('fsmUserBundle:User')->getlistUserPhoto();
- $em->flush();
+$em->flush();
 return array('users' => $utilisateurs);
 }
 
@@ -207,9 +213,11 @@ $this->get('session')->getFlashBag()->add('Erreurinfo', 'On ne peut désactiver 
 
 if ($OuiNon == 'OUI') {
 $utilisateur->setHabilite(FALSE);
+$this->get('session')->getFlashBag()->add('Information', $utilisateur->getUsername().' vient d\'être désactivé');
+
 }
 $utilisateurs = $em->getRepository('fsmUserBundle:User')->getlistUserPhoto();
-
+ $em->flush();
 return array('users' => $utilisateurs);
 }
 

@@ -1,0 +1,18 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class ="well">
+            <form method ="post" {{ form_enctype(form) }}
+                  {# action = "{{ path('fsm_demande_create',{'id':form.objet  }) }}" > #}
+       {{ form_widget(form) }}
+                <br>
+                <div class="col-lg-2"></div>
+                <input type ="submit" class ="btn btn-primary" />
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %} 

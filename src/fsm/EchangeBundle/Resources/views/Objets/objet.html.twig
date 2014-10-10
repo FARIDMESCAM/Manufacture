@@ -13,7 +13,15 @@
 {# Cette page est accessible à des anonymes. On ne leur donne pas les mails des users inscrits       #}
         {% if app.user %}
         <a  href="{{path('fsm_user_envoimail',{'id':objetphoto.id})}}" />Envoyer un mail<img width="50" src="{{ asset('img/mail.jpg') }}" /> </a><br> <br> <br>
-    {% endif%}   
+        <a  href="{{path('fsm_demande_create',{'id':objetphoto.id})}}" />Demander la location<img /> </a><br>    
+ {% endif%}
+    {% if (demande == TRUE) %}
+         <div id="affichedemande" class ="col-lg-2"> 
+      <p>{%include "fsmEchangeBundle:Demande:demande.html.twig"%}</p>
+
+    </div>   
+   {%endif%}
+    <br>
     <strong> description : </strong> <br>
         {{objetphoto.description}}<br>
         <strong> type d'annonce </strong><br>
@@ -43,4 +51,23 @@
      </div>
 </div>
 {% endfor %}
+ 
+
+{#<script>
+    function location(id1) {
+        alert('toto');
+        alert('glob');
+            $.ajax({
+            url: Routing.generate('fsm_demande_create'),
+            cache: false,
+            success: function(html) {
+                $('#affichedemande').empty();
+                $('#affichedemande').append(html);
+
+            }
+        });
+        return false;
+    }
+</script>#}
+
 {% endblock %}    

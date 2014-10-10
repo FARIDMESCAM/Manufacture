@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 //use fsm\EchangeBundle\Command\EmailCommand;
 
@@ -76,7 +77,7 @@ class ObjetController extends Controller {
             $id = $user->getId();
             $em = $this->getDoctrine()->getManager();
 
-            // $ gestion permet de distinguer la fenêtre ou on gère les objets de celle où on les consulte.
+            // $gestion permet de distinguer la fenêtre ou on gère les objets de celle où on les consulte.
             // ces 2 fenêtres héritent du même template .
             $gestion = 'YES';
 
@@ -134,7 +135,18 @@ class ObjetController extends Controller {
         }
     }
 
+    // La visualisation des 3 derniers objets créés sont visibles sur la page d'accueil.
+    //Il ne faut donc pas restreindre l'accès à cette url.
+    
+    /**
+     * @Route("/showObjet/{id}", name="fsm_objet_show")
+     * @Template("fsmEchangeBundle:Objets:objet.html.twig")
+     * @param type $id
+     * @return type
+     */
     public function showObjetAction($id) {
+        
+
         // renvoie un tableau
         $liste_objet = $this->getDoctrine()->getManager()
                         ->getRepository('fsmEchangeBundle:Objet')->getObjetPhotosByObjet($id);
@@ -151,8 +163,8 @@ class ObjetController extends Controller {
         } else {
             $is_owner = false;
         }
-
-        return $this->render('fsmEchangeBundle:Objets:objet.html.twig', array('objetphotos' => $liste_objet, 'is_owner' => $is_owner));
+        $demande = FALSE;
+        return array('objetphotos' => $liste_objet, 'is_owner' => $is_owner,'demande'=>$demande);
     }
 
     public function envoiMailAction($id) {

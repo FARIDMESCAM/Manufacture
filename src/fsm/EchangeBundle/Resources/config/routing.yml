@@ -52,7 +52,15 @@ fsm_photo_ajout_U:
     defaults: { _controller: fsmEchangeBundle:Photo:ajouterPhotoU } 
     requirements:
        id: \d+
-
+       
+#fsm_demande_create:
+#    path: /demandecreation/{id}
+#    defaults: { _controller: fsmEchangeBundle:Demande:demandecreation }
+#    requirements:
+#       id: \d+
+#    options:
+#        expose: true
+        
 fsm_objet_list:
     path: /Objets
     defaults: { _controller: fsmEchangeBundle:Objet:ListObjets }
@@ -78,11 +86,11 @@ fsm_profile_showPerso:
     defaults: { _controller: fsmUserBundle:Profile:showProfile } 
     requirements:
        id: \d+      
-fsm_objet_show:
-    path: /showObjet/{id}
-    defaults: { _controller: fsmEchangeBundle:Objet:showObjet }
-    requirements:
-       id: \d+
+#fsm_objet_show:
+#    path: /showObjet/{id}
+#    defaults: { _controller: fsmEchangeBundle:Objet:showObjet }
+#    requirements:
+#       id: \d+
 #fsm_objet_update:       
 #    path: /updateObjet/{id}
 #    defaults: { _controller: fsmEchangeBundle:Objet:updateObjet }
