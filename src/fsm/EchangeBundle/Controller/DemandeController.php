@@ -12,19 +12,16 @@ use fsm\EchangeBundle\Form\DemandeType;
 use Commun\Form\FormHandler;
 use Symfony\Component\HttpFoundation\Response;
 
-
-
 class DemandeController extends Controller {
 
-
-     /**
+    /**
      * @Route("/demandecreate/{id}", name="fsm_demande_create")
      * @Template("fsmEchangeBundle:Demande:demande.html.twig")
      */
     public function demandecreationAction($id) {
-      
+
         $request = $this->container->get('request');
-        $autorisation = 'KO';       
+        $autorisation = 'KO';
         $autorisation = $this->Habilitation($autorisation);
         if ($autorisation === 'OK') {
             $user = $this->get('security.context')->getToken()->getUser();
@@ -32,23 +29,40 @@ class DemandeController extends Controller {
             $Objet = $em->getRepository('fsmEchangeBundle:Objet')->find($id);
             $Demande = new Demande($user, $Objet);
             $form = $this->createForm(new DemandeType(), $Demande);
-            $commit = TRUE; 
+            $commit = TRUE;
 //           var_dump($Objet);
 //            return new Response('Hello world!');
-            $formHandler = new FormHandler($form, $this->get('request'), $em,$commit);
+            $formHandler = new FormHandler($form, $this->get('request'), $em, $commit);
             if ($formHandler->process()) {
                 $this->get('session')->getFlashBag()->add('Information', 'Votre demande de location a bien été enregistrée');
                 return $this->redirect
                                 ($this->generateUrl('fsm_objet_show', array('id' => $id)));
-        }
+            }
             return array('form' => $form->createView());
-            
-             }
-        else {
+        } else {
             return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
-    
+        }
+    }
+
+    /**
+     * @Route("/dmandesLoc", name="fsm_demande_mes")
+     * @Template("fsmEchangeBundle:Demande:listMes.html.twig")
+     */
+    public function mesDemandesAction() {
+        $user = $this->get('security.context')->getToken()->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $Demandes = $em->getRepository('fsmEchangeBundle:Demande')->mesDemandes($user);
+//            var_dump($Demandes);
+        return array('demandes' => $Demandes);
+    }
+
+    /**
+     * @Template("fsmEchangeBundle:test:pop.html.twig")
+     */
+    public function choixAction() {
         
-}
+         $form = $this->container->get('form.factory')->create(new RechercheForm());
+         return array('form' => $form->createView());
     }
 
     public function Habilitation($autorisation) {
@@ -57,31 +71,29 @@ class DemandeController extends Controller {
         if (true === $user->getHabilite()) {
             $autorisation = 'OK';
         } else {
-            
-                         
-                    $objetmail = 'user à habilite';
-                    $destinataire = 'faridsahlimescam@voila.fr';
-                    $texte = 'les globs attaquent la plage';
-                     $message = \Swift_Message::newInstance()
+
+
+            $objetmail = 'user à habilite';
+            $destinataire = 'faridsahlimescam@voila.fr';
+            $texte = 'les globs attaquent la plage';
+            $message = \Swift_Message::newInstance()
                     ->setSubject($objetmail)
                     ->setFrom('faridsahlimescam@voila.fr')
                     ->setTo($destinataire)
-                        
                     ->setBody($this->renderView('fsmUserBundle:Default:mailuser.html.twig', array('textemail' => $texte)));
 
             $mailer = $this->get('mailer');
             $type = $message->getHeaders()->get('Content-Type');
             $type->setValue('text/html');
             $type->setParameter('charset', 'utf-8');
-            
-            
+
+
             $result = $mailer->send($message);
-             var_dump($result);
-             return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
+            var_dump($result);
+            return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
 //            throw new AccessDeniedException();
         }
         return $autorisation;
     }
 
-
-    }
+}

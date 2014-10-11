@@ -3,6 +3,7 @@
 namespace fsm\EchangeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Demande
@@ -26,9 +27,7 @@ class Demande
      * @var datetime $date
      * @Assert\Date()
      * @ORM\Column(name="debut", type="datetime")
-     * @Assert\GreaterThan(
-     *     value = 18
-     * )
+    
      */
     private $debut;
 
@@ -52,6 +51,13 @@ class Demande
      *
      */
     private $user;
+    
+    
+      /**
+      * @ORM\Column(name="statut", type="integer", length=1,nullable = true)
+      */
+     
+    private $statut;
     
     public function __construct($user,$objet) {
         $this->user = $user;
@@ -160,4 +166,49 @@ class Demande
     {
         return $this->user;
     }
+
+   
+
+    /**
+     * Set statut
+     *
+     * @param integer $statut
+     * @return Demande
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+    
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return integer 
+     */
+    public function getStatut()
+    {   if ($this->statut==0){
+            $retour = 'demandée';;
+        }
+        if ($this->statut==1){
+            $retour = 'Approuvée';
+        }
+        if ($this->statut==2){
+            $retour = 'En cours';
+        }
+              if ($this->statut==3){
+            $retour = 'Terminée';
+        }
+         if ($this->statut==4){
+            $retour = 'Refusée';
+        }
+        if ($this->statut==5){
+            $retour = 'Sans suite';
+        }
+     return    $retour;
+      
+    }
+    
+
 }

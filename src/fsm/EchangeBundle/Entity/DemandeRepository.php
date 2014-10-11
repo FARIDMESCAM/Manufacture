@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class DemandeRepository extends EntityRepository
 {
+    
+        public function mesDemandes($user) {
+            // On veut récupérer toutes les demandes par rapport à un utilisateur
+            // Sur l'utilisateur, l'associaton photo n'est pas obligatoir
+            // On ne peut donc restreindre à ce niveau la sélection des photos principales
+        $query = $this->createQueryBuilder('d')
+                 ->join('d.objet', 'o')
+                ->join('d.user', 'u')
+                ->leftjoin('u.photos','p')
+                ->where('o.user = :user')
+                ->setParameter('user', $user)
+                ->addSelect('o','u','p');       
+        return $query->getQuery()->getResult();
+    }
+
+
+    
 }
