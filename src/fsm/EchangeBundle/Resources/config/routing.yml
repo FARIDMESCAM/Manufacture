@@ -80,6 +80,14 @@ fsm_photo_principale:
        photo: \d+
     options:
         expose: true
+        
+#fsm_demande_choix:
+#    path: /choix/{id}
+#    defaults: { _controller: fsmEchangeBundle:Demande:choix } 
+#    requirements:
+#       photo: \d+
+#    options:
+#        expose: true
     
 fsm_profile_showPerso:
     path: /showPrP/{id}

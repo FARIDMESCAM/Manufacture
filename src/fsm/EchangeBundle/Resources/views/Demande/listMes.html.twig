@@ -22,7 +22,7 @@
                 <th>Date fin</th>
                 <th>Statut</th>
                 
-
+            
 
                
         </thead>
@@ -46,14 +46,9 @@
                        {% else %}
                          <img width="30" class="img-circle" src="{{ asset('img/user.jpg') }}"  /> 
               {% endfor %}
-              
+
                 </td>
-                <td>
-                    <ul>
-    <a id="btn-consulter-activite" href="#popupFormConsulter" role="button" data-toggle="modal"><i class="icon-edit"></i> Consulter / modifier</a>                 
-    {% render(controller("fsmEchangeBundle:Demande:choix")) %}
-</ul><br><br>
-                </td>
+
                 <td>
                     {%for photo in demande.getObjet.getPhotos%}
                      {% if photo != null%}
@@ -70,7 +65,10 @@
                     {{demande.fin|date('d-m-Y')}}
                 </td>
                     <td>
-                    {{demande.getstatut}}
+                    {{demande.getstatut}}<br>
+                   {%if demande.getstatut =='demandée' %}
+                    <a href="{{path('fsm_demande_choix',{'id':demande.id})}}" class="btn btn-success">Décider</a><br><br>
+                     {%endif %}           
                     </td>
 
             </tr>
@@ -82,6 +80,7 @@
 
     </table>
 </div> 
+
 
 
 <div class ="col-lg-1"></div>

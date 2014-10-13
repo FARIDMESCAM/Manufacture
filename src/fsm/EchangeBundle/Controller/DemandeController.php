@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use fsm\EchangeBundle\Entity\Demande;
 use fsm\EchangeBundle\Form\DemandeType;
+use fsm\EchangeBundle\Form\ChoixForm;
 use Commun\Form\FormHandler;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -45,7 +46,7 @@ class DemandeController extends Controller {
     }
 
     /**
-     * @Route("/dmandesLoc", name="fsm_demande_mes")
+     * @Route("/dmandesLoc",name="fsm_demande_mes")
      * @Template("fsmEchangeBundle:Demande:listMes.html.twig")
      */
     public function mesDemandesAction() {
@@ -56,15 +57,27 @@ class DemandeController extends Controller {
         return array('demandes' => $Demandes);
     }
 
-    /**
-     * @Template("fsmEchangeBundle:test:pop.html.twig")
+     /**
+     * @Route("/choix/{id}",name="fsm_demande_choix")
+     * @Template("fsmEchangeBundle:Demande:choix.html.twig")
      */
-    public function choixAction() {
-        
-         $form = $this->container->get('form.factory')->create(new RechercheForm());
-         return array('form' => $form->createView());
+    public function choixAction($id) {
+            $em = $this->getDoctrine()->getManager();
+            $Demande = $em->getRepository('fsmEchangeBundle:Demande')->find($id);
+            $form = $this->createForm(new ChoixForm(), $Demande);
+            $commit = TRUE;
+            $formHandler = new FormHandler($form, $this->get('request'), $em, $commit);
+            if ($formHandler->process()) {
+                
+                $this->get('session')->getFlashBag()->add('Information', 'La demande de location a bien été modifiée');
+                return $this->redirect
+                                ($this->generateUrl('fsm_demande_mes'));
+            }     
+            
+          return array('form' => $form->createView(),'demande'=>$id);
     }
 
+    
     public function Habilitation($autorisation) {
         $autorisation = 'KO';
         $user = $this->get('security.context')->getToken()->getUser();
