@@ -4,6 +4,7 @@ namespace fsm\EchangeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * Demande
@@ -14,6 +15,28 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Demande
 {
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+             
+
+        // Vérifie si le nom est bidon
+        if ($this->getDebut() > $this->getFin() )
+        {$context->addViolationAt(
+                'fin',
+                'La date de début ne peut être postérieure à la date de fin');
+    }
+    $datesysteme = new \Datetime();
+    if ($this->getFin() < $datesysteme)
+    {$context->addViolationAt(
+                'fin',
+                'La date de fin ne peut être antérieure à la date du jour');}
+    
+    }
+    
+    
     /**
      * @var integer
      *
@@ -36,6 +59,8 @@ class Demande
      * @Assert\Date()
      * @ORM\Column(name="fin", type="datetime")
      */
+    
+     
     private $fin;
 
       /**

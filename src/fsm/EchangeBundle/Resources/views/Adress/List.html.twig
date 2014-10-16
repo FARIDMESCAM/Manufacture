@@ -1,0 +1,36 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+<div class ="row-30">.</div>
+<div class ="row">
+
+    <div class ="col-lg-4"> </div> 
+<a class="navbar-brand" href="{{path('fsm_adress_ajout')}}">Ajout d'adresse</a>
+<br><br>
+    <div id = "test" class ="col-lg-2">      
+{% for adresse in adresses %}
+        <p><strong>{{adresse.adresse}}</strong>
+            <a id="cat"  onclick ='adressemod({{adresse.id}})' href="#">Modif</a>
+        </p>
+{%endfor%}
+    </div>
+    <div id="gestionadr" class ="col-lg-2"> 
+        <p>{%include "fsmEchangeBundle:Adress:Modif.html.twig"%}</p>
+    </div>
+</div>
+<script>
+    function adressemod(id1) {
+        $.ajax({
+            url: Routing.generate('fsm_adress_modif', {id: id1}),
+            cache: false,
+            success: function(html) {
+                $('#gestionadr').empty();
+                $('#gestionadr').append(html);
+
+            }
+        });
+        return false;
+    }
+</script>
+
+
+{%endblock%}

@@ -64,13 +64,15 @@ class RegistrationController extends Controller
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-
+              
                 $userManager->updateUser($user);
-
+              
+                
                 if (null === $response = $event->getResponse()) {
-                    
-                }
-                //return $this->redirect($this->generateUrl('fos_user_profile_show'));
+                   
+                } 
+               
+               
                             return $this->redirect
                             ($this->generateUrl('fsm_photo_ajout_U', array('id' => $user->getId())));
                            //  $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));

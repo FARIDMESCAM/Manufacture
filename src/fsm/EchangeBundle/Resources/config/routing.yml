@@ -36,7 +36,14 @@ fsm_categorie_modif:
         id: \d+
     options:
         expose: true
-    
+        
+fsm_adress_modif:
+    path : /modifAdress/{id}
+    defaults: { _controller: fsmEchangeBundle:Adress:modifAdress }
+    requirements:
+        id: \d+
+    options:
+        expose: true    
 #fsm_categorie_list:
 #    path : /ListCategorie
 #    defaults: { _controller: fsmEchangeBundle:Categorie:ListCategorie }
@@ -50,8 +57,8 @@ fsm_photo_ajout_O:
 fsm_photo_ajout_U:
     path : /ajouterPhotoU/{id}
     defaults: { _controller: fsmEchangeBundle:Photo:ajouterPhotoU } 
-    requirements:
-       id: \d+
+#    requirements:
+#       id: \d+
        
 #fsm_demande_create:
 #    path: /demandecreation/{id}

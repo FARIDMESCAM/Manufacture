@@ -29,7 +29,7 @@ class User extends BaseUser {
 
     /**
      * @var string
-     * @ORM\Column(name="telephone",type ="string", length=10)
+     * @ORM\Column(name="telephone",type ="string", length=10,unique=true)
      * @Assert\Regex("^0[1-68]([-. ]?[0-9]{2}){4}^",message="Votre téléphone n'est pas conforme")
      */
     
@@ -43,6 +43,14 @@ class User extends BaseUser {
      protected $habilite
              ;
     
+         /**
+     *
+     * @ORM\ManyToOne(targetEntity="fsm\EchangeBundle\Entity\Adress",cascade ={"persist"})
+     *
+     */
+    private $adresse;
+     
+     
     /**
      * Get id
      *
@@ -155,5 +163,28 @@ class User extends BaseUser {
     public function getHabilite()
     {
         return $this->habilite;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param \fsm\EchangeBundle\Entity\Adress $adresse
+     * @return User
+     */
+    public function setAdresse(\fsm\EchangeBundle\Entity\Adress $adresse = null)
+    {
+        $this->adresse = $adresse;
+    
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return \fsm\EchangeBundle\Entity\Adress 
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
     }
 }

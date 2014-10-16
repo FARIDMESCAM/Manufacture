@@ -41,6 +41,7 @@ $em = $this->getDoctrine()->getManager();
 $liste_user_photos = $em->getRepository('fsmUserBundle:User')->getUserPhotoP($user);
 
 
+
 return $this->render('fsmUserBundle:Profile:showP.html.twig', array('userphotos' => $liste_user_photos));
 //               
 //return $this->container->get('templating')->renderResponse('fsmUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
