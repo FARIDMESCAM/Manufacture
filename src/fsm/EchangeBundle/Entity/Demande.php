@@ -5,6 +5,7 @@ namespace fsm\EchangeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use fsm\EchangeBundle\Entity\Periode;
 
 /**
  * Demande
@@ -84,9 +85,27 @@ class Demande
      
     private $statut;
     
-    public function __construct($user,$objet) {
+     /**
+     * @ORM\ManyToOne(targetEntity ="fsm\EchangeBundle\Entity\Exercice"))
+     * @ORM\JoinColumn(nullable=true)
+     * cascade ={"persist"})
+     */
+    private $exercice;
+    
+         /**
+     * @ORM\ManyToOne(targetEntity ="fsm\EchangeBundle\Entity\Periode"))
+     * @ORM\JoinColumn(nullable=true)
+     * cascade ={"persist"})
+     */
+    private $periode;
+    
+    
+    
+    public function __construct($user,$objet,$periode,$exercice) {
         $this->user = $user;
         $this->objet = $objet;
+       $this->periode = $periode;
+       $this->exercice = $exercice;
     }
     
     

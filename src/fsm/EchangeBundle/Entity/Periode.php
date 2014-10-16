@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="fsm\EchangeBundle\Entity\PeriodeRepository")
  */
-class Periode
-{
+class Periode {
+
     /**
      * @var integer
      *
@@ -28,8 +28,11 @@ class Periode
      */
     private $libelle;
 
+    /**
+     * @ORM\Column(name="statut", type="integer", length=1,nullable = true)
+     */
+    private $statut;
 
-    
     /**
      * @ORM\ManyToOne(targetEntity ="fsm\EchangeBundle\Entity\Exercice", inversedBy ="periodes"))
      * @ORM\JoinColumn(nullable=false)
@@ -42,8 +45,7 @@ class Periode
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -53,10 +55,9 @@ class Periode
      * @param string $libelle
      * @return Periode
      */
-    public function setLibelle($libelle)
-    {
+    public function setLibelle($libelle) {
         $this->libelle = $libelle;
-    
+
         return $this;
     }
 
@@ -65,8 +66,7 @@ class Periode
      *
      * @return string 
      */
-    public function getLibelle()
-    {
+    public function getLibelle() {
         return $this->libelle;
     }
 
@@ -76,10 +76,9 @@ class Periode
      * @param \fsm\EchangeBundle\Entity\Exercice $exercice
      * @return Periode
      */
-    public function setExercice(\fsm\EchangeBundle\Entity\Exercice $exercice)
-    {
+    public function setExercice(\fsm\EchangeBundle\Entity\Exercice $exercice) {
         $this->exercice = $exercice;
-    
+
         return $this;
     }
 
@@ -88,8 +87,11 @@ class Periode
      *
      * @return \fsm\EchangeBundle\Entity\Exercice 
      */
-    public function getExercice()
-    {
+    public function getExercice() {
         return $this->exercice;
     }
+    
+     
+    
+
 }

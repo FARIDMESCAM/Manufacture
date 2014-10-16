@@ -27,6 +27,18 @@ class DemandeRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
+    // Ici, restriction sur le user de la demande, et on ramène le user propriétaire de l'objet
+        public function mesLocations($user) {
+             $query = $this->createQueryBuilder('d')
+                 ->join('d.objet', 'o')
+                ->join('o.user', 'u')
+                ->leftjoin('u.photos','p')
+                ->where('d.user = :user')
+                ->setParameter('user', $user)
+                ->addSelect('o','u','p');       
+        return $query->getQuery()->getResult();
+            
+        }
 
     
 }

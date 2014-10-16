@@ -35,7 +35,7 @@
                                 <ul>
                                     <li><a href="{{path ('fsm_objets_mes') }}">Gestion</a></li>
                                     <li><a href="{{path ('fsm_objet_ajout') }}">Ajouter des objets</a></li>
-                                    <li><a href="{{path ('fsm_demande_mes') }}">Mes locations</a></li>
+                                    <li><a href="{{path ('fsm_demande_mes') }}">Locations sur mes objets</a></li>
                                 </ul>
                             </li>
                             {% if is_granted('ROLE_ADMIN') %}
@@ -50,6 +50,7 @@
                             <li><a href="#">Menu général</a>
                                 <ul>
                                     <li><a href="{{path ('fsm_objet_list') }}">Toutes les annonces</a></li>
+                                    <li><a href="{{path ('fsm_locations_mes') }}">Mes demandesde location</a></li>
 
                                 </ul>
                             </li>

@@ -28,7 +28,9 @@ class DemandeController extends Controller {
             $user = $this->get('security.context')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
             $Objet = $em->getRepository('fsmEchangeBundle:Objet')->find($id);
-            $Demande = new Demande($user, $Objet);
+            $periode = $em->getRepository('fsmEchangeBundle:Periode')->findOneBy(array ('statut' => '1'));
+            $exercice = $em->getRepository('fsmEchangeBundle:Exercice')->findOneBy(array ('statut' => '1'));
+            $Demande = new Demande($user, $Objet,$periode,$exercice);
             $form = $this->createForm(new DemandeType(), $Demande);
             $commit = TRUE;
 //           var_dump($Objet);
@@ -49,6 +51,7 @@ class DemandeController extends Controller {
      * @Route("/dmandesLoc",name="fsm_demande_mes")
      * @Template("fsmEchangeBundle:Demande:listMes.html.twig")
      */
+    // Il s'agit ici des locations que d'autres personnes veulent faire sur mes objets.
     public function mesDemandesAction() {
         $user = $this->get('security.context')->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -56,6 +59,19 @@ class DemandeController extends Controller {
 //            var_dump($Demandes);
         return array('demandes' => $Demandes);
     }
+    
+       /**
+     * @Route("/Locationsmes",name="fsm_locations_mes")
+     * @Template("fsmEchangeBundle:Demande:mesloc.html.twig")
+     */
+        public function mesLocationsAction() {
+        $user = $this->get('security.context')->getToken()->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $Demandes = $em->getRepository('fsmEchangeBundle:Demande')->mesLocations($user);
+//            var_dump($Demandes);
+        return array('demandes' => $Demandes);
+    }
+   
 
      /**
      * @Route("/choix/{id}",name="fsm_demande_choix")

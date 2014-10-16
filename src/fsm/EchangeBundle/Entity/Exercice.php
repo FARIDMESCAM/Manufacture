@@ -27,10 +27,17 @@ class Exercice
      * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
+    
+    
+           /**
+     * @ORM\Column(name="statut", type="integer", length=1,nullable = true)
+     */
+    private $statut;
 
      /**
      * @ORM\OneToMany(targetEntity ="fsm\EchangeBundle\Entity\Periode", mappedBy = "exercice")
      */
+    
     private $periodes;
     /**
      * Get id
