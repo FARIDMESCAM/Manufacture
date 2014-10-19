@@ -1,0 +1,51 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+<div class ="row-30">.</div>
+<div class ="row">
+
+    <div class ="col-lg-4"> </div> 
+    <a class="navbar-brand"  href="{{path('fsm_exercice_ajout')}}">Ajout d'exercice</a>
+    <br><br>
+    <div id = "test" class ="col-lg-3">      
+{% for exercice in exercices %}
+        <p><strong>{{exercice.libelle}}</strong>
+            <a id="cat"  onclick ='exercicemod({{exercice.id}})' href="#">Modif</a>
+            <a href="{{path('fsm_periode_list',{'id':exercice.id})}}" > <img width="35"  />Gestion des périodes </a>
+        </p>
+{%endfor%}
+    </div>
+    <div id="gestionexercice" class ="col-lg-2"> 
+        <p>{%include "fsmEchangeBundle:Exercice:Modif.html.twig"%}</p>
+    </div>
+</div>
+<script>
+    function exercicemod(id1) {
+        $.ajax({
+            url: Routing.generate('fsm_exercice_update', {id: id1}),
+            cache: false,
+            success: function(html) {
+                $('#gestionexercice').empty();
+                $('#gestionexercice').append(html);
+
+            }
+        });
+        return false;
+    }
+    
+    function creationexercice() {
+        $.ajax({
+            url: Routing.generate('fsm_exercice_ajout': id1}),
+            cache: false,
+            success: function(html) {
+                $('#gestionexercice').empty();
+                $('#gestionexercice').append(html);
+
+            }
+        });
+        return false;
+        
+    }
+</script>
+
+
+{%endblock%}

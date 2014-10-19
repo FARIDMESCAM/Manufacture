@@ -1,0 +1,27 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+<div class ="row-30">
+    <div class ="col-lg-5"></div>
+    {%if objetphotos|length  > 0  %}
+    
+<caption>
+            <h4 >Mes annonces </h4 >
+        </caption>
+</div>
+<div class ="col-lg-2"></div>
+<a class="navbar-brand" href="{{path('fsm_objet_ajout')}}">Ajout d'objets</a>
+<p>{%include "fsmEchangeBundle:Objets:Objets.html.twig"%}</p>
+{% else %}
+
+<p><strong>
+        <br><br>
+         <div class ="col-lg-5"></div>
+        Vous n'avez encore pas encore mis d'annonces en ligne.<br><br><br><br><br><br>
+         <div class ="col-lg-5"></div>
+        Vous y êtes cordialement invité.<br><br><br><br>
+   <div class ="col-lg-5"></div> <a class="navbar-brand" href="{{path('fsm_objet_ajout')}}">Ajout d'objets</a>     
+</strong></p>
+<br><br><br><br>
+
+{% endif %}
+{% endblock %}

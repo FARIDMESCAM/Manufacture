@@ -28,7 +28,7 @@ class AdressController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($Adr);
                 $em->flush();
-                $nom = $Adr->getAdresse();
+                $nom = $Adr->getLibelle();
                 $this->get('session')->getFlashBag()->add('Creationinfo', 'L\'adresse ' . $nom . ' a bien été enregistrée');
                 return $this->redirect($this->generateUrl('fsm_echange_accueil'));
             }

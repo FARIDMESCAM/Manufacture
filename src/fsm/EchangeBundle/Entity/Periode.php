@@ -91,7 +91,11 @@ class Periode {
         return $this->exercice;
     }
     
-     
+    function __construct($exercice) {
+        $this->exercice = $exercice;
+        $this->statut=0;
+    }
+
     
 
 }

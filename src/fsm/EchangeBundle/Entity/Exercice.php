@@ -111,4 +111,16 @@ class Exercice
     {
         return $this->periodes;
     }
-}
+
+    
+    public function __toString() {
+  
+        return $this->id;
+  
+        
+    }
+
+    
+    }
+
+

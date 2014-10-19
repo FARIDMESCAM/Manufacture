@@ -1,0 +1,41 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+<p>
+{# On affiche tous les messages flash dont le nom est 
+info  #}
+{% for message in app.session.flashbag.get('Objetinfo') %}
+<p >{{ message }} </p>
+{% endfor %}
+</p>
+{#En mode création, on affiche le formulaire de saisie de photos ainsi que si moins de 3 photos.#}
+{%if objetphotos == null %}
+<p>{%include "fsmEchangeBundle:Photos:creation.html.twig"%}</p>
+{%else%}
+{#Si moins de 3 photos, affichage d'ajout de photos.#}
+   {% for objetphoto in objetphotos %}
+    {%if  objetphoto.getPhotos.count <3 %}
+<p>{%include "fsmEchangeBundle:Photos:creation.html.twig"%}</p>
+{%endif%}
+   {% endfor%}
+{# Affichage des photos.  #}
+<div id="affichage_photos"> 
+    <p>{%include "fsmEchangeBundle:Photos:listephotos.html.twig"%}</p>
+</div>
+{%endif%}
+<script>
+    function photoP(id1) {
+        $.ajax({
+            type: "POST",
+            url: Routing.generate('fsm_photo_principale', {photo: id1}),
+            cache: false,
+            success: function(html) {
+                $('#affichage_photos').empty();
+                $('#affichage_photos').append(html);
+
+            }
+        });
+        return false;
+    }
+</script>
+{% endblock %}
+

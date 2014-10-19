@@ -1,0 +1,19 @@
+{% block body %}
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class ="well">
+            <form method ="post" {{ form_enctype(form) }}> 
+       {{ form_widget(form) }}
+                <br>
+                <div class="col-lg-2"></div>
+                <input type ="submit" class ="btn btn-primary" />
+                <div class="col-lg-2"></div>
+                <a href="{{path ('fsm_objets_mes') }}">Pas de photo</a>
+                <hr>
+                <p class="text-center">Vous pouvez mettre jusqu'à 3 photos.</p>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %} 

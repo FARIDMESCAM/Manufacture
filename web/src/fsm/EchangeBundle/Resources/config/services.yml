@@ -1,0 +1,8 @@
+parameters:
+#    fsm_echange.example.class: fsm\EchangeBundle\Example
+
+services:
+#    fsm_echange.example:
+#        class: %fsm_echange.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+

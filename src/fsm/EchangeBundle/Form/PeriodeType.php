@@ -16,8 +16,7 @@ class PeriodeType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('exercice')
-        ;
+               ;
     }
     
     /**

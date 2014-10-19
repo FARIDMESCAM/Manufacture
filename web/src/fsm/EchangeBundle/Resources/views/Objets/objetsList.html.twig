@@ -1,0 +1,57 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+<div class ="row-30">
+    <div class ="col-lg-5"></div>
+<caption>
+            <h4 >Toutes les annonces </h4 >
+        </caption>
+</div>
+
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4">
+<div class ="well">
+  <form id="form_recherche" action="{{ path('fsm_objet_list') }}" method ="post" {{ form_enctype(form) }}> 
+       {{ form_widget(form) }}
+      <br>
+        <input type ="submit" class ="btn btn-primary" />
+    </form>
+</div>
+</div>
+</div>    
+
+<br>
+  <div id="resultats_recherche"> 
+<p>{%include "fsmEchangeBundle:Objets:Objets.html.twig"%}</p>
+  </div>
+<script>
+$(".loading").hide();
+$("#form_recherche").submit(function(){ 
+    $(".loading").show();
+    var namerecherche = $("#objetrecherche_name").val();
+    var catrecherche = $("#objetrecherche_categories").val();
+    var obj = {"name":namerecherche,"categories":catrecherche}
+    var objjson =JSON.stringify(obj);
+{#    var DATA =['name=' + namerecherche,'categories'+catrecherche];#}
+{#    var DATA ='name=' + namerecherche;#}
+   var person = {
+            name: $("#objetrecherche_name").val(),
+            categorie:$("#objetrecherche_categories").val()
+        }
+
+    
+    $.ajax({
+        type: "POST",
+        url:Routing.generate('fsm_objet_list'),
+        data: person,
+        cache: false,
+        success: function(data){
+           $('#resultats_recherche').html(data);
+           $(".loading").hide();
+        }
+    });    
+    return false;
+});
+</script>
+
+
+{% endblock %}
