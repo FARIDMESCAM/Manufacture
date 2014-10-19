@@ -16,7 +16,7 @@ class ExerciceController extends Controller {
 
     /**
      * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/ajouterExercice", name="fsm_exercice_ajout") 
+     * @Route("/ajoutexxrExercice", name="fsm_exercice_ajout",options={"expose"=true}) 
      */
     public function ajouterExerciceAction() {
         $exercice = new Exercice();
@@ -29,11 +29,11 @@ class ExerciceController extends Controller {
                 $em->persist($exercice);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('fsm_echange_accueil'));
+              return $this->redirect($this->generateUrl('fsm_exercice_list'));
             }
         }
 
-        return $this->render('fsmEchangeBundle:Adress:ajouter.html.twig', array('form' => $form->createView(),));
+        return $this->render('fsmEchangeBundle:Exercice:ajouter.html.twig', array('form' => $form->createView(),));
     }
 
     /**
