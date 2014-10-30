@@ -66,19 +66,9 @@ doctrine:
         auto_mapping: true
 
 # Swiftmailer Configuration
-swiftmailer:
-    transport: smtp
-    auth_mode: login
-    port:      587
-    host:     smtp.gmail.com
-    username:  faridmescam@gmail.com    
-    password:  bprop789
-    spool:    
-      {  type : file }
-#     type: file
-#     path: "%kernel.root_dir%/spool"
+
     
-    delivery_address: 
+
 
 fos_user :
     db_driver : orm 

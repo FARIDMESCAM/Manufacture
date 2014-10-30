@@ -18,10 +18,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-//use fsm\EchangeBundle\Command\EmailCommand;
-
-
-
 class ObjetController extends Controller {
 
     /**
@@ -137,7 +133,7 @@ class ObjetController extends Controller {
 
     // La visualisation des 3 derniers objets créés sont visibles sur la page d'accueil.
     //Il ne faut donc pas restreindre l'accès à cette url.
-    
+
     /**
      * @Route("/showObjet/{id}", name="fsm_objet_show")
      * @Template("fsmEchangeBundle:Objets:objet.html.twig")
@@ -145,7 +141,7 @@ class ObjetController extends Controller {
      * @return type
      */
     public function showObjetAction($id) {
-        
+
 
         // renvoie un tableau
         $liste_objet = $this->getDoctrine()->getManager()
@@ -164,7 +160,7 @@ class ObjetController extends Controller {
             $is_owner = false;
         }
         $demande = FALSE;
-        return array('objetphotos' => $liste_objet, 'is_owner' => $is_owner,'demande'=>$demande);
+        return array('objetphotos' => $liste_objet, 'is_owner' => $is_owner, 'demande' => $demande);
     }
 
     public function envoiMailAction($id) {
@@ -182,72 +178,21 @@ class ObjetController extends Controller {
             $Objet = $Objet['0'];
 
             $data = $form->getData();
-
+            $user = $this->get('security.context')->getToken()->getUser();
             $texte = $data['texte'];
             $objetmail = $data['objet'];
             $destinataire = $Objet->getUser()->getEmail();
-
+            $emetteur = $user->getEmail();
             $message = \Swift_Message::newInstance()
                     ->setSubject($objetmail)
-                    ->setFrom('faridsahlimescam@voila.fr')
+                    ->setFrom($emetteur)
                     ->setTo($destinataire)
                     ->setBody($this->renderView('fsmEchangeBundle:Objets:formatMail.html.twig', array('textemail' => $texte)));
-
-
             $mailer = $this->get('mailer');
+            $type = $message->getHeaders()->get('Content-Type');
+            $type->setValue('text/html');
+            $type->setParameter('charset', 'utf-8');
             $result = $mailer->send($message);
-
-            $email_expediteur = $this->get('security.context')->getToken()->getUser()->getEmail();
-            $email_nom = $this->get('security.context')->getToken()->getUser()->getUsername();
-
-            $message_texte = 'Bonjour,' . "\n\n" . 'Voici un message au format texte';
-            $message_html = '<html> 
-     <head> 
-     <title>Titre</title> 
-     </head> 
-     <body>Test de message</body> 
-     </html>';
-
-            //----------------------------------------------- 
-            //GENERE LA FRONTIERE DU MAIL ENTRE TEXTE ET HTML 
-            //----------------------------------------------- 
-
-            $frontiere = '-----=' . md5(uniqid(mt_rand()));
-
-            //----------------------------------------------- 
-            //HEADERS DU MAIL 
-            //----------------------------------------------- 
-
-            $headers = 'From: "Nom" <' . $email_expediteur . '>' . "\n";
-            $headers .= 'Return-Path: <' . $email_expediteur . '>' . "\n";
-            $headers .= 'MIME-Version: 1.0' . "\n";
-            $headers .= 'Content-Type: multipart/alternative; boundary="' . $frontiere . '"';
-
-            //----------------------------------------------- 
-            //MESSAGE TEXTE 
-            //----------------------------------------------- 
-            $message = $email_nom . ' est interesse par l\'objet mentionne ci-dessus. Voici son message.  ' . $texte;
-//            $message = $texte;
-            $sujet = "Votre objet " . $Objet->getNom() . " du site La Manufacture" . "-" . $data['objet'];
-            ini_set("SMTP", "smtp.sfr.fr");
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-            $headers .= "From: " . $email_expediteur . "\r\n";
-
-
-
-
-            if (mail($destinataire, $sujet, $message, $headers)) {
-                $EnvoiMail = 'OK';
-            } else {
-                $EnvoiMail = 'KO';
-            }
-
-
-//                             $spool = $mailer->getTransport()->getSpool();
-//                              $transport = $this->get('swiftmailer.transport.real');
-//                              $spool->flushQueue($transport);
-
 
             return $this->redirect
                             ($this->generateUrl('fsm_objet_show', array('id' => $id)));
@@ -270,26 +215,25 @@ class ObjetController extends Controller {
         if (true === $user->getHabilite()) {
             $autorisation = 'OK';
         } else {
-            
-                         
-                    $objetmail = 'user à habilite';
-                    $destinataire = 'faridsahlimescam@voila.fr';
-                    $texte = 'les globs attaquent la plage';
-                     $message = \Swift_Message::newInstance()
+
+
+            $objetmail = 'user à habilite';
+            $destinataire = 'faridsahlimescam@voila.fr';
+            $texte = 'les globs attaquent la plage';
+            $message = \Swift_Message::newInstance()
                     ->setSubject($objetmail)
                     ->setFrom('faridsahlimescam@voila.fr')
                     ->setTo($destinataire)
-                        
                     ->setBody($this->renderView('fsmUserBundle:Default:mailuser.html.twig', array('textemail' => $texte)));
-                      $mailer = $this->get('mailer');
+            $mailer = $this->get('mailer');
             $type = $message->getHeaders()->get('Content-Type');
             $type->setValue('text/html');
             $type->setParameter('charset', 'utf-8');
-            
-            
+
+
             $result = $mailer->send($message);
 //             var_dump($result);
-             return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
+            return $this->render('fsmEchangeBundle:Default:habilite.html.twig');
 //            throw new AccessDeniedException();
         }
         return $autorisation;

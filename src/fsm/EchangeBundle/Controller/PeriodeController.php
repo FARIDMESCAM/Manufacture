@@ -42,19 +42,36 @@ class PeriodeController extends Controller {
 
     /**
      * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/ListPeriode{id}", name="fsm_periode_list")
-     * @Template("fsmEchangeBundle:Periode:List.html.twig")
+     * @Route("/ListPeriodeC{id}", name="fsm_periode_list_c",requirements={"id" = "\d+"},options={"expose"=true})
+     * @Template("fsmEchangeBundle:Periode:Listc.html.twig")
      */
     public function ListPeriodeAction($id) {
         $request = $this->container->get('request');
         $em = $this->getDoctrine()->getManager();
         $liste_periodes = $em->getRepository('fsmEchangeBundle:Periode')->findByExercice($id);
-       
+        $Gestion = FALSE;
 
         // Lors de l'affichage des catégories, on ne fait que les visionner.
         //Il n'y aura de formulaire à transmettre qu'en mode modification -- modifCategorieAction
-        return array('periodes' => $liste_periodes,'exercice'=>$id, 'form' => null);
+        return array('periodes' => $liste_periodes,'exercice'=>$id, 'form' => null,'gestion'=>$Gestion);
     }
+    
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Route("/ListPeriodeG{id}", name="fsm_periode_list_u",requirements={"id" = "\d+"},options={"expose"=true})
+     * @Template("fsmEchangeBundle:Periode:Listu.html.twig")
+     */
+    public function ListPeriodeGAction($id) {
+        $request = $this->container->get('request');
+        $em = $this->getDoctrine()->getManager();
+        $liste_periodes = $em->getRepository('fsmEchangeBundle:Periode')->findByExercice($id);
+        $Gestion = TRUE;
+
+        // Lors de l'affichage des catégories, on ne fait que les visionner.
+        //Il n'y aura de formulaire à transmettre qu'en mode modification -- modifCategorieAction
+        return array('periodes' => $liste_periodes,'exercice'=>$id, 'form' => null,'gestion'=>$Gestion);
+    }
+    
 
     /**
      * @Security("has_role('ROLE_ADMIN')")
@@ -65,6 +82,7 @@ class PeriodeController extends Controller {
         $periode = $this->getDoctrine()->getManager()
                 ->getRepository("fsmEchangeBundle:Periode")
                 ->find($id);
+      
 
         $form = $this->createForm(new PeriodeType, $periode);
 
@@ -82,13 +100,13 @@ class PeriodeController extends Controller {
                 $em->flush();
                 $nom = $periode->getLibelle();
                 $this->get('session')->getFlashBag()->add('Information', 'Le libellé de la période comptable  ' . $nom . ' a bien été modifié.');
-
-                return $this->redirect($this->generateUrl('fsm_periode_list'));
+                // Ici, si on fait simplement $periode->getExercice() ramène le libellé de l'exercice ( le to_string de la classe exercice ??)
+                return $this->redirect($this->generateUrl('fsm_periode_list_u',array('id' => $periode->getExercice()->getId())));
             }
         }
 
 
-        return $this->render('fsmEchangeBundle:Exercice:Modif.html.twig', array('form' => $form->createView(), 'id' => $exercice->getid()));
+        return $this->render('fsmEchangeBundle:Periode:Modif.html.twig', array('form' => $form->createView(), 'id' => $periode->getId()));
     }
 
 }

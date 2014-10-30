@@ -22,7 +22,8 @@
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
         "bcc/cron-manager-bundle": "v2.4.1",
         "gregwar/image-bundle": "dev-master",
-        "winzou/console-bundle": "dev-master"
+        "winzou/console-bundle": "dev-master",
+        "symfony/console": "dev-master"
 
     },
     "require-dev": {

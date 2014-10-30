@@ -1,0 +1,35 @@
+{#{% extends "fsmEchangeBundle::layout.html.twig" %}#}
+{% block body %}
+
+<div class ="row">
+
+    <div class ="col-lg-4"> </div> 
+  {% if exercice != null and gestion == TRUE %}
+    {%if periodes|length < 13  %}
+    <a class="navbar-brand" href="{{path('fsm_periode_add',{'id':exercice})}}">Ajout de périodes</a>
+    <br/> <br/>
+    {%endif%}
+       {%endif%}
+
+    <div id = "visuP" class ="col-lg-4">    
+        <table class ="table table-striped table-condensed ">
+{% for periode in periodes %}
+            <tr>
+        <p><strong>{{periode.libelle}}</strong>
+            {%if gestion == TRUE%}
+            <a id="cat"  onclick ='updateperiode({{periode.id}})' href="#">Modif</a>
+            {%endif%}
+        </p>
+        </tr>
+    {%endfor%}
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+</script>
+
+
+{%endblock%}

@@ -33,5 +33,15 @@ monolog:
 assetic:
     use_controller: %use_assetic_controller%
 
-#swiftmailer:
-#    delivery_address: me@example.com
+swiftmailer:
+    transport: smtp 
+    auth_mode: login
+    port:      587
+    host:      smtp.gmail.com
+    username:  faridmescam@gmail.com    
+    password:  bprop789
+    logging:   "%kernel.debug%"
+    spool: { type: memory }
+    spool: { path: "%kernel.root_dir%/spool"}
+#     type: file
+#     path: "%kernel.root_dir%/spool"

@@ -48,12 +48,13 @@ class ExerciceController extends Controller {
 
         // Lors de l'affichage des catégories, on ne fait que les visionner.
         //Il n'y aura de formulaire à transmettre qu'en mode modification -- modifCategorieAction
-        return array('exercices' => $liste_exercices, 'form' => null);
+        return array('exercices' => $liste_exercices, 'form' => null,'periodes'=>null,'exercice'=>null);
     }
 
     /**
      * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/updateExercice{id}", name="fsm_exercice_update",options={"expose"=true}) 
+     * @Route("/updateExercice{id}", name="fsm_exercice_update",
+     * requirements={"id" = "\d+"},options={"expose"=true}) 
      */
     public function modifExerciceAction($id) {
         $request = $this->container->get('request');

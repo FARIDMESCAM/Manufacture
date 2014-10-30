@@ -129,7 +129,7 @@ class PhotoController extends Controller {
             // photo reliée à un objet
             $dest = 'Obj';
             $objet = $id->getObjet();
-            // On stocke l'id de l'objet pour redircetion.
+            // On stocke l'id de l'objet pour redirection.
             $ret = $id->getObjet()->getId();
             if ($id->getPrincipal() === TRUE) {
                 $update = TRUE;

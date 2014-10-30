@@ -24,3 +24,13 @@ monolog:
             level: debug
         console:
             type:  console
+            
+swiftmailer:
+    transport: smtp 
+    auth_mode: login
+    port:      587
+    host:      smtp.gite-lugos.fr
+    username:  postmaster@gite-lugos.fr  
+    password:  bprop789
+    logging:   "%kernel.debug%"
+    spool: { type: memory }

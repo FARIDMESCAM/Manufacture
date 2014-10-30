@@ -1,0 +1,64 @@
+{% extends "fsmEchangeBundle::layout.html.twig" %}
+{% block body %}
+
+<div class ="row">
+
+    <div class ="col-lg-4"> </div> 
+  {% if exercice != null and gestion == TRUE %}
+    {%if periodes|length < 13  %}
+    <a class="navbar-brand" href="{{path('fsm_periode_add',{'id':exercice})}}">Ajout de périodes</a>
+    <br/> <br/>
+    {%endif%}
+       {%endif%}
+
+    <div id = "visuP" class ="col-lg-4">    
+        <table class ="table table-striped table-condensed ">
+{% for periode in periodes %}
+            <tr>
+        <p><strong>{{periode.libelle}}</strong>
+            {%if gestion == TRUE%}
+            <a id="cat"  onclick ='updateperiode({{periode.id}})' href="#">Modif</a>
+            {%endif%}
+        </p>
+        </tr>
+    {%endfor%}
+        </table>
+    </div>
+     </div>
+        <div id="gestionperiode" class ="col-lg-3"> 
+           {%include "fsmEchangeBundle:Periode:Modif.html.twig"%}
+        </div>
+</div>
+
+
+<script>
+function updateperiode(id1) {
+        $.ajax({
+            url: Routing.generate('fsm_periode_update', {id: id1}),
+            cache: false,
+            success: function(html) {
+                $('#gestionperiode').empty();
+                $('#gestionperiode').append(html);
+
+            }
+        });
+        return false;
+    }
+
+    function creationexercice() {
+        $.ajax({
+            url: Routing.generate('fsm_exercice_ajout'),
+            cache: false,
+            success: function(html) {
+                $('#gestionexercice').empty();
+                $('#gestionexercice').append(html);
+
+            }
+        });
+        return false;
+
+    }
+</script>
+
+
+{%endblock%}

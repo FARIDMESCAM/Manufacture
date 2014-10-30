@@ -1,2 +1,2 @@
-php app/console swiftmailer:spool:\Symfony\Bundle\SwiftmailerBundle\Command\SendEmailCommand::;
+php app/console swiftmailer:spool:send --env = prod;
 

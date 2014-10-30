@@ -1,4 +1,12 @@
 parameters:
+
+#    node: null
+#    node_paths: null
+#    database_host: mysql51-108.perso
+#    database_port: null
+#    database_name: gitelugomanufa
+#    database_user: gitelugomanufa
+#    database_password: bprop789
     database_driver: pdo_mysql
     database_host:  127.0.0.1
     database_port:

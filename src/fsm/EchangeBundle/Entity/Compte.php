@@ -24,7 +24,7 @@ class Compte
     /**
      * @var string
      *
-     * @ORM\Column(name="Solde", type="decimal")
+     * @ORM\Column(name="Solde", type="decimal", nullable=true)
      */
     private $solde;
 
@@ -42,6 +42,19 @@ class Compte
      * cascade ={"persist"})
      */
     private $periode;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="fsm\UserBundle\Entity\User",cascade ={"persist"})
+     *
+     */
+    private $user;
+
+    
+    
+    public function __construct($user) {
+        $this->user = $user;
+          }
     
     /**
      * Get id
@@ -74,5 +87,74 @@ class Compte
     public function getSolde()
     {
         return $this->solde;
+    }
+
+    /**
+     * Set exercice
+     *
+     * @param \fsm\EchangeBundle\Entity\Exercice $exercice
+     * @return Compte
+     */
+    public function setExercice(\fsm\EchangeBundle\Entity\Exercice $exercice = null)
+    {
+        $this->exercice = $exercice;
+    
+        return $this;
+    }
+
+    /**
+     * Get exercice
+     *
+     * @return \fsm\EchangeBundle\Entity\Exercice 
+     */
+    public function getExercice()
+    {
+        return $this->exercice;
+    }
+
+    /**
+     * Set periode
+     *
+     * @param \fsm\EchangeBundle\Entity\Periode $periode
+     * @return Compte
+     */
+    public function setPeriode(\fsm\EchangeBundle\Entity\Periode $periode = null)
+    {
+        $this->periode = $periode;
+    
+        return $this;
+    }
+
+    /**
+     * Get periode
+     *
+     * @return \fsm\EchangeBundle\Entity\Periode 
+     */
+    public function getPeriode()
+    {
+        return $this->periode;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \fsm\UserBundle\Entity\User $user
+     * @return Compte
+     */
+    public function setUser(\fsm\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \fsm\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

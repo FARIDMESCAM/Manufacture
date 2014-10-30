@@ -104,8 +104,10 @@ class Demande
     public function __construct($user,$objet,$periode,$exercice) {
         $this->user = $user;
         $this->objet = $objet;
-       $this->periode = $periode;
-       $this->exercice = $exercice;
+        $this->periode = $periode;
+        $this->exercice = $exercice;
+         $this->statut = 0;
+//        $this->periode = $em->getRepository('fsmEchangeBundle:Periode')->findOneBy(array ('statut' => '1'));
     }
     
     

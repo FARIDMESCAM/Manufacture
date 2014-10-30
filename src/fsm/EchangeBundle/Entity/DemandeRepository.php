@@ -39,6 +39,21 @@ class DemandeRepository extends EntityRepository
         return $query->getQuery()->getResult();
             
         }
+        
+         public function DemandesEnCoursFinies() {
+             
+//             Si on met \ alors on fait appel au namespace global
+             $datedujour = new \DateTime();
+             $query = $this->createQueryBuilder('d')
+                 -> setParameter ('dateDuJour', $datedujour )
+                 ->join('d.objet', 'o')
+                ->join('o.user', 'u')
+               ->where('d.fin < :dateDuJour and d.statut = 2')
+               ->addSelect('o','u');       
+        return $query->getQuery()->getResult();
+            
+        }
+        
 
     
 }

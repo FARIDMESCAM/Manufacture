@@ -1,24 +1,51 @@
 {% extends "fsmEchangeBundle::layout.html.twig" %}
 {% block body %}
-<div class ="row-30">.</div>
-<div class ="row">
-
-    <div class ="col-lg-4"> </div> 
+<div class ="container">
+    <div class ="row">
+        <div class ="col-lg-4"> </div> 
 {#    <a class="navbar-brand"  href="{{path('fsm_exercice_ajout')}}">Ajout d'exercice</a>#}
-    <a class="navbar-brand"  onclick ='creationexercice()' href="#">Ajout d'exercice</a>
-    <br><br>
-    <div id = "test" class ="col-lg-3">      
-{% for exercice in exercices %}
-        <p><strong>{{exercice.libelle}}</strong>
-            <a id="cat"  onclick ='exercicemod({{exercice.id}})' href="#">Modif</a>
-            <a href="{{path('fsm_periode_list',{'id':exercice.id})}}" > <img width="35"  />Gestion des périodes </a>
-        </p>
-{%endfor%}
+        <a class="navbar-brand"  onclick ='creationexercice()' href="#">Ajout d'exercice</a>
+        <br><br>
     </div>
-    <div id="gestionexercice" class ="col-lg-2"> 
-        <p>{%include "fsmEchangeBundle:Exercice:Modif.html.twig"%}</p>
+    <div class ="row">
+        <div id = "listexercices" class ="col-lg-offset-3 col-lg-6">      
+{% for exercice in exercices %}
+           
+
+                <a id="categ"  onclick ='exercicemod({{exercice.id}})' href="#">Modif</a>
+               <strong>{{exercice.libelle}}</strong>
+                <a id="per"  onclick ='Visuperiode({{exercice.id}})' href="#">Visualisation des périodes </a>
+                <a href="{{path('fsm_periode_list_u',{'id':exercice.id})}}" >Gestion des périodes</a>
+               
+                <br>
+            
+{%endfor%}
+        </div>
+        <div id="gestionexercice" class ="col-lg-3"> 
+           {%include "fsmEchangeBundle:Exercice:Modif.html.twig"%}
+        </div>
+
+    </div>
+    <br><br>
+    <div class ="row">
+
+    </div>
+    <br><br>
+    <div class ="container">
+        <div class ="row">
+            <div id="listperiode" class ="col-lg-offset-4 col-lg-3"> 
+                <p>{%include "fsmEchangeBundle:Periode:Listc.html.twig"%}</p>
+            </div>
+
+
+        </div>
+
     </div>
 </div>
+
+
+
+
 <script>
     function exercicemod(id1) {
         $.ajax({
@@ -32,7 +59,7 @@
         });
         return false;
     }
-    
+
     function creationexercice() {
         $.ajax({
             url: Routing.generate('fsm_exercice_ajout'),
@@ -44,9 +71,23 @@
             }
         });
         return false;
-        
+
     }
+
+    function Visuperiode(id1) {
+        $.ajax({
+            url: Routing.generate('fsm_periode_list_c', {id: id1}),
+            cache: false,
+            success: function(html) {
+                $('#gestionexercice').empty();
+                $('#listperiode').empty();
+                $('#listperiode').append(html);
+
+            }
+        });
+        return false;
+    }
+
 </script>
+  {%endblock%}  
 
-
-{%endblock%}
