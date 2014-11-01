@@ -54,6 +54,33 @@ class DemandeRepository extends EntityRepository
             
         }
         
+        
+        // Permet de passer les demandes non demarrées à en cours
+        public function DemandesADemarrer() {
+             $datedujour = new \DateTime();
+             $query = $this->createQueryBuilder('d')
+                 -> setParameter ('dateDuJour', $datedujour )
+                 ->join('d.objet', 'o')
+                ->join('o.user', 'u')
+               ->where('d.debut <= :dateDuJour and d.statut = 1')
+               ->addSelect('o','u');       
+        return $query->getQuery()->getResult();
+            
+        }
 
+        
+        // Permet de passer les demandes sans réponse au statut sans suite
+                public function DemandesSansSuite() {
+             $datedujour = new \DateTime();
+             $query = $this->createQueryBuilder('d')
+                 -> setParameter ('dateDuJour', $datedujour )
+                 ->join('d.objet', 'o')
+                ->join('o.user', 'u')
+               ->where('d.fin <= :dateDuJour and d.statut = 0')
+               ->addSelect('o','u');       
+        return $query->getQuery()->getResult();
+                }
+            
+        }
     
-}
+

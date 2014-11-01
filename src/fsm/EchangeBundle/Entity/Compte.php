@@ -29,19 +29,7 @@ class Compte
     private $solde;
 
 
-     /**
-     * @ORM\ManyToOne(targetEntity ="fsm\EchangeBundle\Entity\Exercice"))
-     * @ORM\JoinColumn(nullable=true)
-     * cascade ={"persist"})
-     */
-    private $exercice;
     
-         /**
-     * @ORM\ManyToOne(targetEntity ="fsm\EchangeBundle\Entity\Periode"))
-     * @ORM\JoinColumn(nullable=true)
-     * cascade ={"persist"})
-     */
-    private $periode;
     
     /**
      *
@@ -89,51 +77,7 @@ class Compte
         return $this->solde;
     }
 
-    /**
-     * Set exercice
-     *
-     * @param \fsm\EchangeBundle\Entity\Exercice $exercice
-     * @return Compte
-     */
-    public function setExercice(\fsm\EchangeBundle\Entity\Exercice $exercice = null)
-    {
-        $this->exercice = $exercice;
     
-        return $this;
-    }
-
-    /**
-     * Get exercice
-     *
-     * @return \fsm\EchangeBundle\Entity\Exercice 
-     */
-    public function getExercice()
-    {
-        return $this->exercice;
-    }
-
-    /**
-     * Set periode
-     *
-     * @param \fsm\EchangeBundle\Entity\Periode $periode
-     * @return Compte
-     */
-    public function setPeriode(\fsm\EchangeBundle\Entity\Periode $periode = null)
-    {
-        $this->periode = $periode;
-    
-        return $this;
-    }
-
-    /**
-     * Get periode
-     *
-     * @return \fsm\EchangeBundle\Entity\Periode 
-     */
-    public function getPeriode()
-    {
-        return $this->periode;
-    }
 
     /**
      * Set user
