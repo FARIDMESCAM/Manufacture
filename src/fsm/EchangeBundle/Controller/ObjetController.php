@@ -25,8 +25,9 @@ class ObjetController extends Controller {
      * @Security("has_role('ROLE_USER')") 
      */
     public function ajouterObjetAction() {
-        $autorisation = 'KO';
-        $autorisation = $this->Habilitation($autorisation);
+
+        $autorisation = $this->container->get('fsm_Echange.habilitation')->Autorisation();
+
         if ($autorisation === 'OK') {
             $user = $this->get('security.context')->getToken()->getUser();
             $Objet = new Objet($user);
@@ -47,8 +48,7 @@ class ObjetController extends Controller {
      * @Route("/updateObjet{id}", name="fsm_objet_update") 
      */
     public function updateObjetAction($id) {
-        $autorisation = 'KO';
-        $autorisation = $this->Habilitation($autorisation);
+ $autorisation = $this->container->get('fsm_Echange.habilitation')->Autorisation();
         if ($autorisation === 'OK') {
             $em = $this->getDoctrine()->getManager();
             $Objet = $em->getRepository('fsmEchangeBundle:Objet')->find($id);
@@ -66,8 +66,7 @@ class ObjetController extends Controller {
 
     public function ListMesObjetAction() {
 //Vérification utilisateur connecté et habilité.
-        $autorisation = 'KO';
-        $autorisation = $this->Habilitation($autorisation);
+$autorisation = $this->container->get('fsm_Echange.habilitation')->Autorisation();
         if ($autorisation === 'OK') {
             $user = $this->get('security.context')->getToken()->getUser();
             $id = $user->getId();
@@ -91,8 +90,7 @@ class ObjetController extends Controller {
      */
     public function ListObjetsAction() {
 
-        $autorisation = 'KO';
-        $autorisation = $this->Habilitation($autorisation);
+$autorisation = $this->container->get('fsm_Echange.habilitation')->Autorisation();
         $em = $this->getDoctrine()->getManager();
         $gestion = 'NO';
         if ($autorisation === 'OK') {
@@ -210,6 +208,7 @@ class ObjetController extends Controller {
     }
 
     public function Habilitation($autorisation) {
+        // Ancienne version avant creation service
         $autorisation = 'KO';
         $user = $this->get('security.context')->getToken()->getUser();
         if (true === $user->getHabilite()) {
