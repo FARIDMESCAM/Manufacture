@@ -64,6 +64,9 @@ class ObjetController extends Controller {
         }
     }
 
+        /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function ListMesObjetAction() {
 //Vérification utilisateur connecté et habilité.
 $autorisation = $this->container->get('fsm_Echange.habilitation')->Autorisation();
