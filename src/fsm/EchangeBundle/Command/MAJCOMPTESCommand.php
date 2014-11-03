@@ -27,6 +27,7 @@ class MAJCOMPTESCommand extends ContainerAwareCommand {
         foreach ($Demandes as $Demande) {
             $user = $Demande->getObjet()->getUser();
             $compteProprio = $em->getRepository('fsmEchangeBundle:Compte')->findOneByUser($user);
+            $compteLocataire = $em->getRepository('fsmEchangeBundle:Compte')->findOneByUser($Demande->getUser());
             if (!$compteProprio) {
             // Le compte n'existe pas. On le créée.
                 $compteProprio = new Compte($user);
@@ -35,13 +36,14 @@ class MAJCOMPTESCommand extends ContainerAwareCommand {
             // Calcul de la duree de la location 
             $dureeloc = $Demande->getDebut()->diff($Demande->getFin())->days + 1;
             // prix de l'objet par jour
-            $prixU = $Demande->getObjet()->getPrix();
+            $prixU = $Demande->getPrix();
 //            $output->writeln($prixU); 
 
             $montantloc = $dureeloc * $prixU;
 //            $output->writeln($montantloc); 
             $newsolde = $compteProprio->getSolde() + $montantloc;
             $compteProprio->setSolde($compteProprio->getSolde() + $montantloc);
+            $compteLocataire->setSolde($compteLocataire->getSolde() - $montantloc);
             $Demande->setStatut(3);
             
             $em->flush();

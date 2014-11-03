@@ -28,9 +28,10 @@ class DemandeController extends Controller {
             $user = $this->get('security.context')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
             $Objet = $em->getRepository('fsmEchangeBundle:Objet')->find($id);
+            $prix = $Objet->getPrix();
             $periode = $em->getRepository('fsmEchangeBundle:Periode')->findOneBy(array('statut' => '1'));
             $exercice = $em->getRepository('fsmEchangeBundle:Exercice')->findOneBy(array('statut' => '1'));
-            $Demande = new Demande($user, $Objet, $periode, $exercice);
+            $Demande = new Demande($user, $Objet, $periode, $exercice,$prix);
             $form = $this->createForm(new DemandeType(), $Demande);
             $commit = TRUE;
             $formHandler = new FormHandler($form, $this->get('request'), $em, $commit);

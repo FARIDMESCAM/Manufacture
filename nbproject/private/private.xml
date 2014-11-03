@@ -4,17 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Command/MAJCOMPTESCommand.php</file>
-            <file>file:/C:/wamp/www/LaManu/app/config/config_dev.yml</file>
-            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Resources/views/Default/menu.html.twig</file>
-            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Resources/config/routing.yml</file>
-            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Resources/views/Objets/objet.html.twig</file>
+            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Controller/DemandeController.php</file>
+            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Services/habilitation.php</file>
             <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Entity/Demande.php</file>
-            <file>file:/C:/wamp/www/LaManu/vendor/friendsofsymfony/user-bundle/Model/User.php</file>
-            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Controller/ObjetController.php</file>
-            <file>file:/C:/wamp/www/LaManu/app/config/config_prod.yml</file>
-            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Entity/DemandeRepository.php</file>
-            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Entity/Compte.php</file>
-            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Command/MajStatutDemandeCommand.php</file>
+            <file>file:/C:/wamp/www/LaManu/src/fsm/EchangeBundle/Resources/config/services.yml</file>
         </group>
     </open-files>
 </project-private>

@@ -72,6 +72,13 @@ class Demande
     private $objet;
     
     /**
+     * @var decimal
+     *
+     * @ORM\Column(name="prix",type="decimal",precision=4, scale=2)
+     */
+    private $prix;
+    
+    /**
      *
      * @ORM\ManyToOne(targetEntity="fsm\UserBundle\Entity\User",cascade ={"persist"})
      *
@@ -101,12 +108,13 @@ class Demande
     
     
     
-    public function __construct($user,$objet,$periode,$exercice) {
+    public function __construct($user,$objet,$periode,$exercice,$prix) {
         $this->user = $user;
         $this->objet = $objet;
         $this->periode = $periode;
         $this->exercice = $exercice;
-         $this->statut = 0;
+        $this->statut = 0;
+        $this->prix = $prix;
 //        $this->periode = $em->getRepository('fsmEchangeBundle:Periode')->findOneBy(array ('statut' => '1'));
     }
     
@@ -257,4 +265,73 @@ class Demande
     }
     
 
+
+    /**
+     * Set prix
+     *
+     * @param string $prix
+     * @return Demande
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+    
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return string 
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set exercice
+     *
+     * @param \fsm\EchangeBundle\Entity\Exercice $exercice
+     * @return Demande
+     */
+    public function setExercice(\fsm\EchangeBundle\Entity\Exercice $exercice = null)
+    {
+        $this->exercice = $exercice;
+    
+        return $this;
+    }
+
+    /**
+     * Get exercice
+     *
+     * @return \fsm\EchangeBundle\Entity\Exercice 
+     */
+    public function getExercice()
+    {
+        return $this->exercice;
+    }
+
+    /**
+     * Set periode
+     *
+     * @param \fsm\EchangeBundle\Entity\Periode $periode
+     * @return Demande
+     */
+    public function setPeriode(\fsm\EchangeBundle\Entity\Periode $periode = null)
+    {
+        $this->periode = $periode;
+    
+        return $this;
+    }
+
+    /**
+     * Get periode
+     *
+     * @return \fsm\EchangeBundle\Entity\Periode 
+     */
+    public function getPeriode()
+    {
+        return $this->periode;
+    }
 }
