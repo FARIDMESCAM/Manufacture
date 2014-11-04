@@ -17,7 +17,12 @@
         <p> <label for="telephone">{{ 'telephone'|trans({}, 'FOSUserBundle') }}</label>: </p>
         <div class="col-lg-2 col-lg-offset-1"><p> {{ userphoto.telephone }}</p></div>
               <br>
-<hr>
+              <hr>
+{%for compteu in compte%}
+        <p> <label for="Solde">{{ 'Solde'|trans({}, 'FOSUserBundle') }}</label>: </p>
+        <div class="col-lg-2 col-lg-offset-1"><p> {{ compteu.solde }}</p></div>
+              <br>
+               {% endfor %}
 
    {%for photo in userphoto.getPhotos%}
 {% if userphoto.getPhotos is not null %}
@@ -27,6 +32,9 @@
          
 
   {% endfor %}
+                <hr>
+
+<hr>
                    </div>
  </div>
 {% endblock %}

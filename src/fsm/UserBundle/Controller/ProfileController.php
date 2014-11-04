@@ -39,10 +39,10 @@ $utilisateur = $em->getRepository('fsmUserBundle:User')->find($user);
 
 $em = $this->getDoctrine()->getManager();
 $liste_user_photos = $em->getRepository('fsmUserBundle:User')->getUserPhotoP($user);
+$compte = $em->getRepository('fsmEchangeBundle:Compte')->findByUser($user);
 
 
-
-return $this->render('fsmUserBundle:Profile:showP.html.twig', array('userphotos' => $liste_user_photos));
+return $this->render('fsmUserBundle:Profile:showP.html.twig', array('userphotos' => $liste_user_photos,'compte'=>$compte));
 //               
 //return $this->container->get('templating')->renderResponse('fsmUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
 }
